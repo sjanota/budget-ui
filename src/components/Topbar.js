@@ -30,7 +30,7 @@ export default function Topbar() {
           <TopbarMenu
             name={topbar.messagesLabel}
             faIcon="envelope"
-            counter={3}
+            counter={0}
           ></TopbarMenu>
         </>
       )}
