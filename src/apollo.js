@@ -25,8 +25,8 @@ export function isSubscriptionOperation({ query }) {
 }
 
 export function createClient(token) {
-  const graphqlApiUrl = 'localhost:8080/query';
-  const httpLink = createHttpLink({ uri: `http://${graphqlApiUrl}` });
+  const graphqlApiUrl = 'https://sjanota-budget.herokuapp.com/query';
+  const httpLink = createHttpLink({ uri: graphqlApiUrl });
   const authLink = setContext((_, { headers }) => {
     // get the authentication token from local storage if it exists
     // return the headers to the context so httpLink can read them
