@@ -62,7 +62,7 @@ ReactDOM.render(
   <AuthorizationProvider>
     <AuthApolloProvider>
       <Beta>
-        <BrowserRouter>
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
           <App />
         </BrowserRouter>
       </Beta>
