@@ -6,7 +6,7 @@ export default {
   },
   sidebar: {
     sections: {
-      currentMonth: 'Bieący miesiąc',
+      currentMonth: 'Bieżący miesiąc',
       budget: 'Budżet',
     },
     pages: {
@@ -28,7 +28,7 @@ export default {
     incomes: 'Wpływy',
     leftToPlan: 'Pozostało do zaplanowania',
     expenses: 'Wydatki',
-    currentMonth: 'Bieący miesiąc',
+    currentMonth: 'Bieżący miesiąc',
     noProblems: 'Wszystko w porządku',
     problems: {
       overplanned: 'Plany na bieżący miesiąc przekraczają wydatki',
