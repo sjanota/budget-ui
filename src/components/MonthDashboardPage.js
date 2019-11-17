@@ -121,12 +121,13 @@ function NoProblems() {
 }
 
 function MonthProblems({ className, problems }) {
+  const { dashbaord } = useDictionary();
   return (
     <Panel
       className={className}
       header={
         <div className="d-flex justify-content-between align-items-center">
-          <Panel.Title>Problems</Panel.Title>
+          <Panel.Title>{dashbaord.problems.title}</Panel.Title>
         </div>
       }
       body={
