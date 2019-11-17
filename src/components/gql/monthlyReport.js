@@ -41,5 +41,6 @@ export function useGetCurrentMonthlyReport() {
   const { selectedBudget } = useBudget();
   return useQuery(GET_CURRENT_MONTHLY_REPORT, {
     variables: { budgetID: selectedBudget.id },
+    fetchPolicy: 'network-only',
   });
 }
