@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "c5e98ed2e049c2c4d541826b9a0542b4",
+    "revision": "b88c77e988017b549af4878473b307f1",
     "url": "/budget-ui/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/budget-ui/static/css/2.c297138a.chunk.css"
   },
   {
-    "revision": "34bb0bbddefb3dfcc575",
+    "revision": "4e6b2738fe3f5d05e0e8",
     "url": "/budget-ui/static/css/main.298473e5.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/budget-ui/static/js/2.cbc921a9.chunk.js"
   },
   {
-    "revision": "34bb0bbddefb3dfcc575",
-    "url": "/budget-ui/static/js/main.f911e4a6.chunk.js"
+    "revision": "4e6b2738fe3f5d05e0e8",
+    "url": "/budget-ui/static/js/main.8becb01a.chunk.js"
   },
   {
     "revision": "33c730efa5f72939ea01",
