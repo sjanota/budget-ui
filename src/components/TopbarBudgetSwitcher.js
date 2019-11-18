@@ -1,8 +1,8 @@
 import React from 'react';
-import TopbarContextSwitcher from './template/Topbar/TopbarContextSwitcher';
+import TopbarContextSwitcher from './sbadmin2/Topbar/TopbarContextSwitcher';
 import { useBudget } from './gql/budget';
-import Spinner from './template/Utilities/Spinner';
-import { useDictionary } from './template/Utilities/Lang';
+import Spinner from './sbadmin2/Utilities/Spinner';
+import { useDictionary } from './sbadmin2/Utilities/Lang';
 
 export default function TopbarBudgetSwitcher() {
   const {

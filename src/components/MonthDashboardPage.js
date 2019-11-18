@@ -1,17 +1,17 @@
 import React from 'react';
-import Page from './template/Page/Page';
-import { Gauge } from './template/Gauge';
+import Page from './sbadmin2/Page/Page';
+import { Gauge } from './sbadmin2/Gauge';
 import { useGetCurrentMonthlyReport } from './gql/monthlyReport';
 import { WithQuery } from './gql/WithQuery';
 import { useGetEnvelopes } from './gql/envelopes';
 import { useGetAccounts } from './gql/accounts';
 import Amount from '../model/Amount';
 import { Row } from 'react-bootstrap';
-import { Panel } from './template/Utilities/Panel';
-import { SplitButton } from './template/Utilities/SplitButton';
+import { Panel } from './sbadmin2/Utilities/Panel';
+import { SplitButton } from './sbadmin2/Utilities/SplitButton';
 import Month from '../model/Month';
 import { useCloseCurrentMonth } from './gql/budget';
-import { useDictionary } from './template/Utilities/Lang';
+import { useDictionary } from './sbadmin2/Utilities/Lang';
 
 function Gauges({ className, month }) {
   const { dashboard } = useDictionary();

@@ -1,12 +1,12 @@
 import React, { useRef } from 'react';
-import Page from './template/Page/Page';
-import PageHeader from './template/Page/PageHeader';
-import ModalButton from './template/Utilities/ModalButton';
-import CreateButton from './template/Utilities/CreateButton';
-import EditTableButton from './template/Utilities/EditTableButton';
-import { FormControl } from './template/Utilities/FormControl';
-import FormModal from './template/Utilities/FormModal';
-import { useFormData } from './template/Utilities/useFormData';
+import Page from './sbadmin2/Page/Page';
+import PageHeader from './sbadmin2/Page/PageHeader';
+import ModalButton from './sbadmin2/Utilities/ModalButton';
+import CreateButton from './sbadmin2/Utilities/CreateButton';
+import EditTableButton from './sbadmin2/Utilities/EditTableButton';
+import { FormControl } from './sbadmin2/Utilities/FormControl';
+import FormModal from './sbadmin2/Utilities/FormModal';
+import { useFormData } from './sbadmin2/Utilities/useFormData';
 import Amount from '../model/Amount';
 import {
   useCreateAccount,
@@ -15,7 +15,7 @@ import {
 } from './gql/accounts';
 import { QueryTablePanel } from './gql/QueryTablePanel';
 import { GlobalHotKeys } from 'react-hotkeys';
-import { useDictionary, withColumnNames } from './template/Utilities/Lang';
+import { useDictionary, withColumnNames } from './sbadmin2/Utilities/Lang';
 
 const columns = [
   { dataField: 'name' },
