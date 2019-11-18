@@ -25,8 +25,8 @@ export function isSubscriptionOperation({ query }) {
 }
 
 export function createClient(token) {
-  // const graphqlApiUrl = 'https://sjanota-budget.herokuapp.com/query';
-  const graphqlApiUrl = 'http://localhost:8080/query';
+  const graphqlApiUrl = 'https://sjanota-budget.herokuapp.com/query';
+  // const graphqlApiUrl = 'http://localhost:8080/query';
   const httpLink = createHttpLink({ uri: graphqlApiUrl });
   const authLink = setContext((_, { headers }) => {
     // get the authentication token from local storage if it exists
