@@ -1,19 +1,6 @@
 {
   "__schema": {
     "types": [
-      { "kind": "SCALAR", "name": "ID", "possibleTypes": [] },
-      { "kind": "OBJECT", "name": "Transfer", "possibleTypes": [] },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "ExpenseCategoryInput",
-        "possibleTypes": []
-      },
-      { "kind": "INPUT_OBJECT", "name": "CategoryInput", "possibleTypes": [] },
-      { "kind": "OBJECT", "name": "ExpenseCategory", "possibleTypes": [] },
-      { "kind": "OBJECT", "name": "Mutation", "possibleTypes": [] },
-      { "kind": "SCALAR", "name": "Float", "possibleTypes": [] },
-      { "kind": "INPUT_OBJECT", "name": "EnvelopeInput", "possibleTypes": [] },
-      { "kind": "OBJECT", "name": "Query", "possibleTypes": [] },
       { "kind": "INPUT_OBJECT", "name": "AccountInput", "possibleTypes": [] },
       { "kind": "INPUT_OBJECT", "name": "EnvelopeUpdate", "possibleTypes": [] },
       { "kind": "INPUT_OBJECT", "name": "ExpenseUpdate", "possibleTypes": [] },
@@ -27,8 +14,6 @@
         "possibleTypes": []
       },
       { "kind": "OBJECT", "name": "EnvelopeOverLimit", "possibleTypes": [] },
-      { "kind": "SCALAR", "name": "Int", "possibleTypes": [] },
-      { "kind": "SCALAR", "name": "Amount", "possibleTypes": [] },
       { "kind": "OBJECT", "name": "Account", "possibleTypes": [] },
       { "kind": "OBJECT", "name": "Envelope", "possibleTypes": [] },
       { "kind": "OBJECT", "name": "Expense", "possibleTypes": [] },
@@ -39,18 +24,20 @@
         "possibleTypes": []
       },
       { "kind": "OBJECT", "name": "MonthStillInProgress", "possibleTypes": [] },
-      { "kind": "SCALAR", "name": "Boolean", "possibleTypes": [] },
-      { "kind": "SCALAR", "name": "Date", "possibleTypes": [] },
+      { "kind": "SCALAR", "name": "Int", "possibleTypes": [] },
+      { "kind": "SCALAR", "name": "Amount", "possibleTypes": [] },
       { "kind": "INPUT_OBJECT", "name": "AccountUpdate", "possibleTypes": [] },
       { "kind": "OBJECT", "name": "Budget", "possibleTypes": [] },
       { "kind": "INPUT_OBJECT", "name": "PlanInput", "possibleTypes": [] },
       { "kind": "INPUT_OBJECT", "name": "ExpenseInput", "possibleTypes": [] },
-      { "kind": "SCALAR", "name": "String", "possibleTypes": [] },
+      { "kind": "SCALAR", "name": "Boolean", "possibleTypes": [] },
+      { "kind": "SCALAR", "name": "Date", "possibleTypes": [] },
       { "kind": "SCALAR", "name": "Month", "possibleTypes": [] },
       { "kind": "OBJECT", "name": "Category", "possibleTypes": [] },
       { "kind": "OBJECT", "name": "Plan", "possibleTypes": [] },
       { "kind": "INPUT_OBJECT", "name": "PlanUpdate", "possibleTypes": [] },
       { "kind": "OBJECT", "name": "MonthlyReport", "possibleTypes": [] },
+      { "kind": "SCALAR", "name": "String", "possibleTypes": [] },
       {
         "kind": "INTERFACE",
         "name": "Problem",
@@ -61,7 +48,20 @@
           { "name": "EnvelopeOverLimit" },
           { "name": "MonthStillInProgress" }
         ]
-      }
+      },
+      { "kind": "OBJECT", "name": "Transfer", "possibleTypes": [] },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "ExpenseCategoryInput",
+        "possibleTypes": []
+      },
+      { "kind": "SCALAR", "name": "ID", "possibleTypes": [] },
+      { "kind": "OBJECT", "name": "Mutation", "possibleTypes": [] },
+      { "kind": "INPUT_OBJECT", "name": "CategoryInput", "possibleTypes": [] },
+      { "kind": "OBJECT", "name": "ExpenseCategory", "possibleTypes": [] },
+      { "kind": "INPUT_OBJECT", "name": "EnvelopeInput", "possibleTypes": [] },
+      { "kind": "OBJECT", "name": "Query", "possibleTypes": [] },
+      { "kind": "SCALAR", "name": "Float", "possibleTypes": [] }
     ]
   }
 }

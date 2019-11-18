@@ -25,7 +25,7 @@ export function isSubscriptionOperation({ query }) {
 }
 
 export function createClient(token) {
-  const graphqlApiUrl = 'https://sjanota-budget.herokuapp.com/query';
+  const graphqlApiUrl = process.env.REACT_APP_GQL_URL;
   // const graphqlApiUrl = 'http://localhost:8080/query';
   const httpLink = createHttpLink({ uri: graphqlApiUrl });
   const authLink = setContext((_, { headers }) => {

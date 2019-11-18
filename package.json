@@ -32,8 +32,9 @@
   },
   "scripts": {
     "createFragmentMatcher": "node createFragmentMatcher.js",
-    "start": "npm run createFragmentMatcher && REACT_APP_INSECURE_AUTH_DISABLED=true react-scripts start",
-    "start:secure": "react-scripts start",
+    "start": "npm run createFragmentMatcher && react-scripts start",
+    "start:secure": "REACT_APP_INSECURE_AUTH_DISABLED=false react-scripts start",
+    "start:secure:remote": "REACT_APP_INSECURE_AUTH_DISABLED=false  REACT_APP_GQL_URL=https://sjanota-budget.herokuapp.com/query react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
