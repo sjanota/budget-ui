@@ -19,7 +19,7 @@ import { WithQuery } from './gql/WithQuery';
 import { useBudget } from './gql/budget';
 import Month from '../model/Month';
 import { Form, Row, Col } from 'react-bootstrap';
-import { useDictionary, withColumnNames } from './sbadmin2/utilities/Lang';
+import { useDictionary, withColumnNames } from './sbadmin2/language';
 import { Combobox } from './sbadmin2/utilities/Combobox';
 import { InlineFormControl } from './sbadmin2/utilities/InlineFormControl';
 import { Variant, Size } from './sbadmin2/bootstrap';

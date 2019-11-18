@@ -11,7 +11,7 @@ import { Panel } from './sbadmin2/utilities/Panel';
 import { SplitButton } from './sbadmin2/utilities/SplitButton';
 import Month from '../model/Month';
 import { useCloseCurrentMonth } from './gql/budget';
-import { useDictionary } from './sbadmin2/utilities/Lang';
+import { useDictionary } from './sbadmin2/language';
 
 function Gauges({ className, month }) {
   const { dashboard } = useDictionary();

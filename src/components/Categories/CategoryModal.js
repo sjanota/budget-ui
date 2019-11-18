@@ -7,7 +7,7 @@ import { useGetEnvelopes } from '../gql/envelopes';
 import { WithQuery } from '../gql/WithQuery';
 import { Combobox } from '../sbadmin2/utilities/Combobox';
 import { InlineFormControl } from '../sbadmin2/utilities/InlineFormControl';
-import { useDictionary } from '../sbadmin2/utilities/Lang';
+import { useDictionary } from '../sbadmin2/language';
 
 export function CategoryModal({ init, ...props }) {
   const query = useGetEnvelopes();

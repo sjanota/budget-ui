@@ -1,6 +1,8 @@
 import React from 'react';
+import { useSBAdmin2 } from '../context';
 
-export default function TopbarUser({ name, pictureUrl, logout }) {
+export default function TopbarUser() {
+  const { user, logout } = useSBAdmin2();
   return (
     <li className="nav-item dropdown no-arrow">
       <span
@@ -12,9 +14,9 @@ export default function TopbarUser({ name, pictureUrl, logout }) {
         aria-expanded="false"
       >
         <span className="mr-2 d-none d-lg-inline text-gray-600 small">
-          {name}
+          {user.name}
         </span>
-        <img alt="" className="img-profile rounded-circle" src={pictureUrl} />
+        <img alt="" className="img-profile rounded-circle" src={user.picture} />
       </span>
       <ul
         className="dropdown-menu dropdown-menu-right shadow animated--grow-in"

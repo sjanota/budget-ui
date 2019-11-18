@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTemplate } from '../Context';
+import { useSBAdmin2 } from '../context';
 import './Topbar.css';
 import TopbarContext from './TopbarContext';
 
@@ -9,7 +9,7 @@ export default function Topbar({
   renderUser,
   faIconContextMinified,
 }) {
-  const { toggleSidebar } = useTemplate();
+  const { toggleSidebar } = useSBAdmin2();
 
   return (
     <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">

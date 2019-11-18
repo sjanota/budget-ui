@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import { SidebarGroup } from './SidebarGroup';
-import { useTemplate } from '../Context';
+import { useSBAdmin2 } from '../context';
 import './Sidebar.css';
 
 export default function Sidebar({ renderBrandName, renderBrandIcon, config }) {
-  const { sidebarToggled, toggleSidebar } = useTemplate();
+  const { sidebarToggled, toggleSidebar } = useSBAdmin2();
   const classNames = classnames(
     'navbar-nav',
     'bg-gradient-primary',

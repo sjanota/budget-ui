@@ -18,7 +18,7 @@ import { WithQuery } from './gql/WithQuery';
 import { GlobalHotKeys } from 'react-hotkeys';
 import { InlineFormControl } from './sbadmin2/utilities/InlineFormControl';
 import { Combobox } from './sbadmin2/utilities/Combobox';
-import { useDictionary, withColumnNames } from './sbadmin2/utilities/Lang';
+import { useDictionary, withColumnNames } from './sbadmin2/language';
 import { Variant } from './sbadmin2/bootstrap';
 
 const columns = [

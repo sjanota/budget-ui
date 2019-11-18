@@ -3,7 +3,7 @@ import { OpenModalButton, FaIconLink, FaIcon } from '../sbadmin2';
 import { CategoryModal } from './CategoryModal';
 import PropTypes from 'prop-types';
 import { useUpdateCategory } from '../gql/categories';
-import { useDictionary } from '../sbadmin2/utilities/Lang';
+import { useDictionary } from '../sbadmin2/language';
 import { Variant } from '../sbadmin2/bootstrap';
 
 export function UpdateCategoryButton({ category }) {

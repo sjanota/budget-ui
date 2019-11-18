@@ -3,7 +3,7 @@ import { OpenModalButton } from '../sbadmin2';
 import CreateButton from '../sbadmin2/utilities/CreateButton';
 import { useCreateCategory } from '../gql/categories';
 import { CategoryModal } from './CategoryModal';
-import { useDictionary } from '../sbadmin2/utilities/Lang';
+import { useDictionary } from '../sbadmin2/language';
 import PropTypes from 'prop-types';
 
 export function CreateCategoryButton({ onClickRef }) {

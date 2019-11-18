@@ -19,7 +19,7 @@ import { WithQuery } from './gql/WithQuery';
 import { GlobalHotKeys } from 'react-hotkeys';
 import { Combobox } from './sbadmin2/utilities/Combobox';
 import { InlineFormControl } from './sbadmin2/utilities/InlineFormControl';
-import { withColumnNames, useDictionary } from './sbadmin2/utilities/Lang';
+import { withColumnNames, useDictionary } from './sbadmin2/language';
 import { Variant } from './sbadmin2/bootstrap';
 
 const columns = [

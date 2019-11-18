@@ -1,24 +1,26 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 
-const TemplateContext = React.createContext();
+const SBAdmin2Context = React.createContext();
 
-export function TemplateProvider({ children }) {
+export function SBAdmin2Provider({ user, logout, children }) {
   const [sidebarToggled, setSidebarToggled] = useState(false);
   return (
-    <TemplateContext.Provider
+    <SBAdmin2Context.Provider
       value={{
         sidebarToggled,
+        user,
+        logout,
         toggleSidebar: () => setSidebarToggled(current => !current),
       }}
     >
       {children}
-    </TemplateContext.Provider>
+    </SBAdmin2Context.Provider>
   );
 }
 
-TemplateProvider.propTypes = {
+SBAdmin2Provider.propTypes = {
   children: PropTypes.any,
 };
 
-export const useTemplate = () => useContext(TemplateContext);
+export const useSBAdmin2 = () => useContext(SBAdmin2Context);

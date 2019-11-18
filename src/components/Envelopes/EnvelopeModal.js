@@ -6,7 +6,7 @@ import FormModal from '../sbadmin2/utilities/FormModal';
 import { useFormData } from '../sbadmin2/utilities/useFormData';
 import PropTypes from 'prop-types';
 import * as model from '../../model/propTypes';
-import { useDictionary } from '../sbadmin2/utilities/Lang';
+import { useDictionary } from '../sbadmin2/language';
 
 export function EnvelopeModal({ init, ...props }) {
   const { envelopes } = useDictionary();

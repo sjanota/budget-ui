@@ -13,7 +13,7 @@ import {
 } from './gql/accounts';
 import { QueryTablePanel } from './gql/QueryTablePanel';
 import { GlobalHotKeys } from 'react-hotkeys';
-import { useDictionary, withColumnNames } from './sbadmin2/utilities/Lang';
+import { useDictionary, withColumnNames } from './sbadmin2/language';
 import { Variant } from './sbadmin2/bootstrap';
 
 const columns = [

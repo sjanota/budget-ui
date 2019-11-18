@@ -3,7 +3,7 @@ import { Page } from '../sbadmin2';
 import { EnvelopesListPanel } from './EnvelopesListPanel';
 import { CategoriesListPanel } from '../Categories/CategoriesListPanel';
 import { GlobalHotKeys } from 'react-hotkeys';
-import { useDictionary } from '../sbadmin2/utilities/Lang';
+import { useDictionary } from '../sbadmin2/language';
 
 const keyMap = {
   createEnvelope: 'e',

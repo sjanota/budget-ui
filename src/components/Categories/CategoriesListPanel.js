@@ -3,7 +3,7 @@ import { useGetCategories } from '../gql/categories';
 import { QueryTablePanel } from '../gql/QueryTablePanel';
 import { CreateCategoryButton } from './CreateCategoryButton';
 import { UpdateCategoryButton } from './UpdateCategoryButton';
-import { useDictionary, withColumnNames } from '../sbadmin2/utilities/Lang';
+import { useDictionary, withColumnNames } from '../sbadmin2/language';
 import { FaIconLink, FaIcon } from '../sbadmin2';
 import { Variant } from '../sbadmin2/bootstrap';
 

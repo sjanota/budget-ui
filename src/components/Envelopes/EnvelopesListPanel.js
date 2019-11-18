@@ -4,7 +4,7 @@ import { CreateEnvelopeButton } from './CreateEnvelopeButton';
 import Amount from '../../model/Amount';
 import { UpdateEnvelopeButton } from './UpdateEnvelopeButton';
 import { QueryTablePanel } from '../gql/QueryTablePanel';
-import { withColumnNames, useDictionary } from '../sbadmin2/utilities/Lang';
+import { withColumnNames, useDictionary } from '../sbadmin2/language';
 import { Variant } from '../sbadmin2/bootstrap';
 import { FaIcon, FaIconLink } from '../sbadmin2';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { SplitButton } from './SplitButton';
 import PropTypes from 'prop-types';
-import { useDictionary } from './Lang';
+import { useDictionary } from '../language';
 
 export default function CancelButton({ onClick }) {
   const { buttons } = useDictionary();

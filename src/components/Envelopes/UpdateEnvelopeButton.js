@@ -3,7 +3,7 @@ import { OpenModalButton, FaIconLink, FaIcon } from '../sbadmin2';
 import { useUpdateEnvelope } from '../gql/envelopes';
 import { EnvelopeModal } from './EnvelopeModal';
 import PropTypes from 'prop-types';
-import { useDictionary } from '../sbadmin2/utilities/Lang';
+import { useDictionary } from '../sbadmin2/language';
 import { Variant } from '../sbadmin2/bootstrap';
 
 export function UpdateEnvelopeButton({ envelope }) {
