@@ -1,10 +1,9 @@
 import React, { useRef } from 'react';
-import Page from '../template/Page/Page';
-import PageHeader from '../template/Page/PageHeader';
+import { Page } from '../sbadmin2';
 import { EnvelopesListPanel } from './EnvelopesListPanel';
 import { CategoriesListPanel } from '../Categories/CategoriesListPanel';
 import { GlobalHotKeys } from 'react-hotkeys';
-import { useDictionary } from '../template/Utilities/Lang';
+import { useDictionary } from '../sbadmin2/utilities/Lang';
 
 const keyMap = {
   createEnvelope: 'e',
@@ -26,7 +25,7 @@ export default function EnvelopesPage() {
         keyMap={keyMap}
         handlers={handlers(createEnvelopeFunRef, createCategoryFunRef)}
       />
-      <PageHeader>{sidebar.pages.envelopes}</PageHeader>
+      <Page.Header>{sidebar.pages.envelopes}</Page.Header>
       <EnvelopesListPanel createFunRef={createEnvelopeFunRef} />
       <CategoriesListPanel createFunRef={createCategoryFunRef} />
     </Page>

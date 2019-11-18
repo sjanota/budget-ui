@@ -1,18 +1,19 @@
 import React from 'react';
-import ModalButton from '../template/Utilities/ModalButton';
-import CreateButton from '../template/Utilities/CreateButton';
+import { OpenModalButton } from '../sbadmin2';
+import CreateButton from '../sbadmin2/utilities/CreateButton';
 import { useCreateCategory } from '../gql/categories';
 import { CategoryModal } from './CategoryModal';
-import { useDictionary } from '../template/Utilities/Lang';
+import { useDictionary } from '../sbadmin2/utilities/Lang';
+import PropTypes from 'prop-types';
 
-export function CreateCategoryButton({ openRef }) {
+export function CreateCategoryButton({ onClickRef }) {
   const [createCategory] = useCreateCategory();
   const { categories } = useDictionary();
   return (
-    <ModalButton
-      openRef={openRef}
-      button={CreateButton}
-      modal={props => (
+    <OpenModalButton
+      onClickRef={onClickRef}
+      renderButton={props => <CreateButton {...props} />}
+      renderModal={props => (
         <CategoryModal
           title={categories.modal.createTitle}
           init={{ name: '', envelope: { id: null }, description: '' }}
@@ -23,3 +24,7 @@ export function CreateCategoryButton({ openRef }) {
     />
   );
 }
+
+CreateCategoryButton.propTypes = {
+  onClickRef: PropTypes.shape({ current: PropTypes.any }),
+};

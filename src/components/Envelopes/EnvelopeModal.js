@@ -1,12 +1,12 @@
 import React from 'react';
 import Amount from '../../model/Amount';
-import { FormControl } from '../template/Utilities/FormControl';
-import { OptionalFormControl } from '../template/Utilities/OptionalFormControl';
-import FormModal from '../template/Utilities/FormModal';
-import { useFormData } from '../template/Utilities/useFormData';
+import { FormControl } from '../sbadmin2/utilities/FormControl';
+import { OptionalFormControl } from '../sbadmin2/utilities/OptionalFormControl';
+import FormModal from '../sbadmin2/utilities/FormModal';
+import { useFormData } from '../sbadmin2/utilities/useFormData';
 import PropTypes from 'prop-types';
 import * as model from '../../model/propTypes';
-import { useDictionary } from '../template/Utilities/Lang';
+import { useDictionary } from '../sbadmin2/utilities/Lang';
 
 export function EnvelopeModal({ init, ...props }) {
   const { envelopes } = useDictionary();

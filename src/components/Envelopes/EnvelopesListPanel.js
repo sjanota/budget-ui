@@ -2,10 +2,11 @@ import React from 'react';
 import { useGetEnvelopes } from '../gql/envelopes';
 import { CreateEnvelopeButton } from './CreateEnvelopeButton';
 import Amount from '../../model/Amount';
-import ArchiveTableButton from '../template/Utilities/ArchiveTableButton';
 import { UpdateEnvelopeButton } from './UpdateEnvelopeButton';
 import { QueryTablePanel } from '../gql/QueryTablePanel';
-import { withColumnNames, useDictionary } from '../template/Utilities/Lang';
+import { withColumnNames, useDictionary } from '../sbadmin2/utilities/Lang';
+import { Variant } from '../sbadmin2/bootstrap';
+import { FaIcon, FaIconLink } from '../sbadmin2';
 
 const columns = [
   { dataField: 'name' },
@@ -36,7 +37,7 @@ const columns = [
     formatter: (cell, row) => (
       <span>
         <UpdateEnvelopeButton envelope={row} />
-        <ArchiveTableButton />
+        <FaIconLink icon={FaIcon.Archive} variant={Variant.secondary} />
       </span>
     ),
     style: {

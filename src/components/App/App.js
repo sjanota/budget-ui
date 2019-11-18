@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Topbar from '../Topbar';
-import SBAdmin2 from '../template/SBAdmin2';
+import { SBAdmin2 } from '../sbadmin2';
 import { sidebarConfig } from './sidebarConfig';
 import { BudgetProvider, BudgetContext } from '../gql/budget';
 import Accounts from '../Accounts';
@@ -10,7 +10,7 @@ import Expenses from '../Expenses';
 import Transfers from '../Transfers';
 import Plans from '../Plans';
 import { MonthDashboardPage } from '../MonthDashboardPage';
-import { LangProvider } from '../template/Utilities/Lang';
+import { LangProvider } from '../sbadmin2/utilities/Lang';
 import pl from '../../lang/pl';
 
 export default function App() {

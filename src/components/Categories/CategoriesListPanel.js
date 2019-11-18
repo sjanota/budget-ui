@@ -1,10 +1,11 @@
 import React from 'react';
 import { useGetCategories } from '../gql/categories';
-import ArchiveTableButton from '../template/Utilities/ArchiveTableButton';
 import { QueryTablePanel } from '../gql/QueryTablePanel';
 import { CreateCategoryButton } from './CreateCategoryButton';
 import { UpdateCategoryButton } from './UpdateCategoryButton';
-import { useDictionary, withColumnNames } from '../template/Utilities/Lang';
+import { useDictionary, withColumnNames } from '../sbadmin2/utilities/Lang';
+import { FaIconLink, FaIcon } from '../sbadmin2';
+import { Variant } from '../sbadmin2/bootstrap';
 
 const columns = [
   { dataField: 'name' },
@@ -19,7 +20,7 @@ const columns = [
     formatter: (cell, row) => (
       <span>
         <UpdateCategoryButton category={row} />
-        <ArchiveTableButton />
+        <FaIconLink icon={FaIcon.Archive} variant={Variant.secondary} />
       </span>
     ),
     style: {

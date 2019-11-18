@@ -4,7 +4,7 @@ import { TopbarMenu } from './sbadmin2/Topbar/TopbarMenu';
 import TopbarUser from './sbadmin2/Topbar/TopbarUser';
 import TopbarBudgetSwitcher from './TopbarBudgetSwitcher';
 import { useAuth0 } from '../react-auth0-spa';
-import { useDictionary } from './sbadmin2/Utilities/Lang';
+import { useDictionary } from './sbadmin2/utilities/Lang';
 
 export default function Topbar() {
   const { user, logout } = useAuth0();

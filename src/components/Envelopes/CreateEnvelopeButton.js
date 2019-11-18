@@ -1,18 +1,19 @@
 import React from 'react';
-import ModalButton from '../template/Utilities/ModalButton';
-import CreateButton from '../template/Utilities/CreateButton';
+import { OpenModalButton } from '../sbadmin2';
+import CreateButton from '../sbadmin2/utilities/CreateButton';
 import { useCreateEnvelope } from '../gql/envelopes';
 import { EnvelopeModal } from './EnvelopeModal';
-import { useDictionary } from '../template/Utilities/Lang';
+import { useDictionary } from '../sbadmin2/utilities/Lang';
+import PropTypes from 'prop-types';
 
-export function CreateEnvelopeButton({ openRef }) {
+export function CreateEnvelopeButton({ onClickRef }) {
   const [createEnvelope] = useCreateEnvelope();
   const { envelopes } = useDictionary();
   return (
-    <ModalButton
-      openRef={openRef}
-      button={CreateButton}
-      modal={props => (
+    <OpenModalButton
+      onClickRef={onClickRef}
+      renderButton={props => <CreateButton {...props} />}
+      renderModal={props => (
         <EnvelopeModal
           title={envelopes.modal.createTitle}
           init={{ name: '', limit: null }}
@@ -23,3 +24,7 @@ export function CreateEnvelopeButton({ openRef }) {
     />
   );
 }
+
+CreateEnvelopeButton.propTypes = {
+  onClickRef: PropTypes.shape({ current: PropTypes.any }),
+};

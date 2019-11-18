@@ -1,10 +1,10 @@
 import React from 'react';
-import ModalButton from '../template/Utilities/ModalButton';
-import EditTableButton from '../template/Utilities/EditTableButton';
+import { OpenModalButton, FaIconLink, FaIcon } from '../sbadmin2';
 import { CategoryModal } from './CategoryModal';
 import PropTypes from 'prop-types';
 import { useUpdateCategory } from '../gql/categories';
-import { useDictionary } from '../template/Utilities/Lang';
+import { useDictionary } from '../sbadmin2/utilities/Lang';
+import { Variant } from '../sbadmin2/bootstrap';
 
 export function UpdateCategoryButton({ category }) {
   const [updateEnvelope] = useUpdateCategory();
@@ -13,9 +13,11 @@ export function UpdateCategoryButton({ category }) {
     updateEnvelope(category.id, input);
   };
   return (
-    <ModalButton
-      button={EditTableButton}
-      modal={props => (
+    <OpenModalButton
+      renderButton={props => (
+        <FaIconLink icon={FaIcon.Edit} variant={Variant.primary} {...props} />
+      )}
+      renderModal={props => (
         <CategoryModal
           title={categories.modal.editTitle}
           init={category}

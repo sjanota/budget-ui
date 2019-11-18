@@ -1,13 +1,10 @@
 import React, { useRef } from 'react';
-import Page from './sbadmin2/Page/Page';
-import PageHeader from './sbadmin2/Page/PageHeader';
-import ModalButton from './sbadmin2/Utilities/ModalButton';
-import CreateButton from './sbadmin2/Utilities/CreateButton';
-import EditTableButton from './sbadmin2/Utilities/EditTableButton';
-import { FormControl } from './sbadmin2/Utilities/FormControl';
-import { OptionalFormControl } from './sbadmin2/Utilities/OptionalFormControl';
-import FormModal from './sbadmin2/Utilities/FormModal';
-import { useFormData } from './sbadmin2/Utilities/useFormData';
+import { Page, FaIconLink, FaIcon, OpenModalButton } from './sbadmin2';
+import CreateButton from './sbadmin2/utilities/CreateButton';
+import { FormControl } from './sbadmin2/utilities/FormControl';
+import { OptionalFormControl } from './sbadmin2/utilities/OptionalFormControl';
+import FormModal from './sbadmin2/utilities/FormModal';
+import { useFormData } from './sbadmin2/utilities/useFormData';
 import Amount from '../model/Amount';
 import {
   useCreatePlan,
@@ -18,11 +15,11 @@ import {
 import { QueryTablePanel } from './gql/QueryTablePanel';
 import { useGetEnvelopes } from './gql/envelopes';
 import { WithQuery } from './gql/WithQuery';
-import TableButton from './sbadmin2/Utilities/TableButton';
 import { GlobalHotKeys } from 'react-hotkeys';
-import { InlineFormControl } from './sbadmin2/Utilities/InlineFormControl';
-import { Combobox } from './sbadmin2/Utilities/Combobox';
-import { useDictionary, withColumnNames } from './sbadmin2/Utilities/Lang';
+import { InlineFormControl } from './sbadmin2/utilities/InlineFormControl';
+import { Combobox } from './sbadmin2/utilities/Combobox';
+import { useDictionary, withColumnNames } from './sbadmin2/utilities/Lang';
+import { Variant } from './sbadmin2/bootstrap';
 
 const columns = [
   { dataField: 'title' },
@@ -144,9 +141,11 @@ function UpdatePlanButton({ plan }) {
   const { plans } = useDictionary();
 
   return (
-    <ModalButton
-      button={EditTableButton}
-      modal={props => (
+    <OpenModalButton
+      renderButton={props => (
+        <FaIconLink icon={FaIcon.Edit} variant={Variant.primary} {...props} />
+      )}
+      renderModal={props => (
         <PlanModal
           init={plan}
           title={plans.modal.editTitle}
@@ -161,9 +160,9 @@ function UpdatePlanButton({ plan }) {
 function DeletePlanButton({ plan }) {
   const [deletePlan] = useDeletePlan();
   return (
-    <TableButton
-      faIcon="trash-alt"
-      variant="secondary"
+    <FaIconLink
+      icon={FaIcon.Trash}
+      variant={Variant.secondary}
       onClick={() => deletePlan(plan.id)}
     />
   );
@@ -174,10 +173,10 @@ function CreatePlanButton({ openRef }) {
   const { plans } = useDictionary();
 
   return (
-    <ModalButton
+    <OpenModalButton
       openRef={openRef}
-      button={CreateButton}
-      modal={props => (
+      renderButton={props => <CreateButton {...props} />}
+      renderModal={props => (
         <PlanModal
           init={{
             title: null,
@@ -212,7 +211,7 @@ export default function Plans() {
   return (
     <Page>
       <GlobalHotKeys keyMap={keyMap} handlers={handlers(openCreateModalRef)} />
-      <PageHeader>{sidebar.pages.plans}</PageHeader>
+      <Page.Header>{sidebar.pages.plans}</Page.Header>
       <QueryTablePanel
         title={plans.table.title}
         query={query}

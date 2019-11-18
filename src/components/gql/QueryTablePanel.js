@@ -1,7 +1,7 @@
 import React from 'react';
-import { Panel } from '../template/Utilities/Panel';
+import { Panel } from '../sbadmin2/utilities/Panel';
 import BootstrapTable from 'react-bootstrap-table-next';
-import RefreshButton from '../template/Utilities/RefreshButton';
+import RefreshButton from '../sbadmin2/utilities/RefreshButton';
 import { WithQuery } from '../gql/WithQuery';
 import PropTypes from 'prop-types';
 

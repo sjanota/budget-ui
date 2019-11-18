@@ -1,12 +1,10 @@
 import React from 'react';
-import Page from './sbadmin2/Page/Page';
-import PageHeader from './sbadmin2/Page/PageHeader';
-import ModalButton from './sbadmin2/Utilities/ModalButton';
-import CreateButton from './sbadmin2/Utilities/CreateButton';
-import EditTableButton from './sbadmin2/Utilities/EditTableButton';
-import { FormControl } from './sbadmin2/Utilities/FormControl';
-import FormModal from './sbadmin2/Utilities/FormModal';
-import { useFormData } from './sbadmin2/Utilities/useFormData';
+import { Page, FaIconLink, FaIcon } from './sbadmin2';
+import { OpenModalButton } from './sbadmin2/utilities/OpenModalButton';
+import CreateButton from './sbadmin2/utilities/CreateButton';
+import { FormControl } from './sbadmin2/utilities/FormControl';
+import FormModal from './sbadmin2/utilities/FormModal';
+import { useFormData } from './sbadmin2/utilities/useFormData';
 import Amount from '../model/Amount';
 import { QueryTablePanel } from './gql/QueryTablePanel';
 import {
@@ -21,10 +19,10 @@ import { WithQuery } from './gql/WithQuery';
 import { useBudget } from './gql/budget';
 import Month from '../model/Month';
 import { Form, Row, Col } from 'react-bootstrap';
-import TableButton from './sbadmin2/Utilities/TableButton';
-import { useDictionary, withColumnNames } from './sbadmin2/Utilities/Lang';
-import { Combobox } from './sbadmin2/Utilities/Combobox';
-import { InlineFormControl } from './sbadmin2/Utilities/InlineFormControl';
+import { useDictionary, withColumnNames } from './sbadmin2/utilities/Lang';
+import { Combobox } from './sbadmin2/utilities/Combobox';
+import { InlineFormControl } from './sbadmin2/utilities/InlineFormControl';
+import { Variant, Size } from './sbadmin2/bootstrap';
 
 const columns = [
   { dataField: 'title' },
@@ -87,10 +85,10 @@ function CategoriesInput({ formData }) {
         <>
           <small className="d-flex align-items-center">
             {expenses.modal.labels.categories}
-            <TableButton
-              faIcon="plus"
-              variant="primary"
-              size="sm"
+            <FaIconLink
+              icon={FaIcon.Plus}
+              variant={Variant.primary}
+              size={Size.sm}
               onClick={() =>
                 formData.push({
                   category: { id: null },
@@ -126,8 +124,8 @@ function CategoriesInput({ formData }) {
                 />
               </Col>
               <Col sm={1}>
-                <TableButton
-                  faIcon="minus"
+                <FaIconLink
+                  icon="minus"
                   variant="danger"
                   size="sm"
                   onClick={() => {
@@ -210,9 +208,9 @@ function ExpenseModal({ init, ...props }) {
 function DeleteExpenseButton({ expense }) {
   const [deleteExpense] = useDeleteExpense();
   return (
-    <TableButton
-      faIcon="trash-alt"
-      variant="secondary"
+    <FaIconLink
+      icon={FaIcon.Trash}
+      variant={Variant.secondary}
       onClick={() => deleteExpense(expense.id)}
     />
   );
@@ -223,9 +221,11 @@ function UpdateExpenseButton({ expense }) {
   const { expenses } = useDictionary();
 
   return (
-    <ModalButton
-      button={EditTableButton}
-      modal={props => (
+    <OpenModalButton
+      renderButton={props => (
+        <FaIconLink icon={FaIcon.Edit} variant={Variant.primary} {...props} />
+      )}
+      renderModal={props => (
         <ExpenseModal
           init={expense}
           title={expenses.modal.editTitle}
@@ -242,9 +242,9 @@ function CreateExpenseButton() {
   const { expenses } = useDictionary();
 
   return (
-    <ModalButton
-      button={CreateButton}
-      modal={props => (
+    <OpenModalButton
+      renderButton={props => <CreateButton {...props} />}
+      renderModal={props => (
         <ExpenseModal
           init={{
             name: null,
@@ -267,7 +267,7 @@ export default function Expenses() {
 
   return (
     <Page>
-      <PageHeader>{sidebar.pages.expenses}</PageHeader>
+      <Page.Header>{sidebar.pages.expenses}</Page.Header>
       <QueryTablePanel
         title={expenses.table.title}
         query={query}

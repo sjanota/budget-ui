@@ -1,8 +1,8 @@
 import React from 'react';
-import Page from './Page/Page';
+import { Page } from './Page/Page';
 import { Link } from 'react-router-dom';
 
-export default function NotFoundPage() {
+export function NotFoundPage() {
   return (
     <Page>
       <div className="text-center">

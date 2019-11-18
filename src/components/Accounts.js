@@ -1,12 +1,10 @@
 import React, { useRef } from 'react';
-import Page from './sbadmin2/Page/Page';
-import PageHeader from './sbadmin2/Page/PageHeader';
-import ModalButton from './sbadmin2/Utilities/ModalButton';
-import CreateButton from './sbadmin2/Utilities/CreateButton';
-import EditTableButton from './sbadmin2/Utilities/EditTableButton';
-import { FormControl } from './sbadmin2/Utilities/FormControl';
-import FormModal from './sbadmin2/Utilities/FormModal';
-import { useFormData } from './sbadmin2/Utilities/useFormData';
+import { Page, FaIconLink, FaIcon } from './sbadmin2';
+import { OpenModalButton } from './sbadmin2/utilities/OpenModalButton';
+import CreateButton from './sbadmin2/utilities/CreateButton';
+import { FormControl } from './sbadmin2/utilities/FormControl';
+import FormModal from './sbadmin2/utilities/FormModal';
+import { useFormData } from './sbadmin2/utilities/useFormData';
 import Amount from '../model/Amount';
 import {
   useCreateAccount,
@@ -15,7 +13,8 @@ import {
 } from './gql/accounts';
 import { QueryTablePanel } from './gql/QueryTablePanel';
 import { GlobalHotKeys } from 'react-hotkeys';
-import { useDictionary, withColumnNames } from './sbadmin2/Utilities/Lang';
+import { useDictionary, withColumnNames } from './sbadmin2/utilities/Lang';
+import { Variant } from './sbadmin2/bootstrap';
 
 const columns = [
   { dataField: 'name' },
@@ -64,9 +63,11 @@ function UpdateAccountButton({ account }) {
   const [updateAccount] = useUpdateAccount();
   const { accounts } = useDictionary();
   return (
-    <ModalButton
-      button={EditTableButton}
-      modal={props => (
+    <OpenModalButton
+      renderButton={props => (
+        <FaIconLink icon={FaIcon.Edit} variant={Variant.primary} {...props} />
+      )}
+      renderModal={props => (
         <AccountModal
           init={account}
           title={accounts.modal.editTitle}
@@ -82,10 +83,10 @@ function CreateAccountButton({ openRef }) {
   const [createAccount] = useCreateAccount();
   const { accounts } = useDictionary();
   return (
-    <ModalButton
+    <OpenModalButton
       openRef={openRef}
-      button={CreateButton}
-      modal={props => (
+      renderButton={props => <CreateButton {...props} />}
+      renderModal={props => (
         <AccountModal
           init={{ name: '' }}
           title={accounts.modal.createTitle}
@@ -112,7 +113,7 @@ export default function Accounts() {
   return (
     <GlobalHotKeys keyMap={keyMap} handlers={keyHandlers(openCreateModal)}>
       <Page>
-        <PageHeader>{sidebar.pages.accounts}</PageHeader>
+        <Page.Header>{sidebar.pages.accounts}</Page.Header>
         <QueryTablePanel
           title={accounts.table.title}
           query={query}

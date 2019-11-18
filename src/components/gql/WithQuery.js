@@ -1,4 +1,4 @@
-import Spinner from '../template/Utilities/Spinner';
+import Spinner from '../sbadmin2/utilities/Spinner';
 import React from 'react';
 import PropTypes from 'prop-types';
 

@@ -1,12 +1,9 @@
 import React, { useRef } from 'react';
-import Page from './sbadmin2/Page/Page';
-import PageHeader from './sbadmin2/Page/PageHeader';
-import ModalButton from './sbadmin2/Utilities/ModalButton';
-import CreateButton from './sbadmin2/Utilities/CreateButton';
-import EditTableButton from './sbadmin2/Utilities/EditTableButton';
-import { FormControl } from './sbadmin2/Utilities/FormControl';
-import FormModal from './sbadmin2/Utilities/FormModal';
-import { useFormData } from './sbadmin2/Utilities/useFormData';
+import { Page, FaIconLink, FaIcon, OpenModalButton } from './sbadmin2';
+import CreateButton from './sbadmin2/utilities/CreateButton';
+import { FormControl } from './sbadmin2/utilities/FormControl';
+import FormModal from './sbadmin2/utilities/FormModal';
+import { useFormData } from './sbadmin2/utilities/useFormData';
 import Amount from '../model/Amount';
 import Month from '../model/Month';
 import {
@@ -19,11 +16,11 @@ import { QueryTablePanel } from './gql/QueryTablePanel';
 import { useGetAccounts } from './gql/accounts';
 import { useBudget } from './gql/budget';
 import { WithQuery } from './gql/WithQuery';
-import TableButton from './sbadmin2/Utilities/TableButton';
 import { GlobalHotKeys } from 'react-hotkeys';
-import { Combobox } from './sbadmin2/Utilities/Combobox';
-import { InlineFormControl } from './sbadmin2/Utilities/InlineFormControl';
-import { withColumnNames, useDictionary } from './sbadmin2/Utilities/Lang';
+import { Combobox } from './sbadmin2/utilities/Combobox';
+import { InlineFormControl } from './sbadmin2/utilities/InlineFormControl';
+import { withColumnNames, useDictionary } from './sbadmin2/utilities/Lang';
+import { Variant } from './sbadmin2/bootstrap';
 
 const columns = [
   { dataField: 'title' },
@@ -149,9 +146,9 @@ function TransferModal({ init, ...props }) {
 function DeleteTransferButton({ transfer }) {
   const [deleteTransfer] = useDeleteTranfer();
   return (
-    <TableButton
-      faIcon="trash-alt"
-      variant="secondary"
+    <FaIconLink
+      icon={FaIcon.Trash}
+      variant={Variant.secondary}
       onClick={() => deleteTransfer(transfer.id)}
     />
   );
@@ -161,9 +158,11 @@ function UpdateTransferButton({ transfer }) {
   const [updateTransfer] = useUpdateTransfer();
   const { transfers } = useDictionary();
   return (
-    <ModalButton
-      button={EditTableButton}
-      modal={props => (
+    <OpenModalButton
+      renderButton={props => (
+        <FaIconLink icon={FaIcon.Edit} variant={Variant.primary} {...props} />
+      )}
+      renderModal={props => (
         <TransferModal
           init={transfer}
           title={transfers.modal.editTitle}
@@ -180,10 +179,10 @@ function CreateTransferButton({ openRef }) {
   const { transfers } = useDictionary();
 
   return (
-    <ModalButton
+    <OpenModalButton
       openRef={openRef}
-      button={CreateButton}
-      modal={props => (
+      renderButton={props => <CreateButton {...props} />}
+      renderModal={props => (
         <TransferModal
           init={{
             title: null,
@@ -216,7 +215,7 @@ export default function Transfers() {
   return (
     <Page>
       <GlobalHotKeys keyMap={keyMap} handlers={keyHandlers(openCreateModal)} />
-      <PageHeader>{sidebar.pages.transfers}</PageHeader>
+      <Page.Header>{sidebar.pages.transfers}</Page.Header>
       <QueryTablePanel
         title={transfers.table.title}
         query={query}

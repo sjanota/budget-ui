@@ -1,13 +1,13 @@
 import React from 'react';
-import FormModal from '../template/Utilities/FormModal';
-import { useFormData } from '../template/Utilities/useFormData';
-import { FormControl } from '../template/Utilities/FormControl';
+import FormModal from '../sbadmin2/utilities/FormModal';
+import { useFormData } from '../sbadmin2/utilities/useFormData';
+import { FormControl } from '../sbadmin2/utilities/FormControl';
 import PropTypes from 'prop-types';
 import { useGetEnvelopes } from '../gql/envelopes';
 import { WithQuery } from '../gql/WithQuery';
-import { Combobox } from '../template/Utilities/Combobox';
-import { InlineFormControl } from '../template/Utilities/InlineFormControl';
-import { useDictionary } from '../template/Utilities/Lang';
+import { Combobox } from '../sbadmin2/utilities/Combobox';
+import { InlineFormControl } from '../sbadmin2/utilities/InlineFormControl';
+import { useDictionary } from '../sbadmin2/utilities/Lang';
 
 export function CategoryModal({ init, ...props }) {
   const query = useGetEnvelopes();
