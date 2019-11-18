@@ -87,6 +87,7 @@ export default {
       columns: {
         name: 'Nazwa',
         envelope: 'Koperta',
+        description: 'Opis',
       },
     },
     modal: {
@@ -95,6 +96,7 @@ export default {
       labels: {
         name: 'Nazwa',
         envelope: 'Koperta',
+        description: 'Opis',
       },
     },
   },

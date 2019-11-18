@@ -17,6 +17,7 @@ export function CategoryModal({ init, ...props }) {
     envelopeID: {
       $init: init.envelope.id,
     },
+    description: { $init: init.description },
   });
   return (
     <FormModal autoFocusRef={formData.name} formData={formData} {...props}>
@@ -42,6 +43,12 @@ export function CategoryModal({ init, ...props }) {
                 defaultValue={formData.envelopeID.default()}
               />
             </InlineFormControl>
+            <FormControl
+              label={categories.modal.labels.description}
+              inline={9}
+              formData={formData.description}
+              feedback="Provide description"
+            />
           </>
         )}
       </WithQuery>

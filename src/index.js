@@ -6,10 +6,11 @@ import App from './components/App/App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
-import { AuthApolloProvider } from './apollo';
+import { AuthApolloProvider, createClient } from './apollo';
 import { Auth0Provider, Auth0Context } from './react-auth0-spa';
 import config from './auth_config.json';
 import { Beta } from './components/Beta';
+import { ApolloProvider } from '@apollo/react-hooks';
 
 // A function that routes the user to the right place
 // after login
@@ -32,7 +33,7 @@ const ProdAuthorizationProvider = ({ children }) => (
     audience={config.audience}
     scope="beta"
   >
-    {children}
+    <AuthApolloProvider>{children}</AuthApolloProvider>
   </Auth0Provider>
 );
 
@@ -46,13 +47,15 @@ const DevAuthorizationProvider = ({ children }) => (
         name: 'Valerie Luna',
         picture: 'https://source.unsplash.com/QAB-WJcbgJk/60x60',
       },
+      getTokenScopes: () => Promise.resolve(['beta']),
     }}
   >
-    {children}
+    <ApolloProvider client={createClient()}>{children}</ApolloProvider>
   </Auth0Context.Provider>
 );
 
 const authDisabled = process.env.REACT_APP_INSECURE_AUTH_DISABLED;
+console.log();
 const AuthorizationProvider =
   authDisabled !== 'true'
     ? ProdAuthorizationProvider
@@ -60,13 +63,11 @@ const AuthorizationProvider =
 
 ReactDOM.render(
   <AuthorizationProvider>
-    <AuthApolloProvider>
-      <Beta>
-        <BrowserRouter basename={process.env.PUBLIC_URL}>
-          <App />
-        </BrowserRouter>
-      </Beta>
-    </AuthApolloProvider>
+    <Beta>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
+        <App />
+      </BrowserRouter>
+    </Beta>
   </AuthorizationProvider>,
   document.getElementById('root')
 );

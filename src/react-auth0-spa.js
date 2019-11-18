@@ -83,6 +83,13 @@ export const Auth0Provider = ({
         getTokenSilently: (...p) => auth0Client.getTokenSilently(...p),
         getTokenWithPopup: (...p) => auth0Client.getTokenWithPopup(...p),
         logout: (...p) => auth0Client.logout(...p),
+        getTokenScopes: async (...p) => {
+          const token = await auth0Client.getTokenSilently(...p);
+          const claimsString = token.split('.')[1];
+          const claims = JSON.parse(atob(claimsString));
+          const scope = claims.scope.split(' ');
+          return scope;
+        },
       }}
     >
       {children}

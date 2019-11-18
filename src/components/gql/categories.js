@@ -11,6 +11,7 @@ const GET_CATEGORIES = gql`
         id
         name
       }
+      description
     }
   }
 `;
@@ -24,6 +25,7 @@ const CREATE_CATEGORY = gql`
         id
         name
       }
+      description
     }
   }
 `;
@@ -37,6 +39,7 @@ const UPDATE_CATEGORY = gql`
         id
         name
       }
+      description
     }
   }
 `;

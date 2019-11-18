@@ -12,6 +12,7 @@ const columns = [
     dataField: 'envelope',
     formatter: a => a.name,
   },
+  { dataField: 'description' },
   {
     dataField: 'actions',
     isDummyColumn: true,

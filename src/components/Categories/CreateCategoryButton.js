@@ -15,7 +15,7 @@ export function CreateCategoryButton({ openRef }) {
       modal={props => (
         <CategoryModal
           title={categories.modal.createTitle}
-          init={{ name: '', envelope: { id: null } }}
+          init={{ name: '', envelope: { id: null }, description: '' }}
           onSave={createCategory}
           {...props}
         />
