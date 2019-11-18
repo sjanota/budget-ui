@@ -32,6 +32,7 @@ const ProdAuthorizationProvider = ({ children }) => (
     onRedirectCallback={onRedirectCallback}
     audience={config.audience}
     scope="beta"
+    returnTo={window.location}
   >
     <AuthApolloProvider>{children}</AuthApolloProvider>
   </Auth0Provider>

@@ -9,6 +9,7 @@ export const useAuth0 = () => useContext(Auth0Context);
 export const Auth0Provider = ({
   children,
   onRedirectCallback = DEFAULT_REDIRECT_CALLBACK,
+  returnTo,
   ...initOptions
 }) => {
   const [isAuthenticated, setIsAuthenticated] = useState();
@@ -82,7 +83,7 @@ export const Auth0Provider = ({
         loginWithRedirect: (...p) => auth0Client.loginWithRedirect(...p),
         getTokenSilently: (...p) => auth0Client.getTokenSilently(...p),
         getTokenWithPopup: (...p) => auth0Client.getTokenWithPopup(...p),
-        logout: (...p) => auth0Client.logout(...p),
+        logout: (...p) => auth0Client.logout({ ...p, returnTo }),
         getTokenScopes: async (...p) => {
           const token = await auth0Client.getTokenSilently(...p);
           const claimsString = token.split('.')[1];
