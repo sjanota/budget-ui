@@ -28,11 +28,11 @@ const ProdAuthorizationProvider = ({ children }) => (
   <Auth0Provider
     domain={config.domain}
     client_id={config.clientId}
-    redirect_uri={window.location}
+    redirect_uri={process.env.PUBLIC_URL}
     onRedirectCallback={onRedirectCallback}
     audience={config.audience}
     scope="beta"
-    returnTo={window.location}
+    returnTo={process.env.PUBLIC_URL}
   >
     <AuthApolloProvider>{children}</AuthApolloProvider>
   </Auth0Provider>
