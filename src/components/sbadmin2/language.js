@@ -3,7 +3,7 @@ import { useSBAdmin2 } from './context';
 import PropTypes from 'prop-types';
 import { capitalize } from '../../util/capitalize';
 
-const DictionaryContext = createContext();
+export const DictionaryContext = createContext();
 
 export function DictionaryProvider({ dictionaries, children }) {
   const { user } = useSBAdmin2();

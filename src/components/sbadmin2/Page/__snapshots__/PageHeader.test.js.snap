@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PageHeader renders with minimal props 1`] = `
+<h1
+  className="h3 mb-4 text-gray-800"
+>
+  
+</h1>
+`;
