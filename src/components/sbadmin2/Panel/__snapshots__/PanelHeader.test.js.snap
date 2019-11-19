@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PanelHeader render with minimal props 1`] = `
+<div
+  className="card-header"
+/>
+`;

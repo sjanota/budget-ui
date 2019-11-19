@@ -1,5 +1,6 @@
-import TablePanel from './Table/TablePanel';
+import TablePanel from './TablePanel/TablePanel';
 import Table from './Table/Table';
+import Panel from './Panel/Panel';
 
 export { Page } from './Page/Page';
 
@@ -11,4 +12,4 @@ export { FaIcon } from './utilities/FaIcon';
 export { FaIconLink } from './utilities/FaIconLink';
 export { useDictionary } from './language';
 
-export { Table, TablePanel };
+export { Table, TablePanel, Panel };

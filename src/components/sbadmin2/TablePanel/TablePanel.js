@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Panel } from '../utilities/Panel';
-import Table from './Table';
+import Panel from '../Panel/Panel';
+import Table from '../Table/Table';
 import { withDictionary } from '../language';
 
 function TablePanel({ title, columns, headerButtons, ...props }) {

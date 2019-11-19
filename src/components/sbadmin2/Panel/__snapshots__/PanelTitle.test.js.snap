@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PanelTitle renders with minimal props 1`] = `
+<h6
+  className="m-0 font-weight-bold text-primary"
+>
+  
+</h6>
+`;
