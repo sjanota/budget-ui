@@ -15,3 +15,4 @@ Icon.Edit = 'edit';
 Icon.Plus = 'plus';
 Icon.Minus = 'minus';
 Icon.Save = 'save';
+Icon.ClipboardCheck = 'clipboard-check';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Page, Panel, SplitButton, useDictionary } from './sbadmin2';
+import { Page, Panel, SplitButton, useDictionary, Icon } from './sbadmin2';
 import { Gauge } from './sbadmin2/Gauge';
 import { useGetCurrentMonthlyReport } from './gql/monthlyReport';
 import { WithQuery } from './gql/WithQuery';
@@ -9,6 +9,7 @@ import Amount from '../model/Amount';
 import { Row } from 'react-bootstrap';
 import Month from '../model/Month';
 import { useCloseCurrentMonth } from './gql/budget';
+import { Variant } from './sbadmin2/bootstrap';
 
 function Gauges({ className, month }) {
   const { dashboard } = useDictionary();
@@ -145,8 +146,10 @@ function StartNextMonthButton({ disabled, warn }) {
   const { dashboard } = useDictionary();
   return (
     <SplitButton
-      icon="clipboard-check"
-      variant={disabled ? 'secondary' : warn ? 'warning' : 'success'}
+      icon={Icon.ClipboardCheck}
+      variant={
+        disabled ? Variant.secondary : warn ? Variant.warning : Variant.success
+      }
       disabled={disabled}
       onClick={() => closeCurrentMonth()}
     >
