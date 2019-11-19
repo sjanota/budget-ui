@@ -5,7 +5,7 @@ import Amount from '../../model/Amount';
 import { UpdateEnvelopeButton } from './UpdateEnvelopeButton';
 import { QueryTablePanel } from '../gql/QueryTablePanel';
 import { Variant } from '../sbadmin2/bootstrap';
-import { FaIcon, FaIconLink } from '../sbadmin2';
+import { Icon, ClickableIcon } from '../sbadmin2';
 
 const columns = [
   { dataField: 'name' },
@@ -36,7 +36,7 @@ const columns = [
     formatter: (cell, row) => (
       <span>
         <UpdateEnvelopeButton envelope={row} />
-        <FaIconLink icon={FaIcon.Archive} variant={Variant.secondary} />
+        <ClickableIcon icon={Icon.Archive} variant={Variant.secondary} />
       </span>
     ),
     style: {

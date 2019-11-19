@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Panel from '../Panel/Panel';
 import Table from '../Table/Table';
-import { withDictionary } from '../language';
+import { withDictionary } from '../../language';
 
 function TablePanel({ title, columns, headerButtons, ...props }) {
   const paddedFirstColumn = {
@@ -19,9 +19,10 @@ function TablePanel({ title, columns, headerButtons, ...props }) {
   return (
     <Panel>
       <Panel.Header className="p-2 pl-3">
-        <Panel.TitlewithButtons title={title}>
-          {headerButtons}
-        </Panel.TitlewithButtons>
+        <div className="d-flex justify-content-between align-items-center">
+          <Panel.Title title={title} />
+          <div>{headerButtons}</div>
+        </div>
       </Panel.Header>
 
       <Panel.Body className="p-0">

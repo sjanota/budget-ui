@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import BootstrapTable from 'react-bootstrap-table-next';
 
-import { withDictionary } from '../language';
+import { withDictionary } from '../../language';
 
 function Table({ columns, columnNames, ...props }) {
   return (

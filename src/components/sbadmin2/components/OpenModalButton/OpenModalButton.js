@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-export function OpenModalButton({ renderButton, renderModal, onClickRef }) {
+export default function OpenModalButton({
+  renderButton,
+  renderModal,
+  onClickRef,
+}) {
   const [show, setShow] = useState(false);
   const onHide = () => setShow(false);
   const onClick = () => setShow(true);

@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Page, FaIconLink, FaIcon, OpenModalButton } from './sbadmin2';
+import { Page, ClickableIcon, Icon, OpenModalButton } from './sbadmin2';
 import CreateButton from './sbadmin2/utilities/CreateButton';
 import { FormControl } from './sbadmin2/utilities/FormControl';
 import FormModal from './sbadmin2/utilities/FormModal';
@@ -146,8 +146,8 @@ function TransferModal({ init, ...props }) {
 function DeleteTransferButton({ transfer }) {
   const [deleteTransfer] = useDeleteTranfer();
   return (
-    <FaIconLink
-      icon={FaIcon.Trash}
+    <ClickableIcon
+      icon={Icon.Trash}
       variant={Variant.secondary}
       onClick={() => deleteTransfer(transfer.id)}
     />
@@ -160,7 +160,7 @@ function UpdateTransferButton({ transfer }) {
   return (
     <OpenModalButton
       renderButton={props => (
-        <FaIconLink icon={FaIcon.Edit} variant={Variant.primary} {...props} />
+        <ClickableIcon icon={Icon.Edit} variant={Variant.primary} {...props} />
       )}
       renderModal={props => (
         <TransferModal

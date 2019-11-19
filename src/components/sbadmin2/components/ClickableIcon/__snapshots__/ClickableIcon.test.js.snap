@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ClickableIcon renders with minimal properly 1`] = `
+<button
+  className="btn bg-transparent border-0 p-0 mx-1 text-primary"
+>
+  <i
+    className="fas fa-archive fa-fw"
+  />
+</button>
+`;

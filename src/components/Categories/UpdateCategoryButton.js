@@ -1,5 +1,5 @@
 import React from 'react';
-import { OpenModalButton, FaIconLink, FaIcon } from '../sbadmin2';
+import { OpenModalButton, ClickableIcon, Icon } from '../sbadmin2';
 import { CategoryModal } from './CategoryModal';
 import PropTypes from 'prop-types';
 import { useUpdateCategory } from '../gql/categories';
@@ -15,7 +15,7 @@ export function UpdateCategoryButton({ category }) {
   return (
     <OpenModalButton
       renderButton={props => (
-        <FaIconLink icon={FaIcon.Edit} variant={Variant.primary} {...props} />
+        <ClickableIcon icon={Icon.Edit} variant={Variant.primary} {...props} />
       )}
       renderModal={props => (
         <CategoryModal

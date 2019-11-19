@@ -1,15 +1,14 @@
-import TablePanel from './TablePanel/TablePanel';
-import Table from './Table/Table';
-import Panel from './Panel/Panel';
-
-export { Page } from './Page/Page';
+import TablePanel from './components/TablePanel/TablePanel';
+import Table from './components/Table/Table';
+import Panel from './components/Panel/Panel';
+import OpenModalButton from './components/OpenModalButton/OpenModalButton';
+import Page from './components/Page/Page';
+import Icon from './components/Icon/Icon';
+import ClickableIcon from './components/ClickableIcon/ClickableIcon';
 
 export { SBAdmin2 } from './SBAdmin2';
 export { NotFoundPage } from './NotFoundPage';
 
-export { OpenModalButton } from './utilities/OpenModalButton';
-export { FaIcon } from './utilities/FaIcon';
-export { FaIconLink } from './utilities/FaIconLink';
 export { useDictionary } from './language';
 
-export { Table, TablePanel, Panel };
+export { Table, TablePanel, Panel, OpenModalButton, Page, Icon, ClickableIcon };

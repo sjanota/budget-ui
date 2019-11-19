@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Page, FaIconLink, FaIcon, OpenModalButton } from './sbadmin2';
+import { Page, ClickableIcon, Icon, OpenModalButton } from './sbadmin2';
 import CreateButton from './sbadmin2/utilities/CreateButton';
 import { FormControl } from './sbadmin2/utilities/FormControl';
 import { OptionalFormControl } from './sbadmin2/utilities/OptionalFormControl';
@@ -143,7 +143,7 @@ function UpdatePlanButton({ plan }) {
   return (
     <OpenModalButton
       renderButton={props => (
-        <FaIconLink icon={FaIcon.Edit} variant={Variant.primary} {...props} />
+        <ClickableIcon icon={Icon.Edit} variant={Variant.primary} {...props} />
       )}
       renderModal={props => (
         <PlanModal
@@ -160,8 +160,8 @@ function UpdatePlanButton({ plan }) {
 function DeletePlanButton({ plan }) {
   const [deletePlan] = useDeletePlan();
   return (
-    <FaIconLink
-      icon={FaIcon.Trash}
+    <ClickableIcon
+      icon={Icon.Trash}
       variant={Variant.secondary}
       onClick={() => deletePlan(plan.id)}
     />

@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
-import { Page, FaIconLink, FaIcon } from './sbadmin2';
-import { OpenModalButton } from './sbadmin2/utilities/OpenModalButton';
+import { Page, ClickableIcon, Icon, OpenModalButton } from './sbadmin2';
 import CreateButton from './sbadmin2/utilities/CreateButton';
 import { FormControl } from './sbadmin2/utilities/FormControl';
 import FormModal from './sbadmin2/utilities/FormModal';
@@ -65,7 +64,7 @@ function UpdateAccountButton({ account }) {
   return (
     <OpenModalButton
       renderButton={props => (
-        <FaIconLink icon={FaIcon.Edit} variant={Variant.primary} {...props} />
+        <ClickableIcon icon={Icon.Edit} variant={Variant.primary} {...props} />
       )}
       renderModal={props => (
         <AccountModal

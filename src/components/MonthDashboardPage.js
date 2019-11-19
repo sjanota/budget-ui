@@ -1,5 +1,5 @@
 import React from 'react';
-import { Page } from './sbadmin2/Page/Page';
+import { Page, Panel, useDictionary } from './sbadmin2';
 import { Gauge } from './sbadmin2/Gauge';
 import { useGetCurrentMonthlyReport } from './gql/monthlyReport';
 import { WithQuery } from './gql/WithQuery';
@@ -7,11 +7,9 @@ import { useGetEnvelopes } from './gql/envelopes';
 import { useGetAccounts } from './gql/accounts';
 import Amount from '../model/Amount';
 import { Row } from 'react-bootstrap';
-import { Panel } from './sbadmin2/utilities/Panel';
 import { SplitButton } from './sbadmin2/utilities/SplitButton';
 import Month from '../model/Month';
 import { useCloseCurrentMonth } from './gql/budget';
-import { useDictionary } from './sbadmin2/language';
 
 function Gauges({ className, month }) {
   const { dashboard } = useDictionary();

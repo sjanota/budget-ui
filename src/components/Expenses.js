@@ -1,6 +1,5 @@
 import React from 'react';
-import { Page, FaIconLink, FaIcon } from './sbadmin2';
-import { OpenModalButton } from './sbadmin2/utilities/OpenModalButton';
+import { Page, ClickableIcon, Icon, OpenModalButton } from './sbadmin2';
 import CreateButton from './sbadmin2/utilities/CreateButton';
 import { FormControl } from './sbadmin2/utilities/FormControl';
 import FormModal from './sbadmin2/utilities/FormModal';
@@ -83,8 +82,8 @@ function CategoriesInput({ formData }) {
         <>
           <small className="d-flex align-items-center">
             {expenses.modal.labels.categories}
-            <FaIconLink
-              icon={FaIcon.Plus}
+            <ClickableIcon
+              icon={Icon.Plus}
               variant={Variant.primary}
               size={Size.sm}
               onClick={() =>
@@ -122,7 +121,7 @@ function CategoriesInput({ formData }) {
                 />
               </Col>
               <Col sm={1}>
-                <FaIconLink
+                <ClickableIcon
                   icon="minus"
                   variant="danger"
                   size="sm"
@@ -206,8 +205,8 @@ function ExpenseModal({ init, ...props }) {
 function DeleteExpenseButton({ expense }) {
   const [deleteExpense] = useDeleteExpense();
   return (
-    <FaIconLink
-      icon={FaIcon.Trash}
+    <ClickableIcon
+      icon={Icon.Trash}
       variant={Variant.secondary}
       onClick={() => deleteExpense(expense.id)}
     />
@@ -221,7 +220,7 @@ function UpdateExpenseButton({ expense }) {
   return (
     <OpenModalButton
       renderButton={props => (
-        <FaIconLink icon={FaIcon.Edit} variant={Variant.primary} {...props} />
+        <ClickableIcon icon={Icon.Edit} variant={Variant.primary} {...props} />
       )}
       renderModal={props => (
         <ExpenseModal

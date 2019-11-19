@@ -3,7 +3,7 @@ import { useGetCategories } from '../gql/categories';
 import { QueryTablePanel } from '../gql/QueryTablePanel';
 import { CreateCategoryButton } from './CreateCategoryButton';
 import { UpdateCategoryButton } from './UpdateCategoryButton';
-import { FaIconLink, FaIcon } from '../sbadmin2';
+import { ClickableIcon, Icon } from '../sbadmin2';
 import { Variant } from '../sbadmin2/bootstrap';
 
 const columns = [
@@ -19,7 +19,7 @@ const columns = [
     formatter: (cell, row) => (
       <span>
         <UpdateCategoryButton category={row} />
-        <FaIconLink icon={FaIcon.Archive} variant={Variant.secondary} />
+        <ClickableIcon icon={Icon.Archive} variant={Variant.secondary} />
       </span>
     ),
     style: {

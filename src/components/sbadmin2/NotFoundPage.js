@@ -1,6 +1,6 @@
 import React from 'react';
-import { Page } from './Page/Page';
 import { Link } from 'react-router-dom';
+import Page from './components/Page/Page';
 
 export function NotFoundPage() {
   return (

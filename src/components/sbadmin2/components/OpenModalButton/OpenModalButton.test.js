@@ -1,10 +1,10 @@
 import renderer from 'react-test-renderer';
-import { OpenModalButton } from './OpenModalButton';
+import OpenModalButton from './OpenModalButton';
 import React from 'react';
 import { mount } from 'enzyme';
-import { actAndUpdate } from '../../../testing';
+import { actAndUpdate } from '../../../../testing';
 
-it('ModalButton renders with minimal props', () => {
+it('OpenModalButton renders with minimal props', () => {
   const component = renderer.create(
     <OpenModalButton
       renderButton={props => <button {...props} />}

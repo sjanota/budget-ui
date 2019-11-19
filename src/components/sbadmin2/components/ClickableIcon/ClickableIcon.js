@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { Button } from 'react-bootstrap';
-import { FaIcon } from './FaIcon';
+import Icon from '../Icon/Icon';
 
-export function FaIconLink({ icon, variant, ...props }) {
+export default function ClickableIcon({ icon, variant, ...props }) {
   const classes = classnames(
+    'btn',
     'bg-transparent',
     'border-0',
     'p-0',
@@ -13,13 +13,13 @@ export function FaIconLink({ icon, variant, ...props }) {
     `text-${variant}`
   );
   return (
-    <Button className={classes} {...props}>
-      <FaIcon icon={icon} />
-    </Button>
+    <button className={classes} {...props}>
+      <Icon icon={icon} />
+    </button>
   );
 }
 
-FaIconLink.propTypes = {
+ClickableIcon.propTypes = {
   icon: PropTypes.string.isRequired,
   variant: PropTypes.string.isRequired,
 };

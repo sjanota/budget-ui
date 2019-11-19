@@ -1,5 +1,5 @@
 import React from 'react';
-import { OpenModalButton, FaIconLink, FaIcon } from '../sbadmin2';
+import { OpenModalButton, ClickableIcon, Icon } from '../sbadmin2';
 import { useUpdateEnvelope } from '../gql/envelopes';
 import { EnvelopeModal } from './EnvelopeModal';
 import PropTypes from 'prop-types';
@@ -16,7 +16,7 @@ export function UpdateEnvelopeButton({ envelope }) {
   return (
     <OpenModalButton
       renderButton={props => (
-        <FaIconLink icon={FaIcon.Edit} variant={Variant.primary} {...props} />
+        <ClickableIcon icon={Icon.Edit} variant={Variant.primary} {...props} />
       )}
       renderModal={props => (
         <EnvelopeModal
