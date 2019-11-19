@@ -1,13 +1,15 @@
 import React from 'react';
-import { SplitButton } from './SplitButton';
+import SplitButton from '../components/SplitButton/SplitButton';
 import PropTypes from 'prop-types';
 import { useDictionary } from '../language';
+import { Size } from '../bootstrap';
+import Icon from '../components/Icon/Icon';
 
 export default function SaveButton(props) {
   const { buttons } = useDictionary();
 
   return (
-    <SplitButton faIcon="save" size="small" {...props}>
+    <SplitButton icon={Icon.Save} size={Size.sm} {...props}>
       {buttons.save}
     </SplitButton>
   );

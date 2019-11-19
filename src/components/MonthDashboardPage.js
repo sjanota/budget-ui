@@ -1,5 +1,5 @@
 import React from 'react';
-import { Page, Panel, useDictionary } from './sbadmin2';
+import { Page, Panel, SplitButton, useDictionary } from './sbadmin2';
 import { Gauge } from './sbadmin2/Gauge';
 import { useGetCurrentMonthlyReport } from './gql/monthlyReport';
 import { WithQuery } from './gql/WithQuery';
@@ -7,7 +7,6 @@ import { useGetEnvelopes } from './gql/envelopes';
 import { useGetAccounts } from './gql/accounts';
 import Amount from '../model/Amount';
 import { Row } from 'react-bootstrap';
-import { SplitButton } from './sbadmin2/utilities/SplitButton';
 import Month from '../model/Month';
 import { useCloseCurrentMonth } from './gql/budget';
 
@@ -123,7 +122,7 @@ function MonthProblems({ className, problems }) {
     <Panel className={className}>
       <Panel.Header>
         <div className="d-flex justify-content-between align-items-center">
-          <Panel.Title.Dict readDict={d => d.dashboard.problems.title} />
+          <Panel.Title readTitle={d => d.dashboard.problems.title} />
         </div>
       </Panel.Header>
       <Panel.Body>
@@ -146,8 +145,8 @@ function StartNextMonthButton({ disabled, warn }) {
   const { dashboard } = useDictionary();
   return (
     <SplitButton
-      faIcon="clipboard-check"
-      variant={warn ? 'warning' : 'success'}
+      icon="clipboard-check"
+      variant={disabled ? 'secondary' : warn ? 'warning' : 'success'}
       disabled={disabled}
       onClick={() => closeCurrentMonth()}
     >
@@ -163,23 +162,26 @@ function CurrentMonth({ className, month }) {
   return (
     <Panel className={className}>
       <Panel.Header>
-        <Panel.TitlewithButtons
-          title={
-            <span>
-              {dashboard.currentMonth}:{' '}
-              <strong>
-                <em>
-                  {months[parsed.month - 1]} {parsed.year}
-                </em>
-              </strong>
-            </span>
-          }
-        >
-          <StartNextMonthButton
-            disabled={month.problems.some(p => p.severity === 'ERROR')}
-            warn={month.problems.length > 0}
+        <div className="d-flex justify-content-between align-items-center">
+          <Panel.Title
+            title={
+              <span>
+                {dashboard.currentMonth}:{' '}
+                <strong>
+                  <em>
+                    {months[parsed.month - 1]} {parsed.year}
+                  </em>
+                </strong>
+              </span>
+            }
           />
-        </Panel.TitlewithButtons>
+          <div>
+            <StartNextMonthButton
+              disabled={month.problems.some(p => p.severity === 'ERROR')}
+              warn={month.problems.length > 0}
+            />
+          </div>
+        </div>
       </Panel.Header>
     </Panel>
   );

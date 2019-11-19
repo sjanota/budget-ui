@@ -6,4 +6,5 @@ export const Variant = {
 
 export const Size = {
   sm: 'sm',
+  lg: 'lg',
 };

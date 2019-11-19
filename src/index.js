@@ -50,6 +50,7 @@ const DevAuthorizationProvider = ({ children }) => (
         locale: 'pl',
       },
       getTokenScopes: () => Promise.resolve(['beta']),
+      logout: () => {},
     }}
   >
     <ApolloProvider client={createClient()}>{children}</ApolloProvider>

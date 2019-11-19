@@ -7,7 +7,7 @@ function PanelTitle({ title }) {
 }
 
 PanelTitle.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.node.isRequired,
 };
 
 export default withDictionary('title', PanelTitle);
