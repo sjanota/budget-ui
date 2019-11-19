@@ -18,7 +18,7 @@ import { WithQuery } from './gql/WithQuery';
 import { GlobalHotKeys } from 'react-hotkeys';
 import { InlineFormControl } from './sbadmin2/utilities/InlineFormControl';
 import { Combobox } from './sbadmin2/utilities/Combobox';
-import { useDictionary, withColumnNames } from './sbadmin2/language';
+import { useDictionary } from './sbadmin2';
 import { Variant } from './sbadmin2/bootstrap';
 
 const columns = [
@@ -206,19 +206,19 @@ const handlers = openCreateModalRef => ({
 export default function Plans() {
   const openCreateModalRef = useRef();
   const query = useGetCurrentPlans();
-  const { sidebar, plans } = useDictionary();
 
   return (
     <Page>
       <GlobalHotKeys keyMap={keyMap} handlers={handlers(openCreateModalRef)} />
-      <Page.Header>{sidebar.pages.plans}</Page.Header>
+      <Page.Header readTitle={d => d.sidebar.pages.plans} />
       <QueryTablePanel
-        title={plans.table.title}
         query={query}
         getData={data => data.budget.currentMonth.plans}
         buttons={<CreatePlanButton openRef={openCreateModalRef} />}
-        columns={withColumnNames(columns, plans.table.columns)}
+        columns={columns}
         keyField="id"
+        readTitle={d => d.plans.table.title}
+        readColumnNames={d => d.plans.table.columns}
       />
     </Page>
   );

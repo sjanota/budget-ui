@@ -19,7 +19,7 @@ import { WithQuery } from './gql/WithQuery';
 import { GlobalHotKeys } from 'react-hotkeys';
 import { Combobox } from './sbadmin2/utilities/Combobox';
 import { InlineFormControl } from './sbadmin2/utilities/InlineFormControl';
-import { withColumnNames, useDictionary } from './sbadmin2/language';
+import { useDictionary } from './sbadmin2';
 import { Variant } from './sbadmin2/bootstrap';
 
 const columns = [
@@ -210,19 +210,19 @@ const keyHandlers = openCreateModal => ({
 export default function Transfers() {
   const query = useGetCurrentTransfers();
   const openCreateModal = useRef();
-  const { sidebar, transfers } = useDictionary();
 
   return (
     <Page>
       <GlobalHotKeys keyMap={keyMap} handlers={keyHandlers(openCreateModal)} />
-      <Page.Header>{sidebar.pages.transfers}</Page.Header>
+      <Page.Header readTitle={d => d.sidebar.pages.transfers} />
       <QueryTablePanel
-        title={transfers.table.title}
         query={query}
         getData={data => data.budget.currentMonth.transfers}
         buttons={<CreateTransferButton openRef={openCreateModal} />}
-        columns={withColumnNames(columns, transfers.table.columns)}
+        columns={columns}
         keyField="id"
+        readTitle={d => d.transfers.table.title}
+        readColumnNames={d => d.transfers.table.columns}
       />
     </Page>
   );

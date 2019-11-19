@@ -13,7 +13,7 @@ import {
 } from './gql/accounts';
 import { QueryTablePanel } from './gql/QueryTablePanel';
 import { GlobalHotKeys } from 'react-hotkeys';
-import { useDictionary, withColumnNames } from './sbadmin2/language';
+import { useDictionary } from './sbadmin2';
 import { Variant } from './sbadmin2/bootstrap';
 
 const columns = [
@@ -108,19 +108,19 @@ const keyHandlers = openCreateModal => ({
 export default function Accounts() {
   const query = useGetAccounts();
   const openCreateModal = useRef();
-  const { sidebar, accounts } = useDictionary();
 
   return (
     <GlobalHotKeys keyMap={keyMap} handlers={keyHandlers(openCreateModal)}>
       <Page>
-        <Page.Header>{sidebar.pages.accounts}</Page.Header>
+        <Page.Header readTitle={d => d.sidebar.pages.accounts} />
         <QueryTablePanel
-          title={accounts.table.title}
           query={query}
           getData={data => data.accounts}
           buttons={<CreateAccountButton openRef={openCreateModal} />}
-          columns={withColumnNames(columns, accounts.table.columns)}
+          columns={columns}
           keyField="id"
+          readTitle={d => d.categories.table.title}
+          readColumnNames={d => d.categories.table.columns}
         />
       </Page>
     </GlobalHotKeys>

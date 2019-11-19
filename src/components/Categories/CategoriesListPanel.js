@@ -3,7 +3,6 @@ import { useGetCategories } from '../gql/categories';
 import { QueryTablePanel } from '../gql/QueryTablePanel';
 import { CreateCategoryButton } from './CreateCategoryButton';
 import { UpdateCategoryButton } from './UpdateCategoryButton';
-import { useDictionary, withColumnNames } from '../sbadmin2/language';
 import { FaIconLink, FaIcon } from '../sbadmin2';
 import { Variant } from '../sbadmin2/bootstrap';
 
@@ -32,15 +31,15 @@ const columns = [
 
 export function CategoriesListPanel({ createFunRef }) {
   const query = useGetCategories();
-  const { categories } = useDictionary();
   return (
     <QueryTablePanel
+      keyField="id"
+      columns={columns}
       buttons={<CreateCategoryButton openRef={createFunRef} />}
-      title={categories.table.title}
       query={query}
       getData={data => data.categories}
-      columns={withColumnNames(columns, categories.table.columns)}
-      keyField="id"
+      readTitle={d => d.categories.table.title}
+      readColumnNames={d => d.categories.table.columns}
     />
   );
 }

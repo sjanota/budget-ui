@@ -47,6 +47,7 @@ const DevAuthorizationProvider = ({ children }) => (
       user: {
         name: 'Valerie Luna',
         picture: 'https://source.unsplash.com/QAB-WJcbgJk/60x60',
+        locale: 'pl',
       },
       getTokenScopes: () => Promise.resolve(['beta']),
     }}
@@ -56,7 +57,6 @@ const DevAuthorizationProvider = ({ children }) => (
 );
 
 const authDisabled = process.env.REACT_APP_INSECURE_AUTH_DISABLED;
-console.log();
 const AuthorizationProvider =
   authDisabled !== 'true'
     ? ProdAuthorizationProvider

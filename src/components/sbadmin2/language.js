@@ -1,6 +1,7 @@
 import React, { createContext, useContext } from 'react';
 import { useSBAdmin2 } from './context';
 import PropTypes from 'prop-types';
+import { capitalize } from '../../util/capitalize';
 
 const DictionaryContext = createContext();
 
@@ -20,6 +21,16 @@ DictionaryProvider.propTypes = {
 
 export const useDictionary = () => useContext(DictionaryContext);
 
-export function withColumnNames(columns, dictionary) {
-  return columns.map(c => ({ ...c, text: dictionary[c.dataField] || '' }));
+export function withDictionary(prop, Component, readPropName) {
+  return props => {
+    readPropName = readPropName || `read${capitalize(prop)}`;
+    const readDict = props[readPropName];
+    const newProps = { ...props };
+    delete newProps[readPropName];
+    const dictionary = useDictionary();
+    if (readDict) {
+      newProps[prop] = readDict(dictionary);
+    }
+    return <Component {...newProps} />;
+  };
 }

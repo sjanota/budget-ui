@@ -121,16 +121,14 @@ function NoProblems() {
 }
 
 function MonthProblems({ className, problems }) {
-  const { dashboard } = useDictionary();
   return (
-    <Panel
-      className={className}
-      header={
+    <Panel className={className}>
+      <Panel.Header>
         <div className="d-flex justify-content-between align-items-center">
-          <Panel.Title>{dashboard.problems.title}</Panel.Title>
+          <Panel.Title.Dict readDict={d => d.dashboard.problems.title} />
         </div>
-      }
-      body={
+      </Panel.Header>
+      <Panel.Body>
         <ul className="list-group list-group-flush">
           {problems.length > 0 ? (
             problems.map((problem, idx) => (
@@ -140,8 +138,8 @@ function MonthProblems({ className, problems }) {
             <NoProblems />
           )}
         </ul>
-      }
-    />
+      </Panel.Body>
+    </Panel>
   );
 }
 
@@ -165,10 +163,9 @@ function CurrentMonth({ className, month }) {
   const parsed = Month.parse(month.month);
 
   return (
-    <Panel
-      className={className}
-      header={
-        <Panel.HeaderWithButton
+    <Panel className={className}>
+      <Panel.Header>
+        <Panel.TitlewithButtons
           title={
             <span>
               {dashboard.currentMonth}:{' '}
@@ -184,9 +181,9 @@ function CurrentMonth({ className, month }) {
             disabled={month.problems.some(p => p.severity === 'ERROR')}
             warn={month.problems.length > 0}
           />
-        </Panel.HeaderWithButton>
-      }
-    />
+        </Panel.TitlewithButtons>
+      </Panel.Header>
+    </Panel>
   );
 }
 

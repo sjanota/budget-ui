@@ -1,66 +1,29 @@
 import React from 'react';
-import { Panel } from '../sbadmin2/utilities/Panel';
-import BootstrapTable from 'react-bootstrap-table-next';
 import RefreshButton from '../sbadmin2/utilities/RefreshButton';
 import { WithQuery } from '../gql/WithQuery';
 import PropTypes from 'prop-types';
+import { TablePanel } from '../sbadmin2';
 
-export function QueryTablePanel({
-  title,
-  query,
-  buttons,
-  getData,
-  columns,
-  ...props
-}) {
-  const paddedFirstColumn = {
-    ...columns[0],
-    classes: 'pl-3',
-    headerClasses: 'pl-3',
-  };
-  const modifiedColumns = [
-    paddedFirstColumn,
-    ...columns.slice(1, columns.length),
-  ];
-
+export function QueryTablePanel({ query, buttons, getData, ...props }) {
   return (
-    <Panel
-      headerClassName="p-2 pl-3"
-      header={
-        <Panel.HeaderWithButton title={title}>
-          <WithQuery query={query} size="sm" showError={false}>
-            {({ refetch }) => (
-              <>
-                <RefreshButton onClick={() => refetch()} className="mr-1" />
-                {buttons}
-              </>
-            )}
-          </WithQuery>
-        </Panel.HeaderWithButton>
-      }
-      bodyClassName="p-0"
-      body={
-        <WithQuery query={query}>
-          {({ data }) => (
-            <BootstrapTable
-              bootstrap4
-              classes="table-layout-auto table-sm m-0"
-              data={getData(data)}
-              striped
-              hover
-              bordered={false}
-              columns={modifiedColumns}
-              {...props}
-            />
-          )}
-        </WithQuery>
-      }
-    />
+    <WithQuery query={query} size="sm" showError={false}>
+      {({ refetch, data }) => (
+        <TablePanel
+          headerButtons={
+            <>
+              <RefreshButton onClick={() => refetch()} className="mr-1" />
+              {buttons}
+            </>
+          }
+          data={getData(data)}
+          {...props}
+        />
+      )}
+    </WithQuery>
   );
 }
 
 QueryTablePanel.propTypes = {
-  title: PropTypes.string.isRequired,
   buttons: PropTypes.node,
   getData: PropTypes.func.isRequired,
   query: PropTypes.shape({

@@ -19,7 +19,7 @@ import { WithQuery } from './gql/WithQuery';
 import { useBudget } from './gql/budget';
 import Month from '../model/Month';
 import { Form, Row, Col } from 'react-bootstrap';
-import { useDictionary, withColumnNames } from './sbadmin2/language';
+import { useDictionary } from './sbadmin2';
 import { Combobox } from './sbadmin2/utilities/Combobox';
 import { InlineFormControl } from './sbadmin2/utilities/InlineFormControl';
 import { Variant, Size } from './sbadmin2/bootstrap';
@@ -33,14 +33,12 @@ const columns = [
   },
   {
     dataField: 'totalAmount',
-    text: 'Amount',
     formatter: Amount.format,
     align: 'right',
     headerAlign: 'right',
   },
   {
     dataField: 'actions',
-    text: '',
     isDummyColumn: true,
     formatter: (cell, row) => (
       <span>
@@ -263,21 +261,21 @@ function CreateExpenseButton() {
 
 export default function Expenses() {
   const query = useGetCurrentExpenses();
-  const { expenses, sidebar } = useDictionary();
 
   return (
     <Page>
-      <Page.Header>{sidebar.pages.expenses}</Page.Header>
+      <Page.Header readTitle={d => d.sidebar.pages.expenses} />
       <QueryTablePanel
-        title={expenses.table.title}
         query={query}
         getData={data => data.budget.currentMonth.expenses}
         buttons={<CreateExpenseButton />}
-        columns={withColumnNames(columns, expenses.table.columns)}
+        columns={columns}
         keyField="id"
         expandRow={expandRow}
         rowClasses={rowClasses}
         striped={false}
+        readTitle={d => d.expenses.table.title}
+        readColumnNames={d => d.expenses.table.columns}
       />
     </Page>
   );

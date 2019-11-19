@@ -4,7 +4,6 @@ import { CreateEnvelopeButton } from './CreateEnvelopeButton';
 import Amount from '../../model/Amount';
 import { UpdateEnvelopeButton } from './UpdateEnvelopeButton';
 import { QueryTablePanel } from '../gql/QueryTablePanel';
-import { withColumnNames, useDictionary } from '../sbadmin2/language';
 import { Variant } from '../sbadmin2/bootstrap';
 import { FaIcon, FaIconLink } from '../sbadmin2';
 
@@ -49,15 +48,15 @@ const columns = [
 
 export function EnvelopesListPanel({ createFunRef }) {
   const query = useGetEnvelopes();
-  const { envelopes } = useDictionary();
   return (
     <QueryTablePanel
-      title={envelopes.table.title}
       query={query}
       buttons={<CreateEnvelopeButton openRef={createFunRef} />}
       getData={data => data.envelopes}
-      columns={withColumnNames(columns, envelopes.table.columns)}
+      columns={columns}
       keyField="id"
+      readTitle={d => d.envelopes.table.title}
+      readColumnNames={d => d.envelopes.table.columns}
     />
   );
 }

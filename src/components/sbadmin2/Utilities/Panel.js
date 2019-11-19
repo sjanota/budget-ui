@@ -1,33 +1,34 @@
 import React from 'react';
-import Card from 'react-bootstrap/Card';
 import classnames from 'classnames';
+import { withDictionary } from '../language';
 
-export function Panel({
-  header,
-  headerClassName,
-  body,
-  bodyClassName,
-  className,
-}) {
-  const classNames = classnames('card', 'shadow', 'mb-4', className);
-  const headerClassNames = classnames(headerClassName, 'card-header');
+export function Panel({ children, className }) {
   return (
-    <div className={classNames}>
-      {header && <div className={headerClassNames}>{header}</div>}
-      {body && <Card.Body className={bodyClassName}>{body}</Card.Body>}
+    <div className={classnames('card', 'shadow', 'mb-4', className)}>
+      {children}
     </div>
   );
 }
 
-Panel.Title = function({ children }) {
-  return <h6 className="m-0 font-weight-bold text-primary">{children}</h6>;
+Panel.Title = function({ title }) {
+  return <h6 className="m-0 font-weight-bold text-primary">{title}</h6>;
 };
 
-Panel.HeaderWithButton = function({ title, children }) {
+Panel.Title.Dict = withDictionary('title', Panel.Title);
+
+Panel.TitlewithButtons = function({ title, children }) {
   return (
     <div className="d-flex justify-content-between align-items-center">
-      <Panel.Title>{title}</Panel.Title>
+      <Panel.Title title={title} />
       <div>{children}</div>
     </div>
   );
+};
+
+Panel.Header = function({ className, children }) {
+  return <div className={classnames(className, 'card-header')}>{children}</div>;
+};
+
+Panel.Body = function({ children, className }) {
+  return <div className={classnames(className, 'card-body')}>{children}</div>;
 };

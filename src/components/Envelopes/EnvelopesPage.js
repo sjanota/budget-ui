@@ -3,7 +3,6 @@ import { Page } from '../sbadmin2';
 import { EnvelopesListPanel } from './EnvelopesListPanel';
 import { CategoriesListPanel } from '../Categories/CategoriesListPanel';
 import { GlobalHotKeys } from 'react-hotkeys';
-import { useDictionary } from '../sbadmin2/language';
 
 const keyMap = {
   createEnvelope: 'e',
@@ -18,14 +17,13 @@ const handlers = (createEnvelopeFunRef, createCategoryFunRef) => ({
 export default function EnvelopesPage() {
   const createEnvelopeFunRef = useRef();
   const createCategoryFunRef = useRef();
-  const { sidebar } = useDictionary();
   return (
     <Page>
       <GlobalHotKeys
         keyMap={keyMap}
         handlers={handlers(createEnvelopeFunRef, createCategoryFunRef)}
       />
-      <Page.Header>{sidebar.pages.envelopes}</Page.Header>
+      <Page.Header readTitle={d => d.sidebar.pages.envelopes} />
       <EnvelopesListPanel createFunRef={createEnvelopeFunRef} />
       <CategoriesListPanel createFunRef={createCategoryFunRef} />
     </Page>
