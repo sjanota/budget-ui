@@ -2,6 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import Icon from '../Icon/Icon';
+import { Variant, Size } from '../../bootstrap';
 
 export default function SplitButton({
   children,
@@ -33,6 +34,6 @@ SplitButton.propTypes = {
   className: PropTypes.string,
   disabled: PropTypes.bool,
   icon: PropTypes.string.isRequired,
-  size: PropTypes.string,
-  variant: PropTypes.string,
+  size: PropTypes.oneOf(Object.keys(Size)),
+  variant: PropTypes.oneOf(Object.keys(Variant)),
 };

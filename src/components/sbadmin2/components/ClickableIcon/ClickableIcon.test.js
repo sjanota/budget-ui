@@ -20,9 +20,20 @@ describe('ClickableIcon', () => {
 
   it('sets proper text-variant class', () => {
     expect(component.find('button')).toHaveClassName('text-primary');
+    expect(component.find('button')).toMatchSelector('[className*=" text-"]');
   });
 
   it('passes icon to Icon', () => {
     expect(component.find(Icon)).toHaveProp('icon', Icon.Archive);
+  });
+
+  it('does not set text-variant class if variant is missing', () => {
+    const component = mount(<ClickableIcon icon={Icon.Archive} />);
+    expect(component.find('button')).not.toMatchSelector(
+      '[className*=" text-"]'
+    );
+    expect(component.find('button')).not.toMatchSelector(
+      '[className^="text-"]'
+    );
   });
 });
