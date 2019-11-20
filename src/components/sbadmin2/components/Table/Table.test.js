@@ -10,6 +10,7 @@ describe('Table', () => {
     expectNoConsoleErrors();
     expectColumnNamesToBeSet(component);
     expectToWorkInBootstrap4Mode(component);
+    expectItemsToBeRendered(component);
   });
 
   it('renders with column names from context', () => {
@@ -18,6 +19,7 @@ describe('Table', () => {
     expectNoConsoleErrors();
     expectColumnNamesToBeSet(component);
     expectToWorkInBootstrap4Mode(component);
+    expectItemsToBeRendered(component);
   });
 });
 
@@ -33,13 +35,14 @@ beforeEach(() => {
 
 const fakeColumnName1 = 'ID';
 const fakeColumnName2 = 'Name';
+const fakeItem = { id: 'my-id', name: 'my-name' };
 
 function whenRenderedWithColumnNamesProps() {
   return render(
     <Table
       columns={[{ dataField: 'id' }, { dataField: 'name' }]}
       columnNames={{ id: fakeColumnName1, name: fakeColumnName2 }}
-      data={[{ id: 'id', name: 'name' }]}
+      data={[fakeItem]}
       keyField="id"
       condensed
     />
@@ -54,7 +57,7 @@ function whenRenderedWithContext() {
       <Table
         columns={[{ dataField: 'id' }, { dataField: 'name' }]}
         readColumnNames={d => d}
-        data={[{ id: 'id', name: 'name' }]}
+        data={[fakeItem]}
         keyField="id"
         condensed
       />
@@ -67,12 +70,21 @@ function expectNoConsoleErrors() {
 }
 
 function expectColumnNamesToBeSet(component) {
-  const firstHeader = component.find('th').eq(0);
-  expect(firstHeader.text()).toBe(fakeColumnName1);
-  const secondHeader = component.find('th').eq(1);
-  expect(secondHeader.text()).toBe(fakeColumnName2);
+  const idHeader = component.find('th').eq(0);
+  expect(idHeader.text()).toBe(fakeColumnName1);
+
+  const nameHeader = component.find('th').eq(1);
+  expect(nameHeader.text()).toBe(fakeColumnName2);
 }
 
 function expectToWorkInBootstrap4Mode(component) {
   expect(component.find('table').hasClass('table-sm')).toBe(true);
+}
+
+function expectItemsToBeRendered(component) {
+  const idCell = component.find('td').eq(0);
+  expect(idCell.text()).toBe(fakeItem.id);
+
+  const nameCell = component.find('td').eq(1);
+  expect(nameCell.text()).toBe(fakeItem.name);
 }
