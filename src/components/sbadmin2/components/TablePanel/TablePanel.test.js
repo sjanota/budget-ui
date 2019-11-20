@@ -11,6 +11,7 @@ describe('TablePanel', () => {
 
     expectNoConsoleErrors();
     expectTitleToBeSet(component);
+    expectFirstColumnToBePadded(component);
   });
 
   it('accepts title from context', () => {
@@ -18,6 +19,7 @@ describe('TablePanel', () => {
 
     expectNoConsoleErrors();
     expectTitleToBeSet(component);
+    expectFirstColumnToBePadded(component);
   });
 });
 
@@ -30,29 +32,20 @@ beforeEach(() => {
 });
 
 const fakeTitle = 'fake-title';
-
+const commonProps = {
+  columns: [{ dataField: 'id' }, { dataField: 'name' }],
+  data: [{ id: 'my-id', name: 'my-name' }, { id: 'my-id1', name: 'my-name1' }],
+  keyField: 'id',
+  columnNames: { id: 'ID', name: 'Name' },
+};
 function whenRenderedWithTitleProp() {
-  return render(
-    <TablePanel
-      columns={[{ dataField: 'id' }]}
-      columnNames={{ id: 'ID' }}
-      data={[{ id: 'id' }]}
-      keyField="id"
-      title={fakeTitle}
-    />
-  );
+  return render(<TablePanel {...commonProps} title={fakeTitle} />);
 }
 
 function whenRenderedWithContext() {
   return render(
     <DictionaryContext.Provider value={fakeTitle}>
-      <TablePanel
-        columns={[{ dataField: 'id' }]}
-        columnNames={{ id: 'ID' }}
-        data={[{ id: 'id' }]}
-        keyField="id"
-        readTitle={d => d}
-      />
+      <TablePanel {...commonProps} readTitle={d => d} />
     </DictionaryContext.Provider>
   );
 }
@@ -63,4 +56,13 @@ function expectNoConsoleErrors() {
 
 function expectTitleToBeSet(component) {
   expect(component.find('.table-panel--title').text()).toBe(fakeTitle);
+}
+
+function expectFirstColumnToBePadded(component) {
+  const idHeader = component.find('th').eq(0);
+  expect(idHeader.hasClass('pl-3')).toBe(true);
+
+  const ids = component.find('tr > td:first-child');
+  expect(ids.eq(0).hasClass('pl-3')).toBe(true);
+  expect(ids.eq(1).hasClass('pl-3')).toBe(true);
 }
