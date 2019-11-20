@@ -20,7 +20,7 @@ function TablePanel({ title, columns, headerButtons, ...props }) {
     <Panel>
       <Panel.Header className="p-2 pl-3">
         <div className="d-flex justify-content-between align-items-center">
-          <Panel.Title title={title} />
+          <Panel.Title title={title} className="table-panel--title" />
           <div>{headerButtons}</div>
         </div>
       </Panel.Header>

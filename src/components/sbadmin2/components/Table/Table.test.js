@@ -1,55 +1,78 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
-import { mount } from 'enzyme';
-import BootstrapTable from 'react-bootstrap-table-next';
+import { render } from 'enzyme';
 import Table from './Table';
 import { DictionaryContext } from '../../language';
 
-it('Table renders with minimal props', () => {
-  const component = renderer.create(
-    <Table
-      columns={[{ dataField: 'id' }]}
-      columnNames={{ id: 'ID' }}
-      data={[{ id: 'id' }]}
-      keyField="id"
-    />
-  );
-  expect(component).toMatchSnapshot();
-});
-
 describe('Table', () => {
-  const component = mount(
-    <Table
-      columns={[{ dataField: 'id' }]}
-      columnNames={{ id: 'ID' }}
-      data={[{ id: 'id' }]}
-      keyField="id"
-    />
-  );
+  it('renders with column names as a prop', () => {
+    const component = whenRenderedWithColumnNamesProps();
 
-  it('adds column names', () => {
-    expect(component.find(BootstrapTable)).toHaveProp('columns', [
-      { dataField: 'id', text: 'ID' },
-    ]);
+    expectNoConsoleErrors();
+    expectColumnNamesToBeSet(component);
+    expectToWorkInBootstrap4Mode(component);
   });
 
-  it('creates table in bootstrap4 mode', () => {
-    expect(component.find(BootstrapTable)).toHaveProp('bootstrap4', true);
-  });
+  it('renders with column names from context', () => {
+    const component = whenRenderedWithContext();
 
-  it('can read column names from dictionary', () => {
-    const component = mount(
-      <DictionaryContext.Provider value={{ id: 'ID' }}>
-        <Table
-          columns={[{ dataField: 'id' }]}
-          readColumnNames={d => d}
-          data={[{ id: 'id' }]}
-          keyField="id"
-        />
-      </DictionaryContext.Provider>
-    );
-    expect(component.find(BootstrapTable)).toHaveProp('columns', [
-      { dataField: 'id', text: 'ID' },
-    ]);
+    expectNoConsoleErrors();
+    expectColumnNamesToBeSet(component);
+    expectToWorkInBootstrap4Mode(component);
   });
 });
+
+const consoleError = jest.spyOn(global.console, 'error').mockImplementation();
+
+afterAll(() => {
+  consoleError.mockReset();
+});
+
+beforeEach(() => {
+  consoleError.mockClear();
+});
+
+const fakeColumnName1 = 'ID';
+const fakeColumnName2 = 'Name';
+
+function whenRenderedWithColumnNamesProps() {
+  return render(
+    <Table
+      columns={[{ dataField: 'id' }, { dataField: 'name' }]}
+      columnNames={{ id: fakeColumnName1, name: fakeColumnName2 }}
+      data={[{ id: 'id', name: 'name' }]}
+      keyField="id"
+      condensed
+    />
+  );
+}
+
+function whenRenderedWithContext() {
+  return render(
+    <DictionaryContext.Provider
+      value={{ id: fakeColumnName1, name: fakeColumnName2 }}
+    >
+      <Table
+        columns={[{ dataField: 'id' }, { dataField: 'name' }]}
+        readColumnNames={d => d}
+        data={[{ id: 'id', name: 'name' }]}
+        keyField="id"
+        condensed
+      />
+    </DictionaryContext.Provider>
+  );
+}
+
+function expectNoConsoleErrors() {
+  expect(consoleError).not.toHaveBeenCalled();
+}
+
+function expectColumnNamesToBeSet(component) {
+  const firstHeader = component.find('th').eq(0);
+  expect(firstHeader.text()).toBe(fakeColumnName1);
+  const secondHeader = component.find('th').eq(1);
+  expect(secondHeader.text()).toBe(fakeColumnName2);
+}
+
+function expectToWorkInBootstrap4Mode(component) {
+  expect(component.find('table').hasClass('table-sm')).toBe(true);
+}
