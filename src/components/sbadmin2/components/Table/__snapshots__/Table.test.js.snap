@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Table renders with minimal props 1`] = `
+<div
+  className="react-bootstrap-table"
+>
+  <table
+    className="table table-bordered"
+  >
+    <thead>
+      <tr>
+        <th
+          tabIndex={0}
+        >
+          ID
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        className={null}
+        style={Object {}}
+      >
+        <td>
+          id
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
