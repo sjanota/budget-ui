@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'react-bootstrap';
 import classnames from 'classnames';
 
 export default function RefreshButton({ className, ...props }) {
-  const classes = classnames('btn-sm', 'btn-secondary', className);
+  const classes = classnames('btn', 'btn-sm', 'btn-secondary', className);
   return (
-    <Button className={classes} {...props}>
+    <button type="button" className={classes} {...props}>
       <i className="fas fa-fw fa-sync-alt" />
-    </Button>
+    </button>
   );
 }
 

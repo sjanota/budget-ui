@@ -1,25 +1,11 @@
 import React from 'react';
-import SplitButton from '../components/SplitButton/SplitButton';
-import PropTypes from 'prop-types';
-import { useDictionary } from '../language';
-import Icon from '../components/Icon/Icon';
-import { Size, Variant } from '../bootstrap';
+import classnames from 'classnames';
 
-export default function CreateButton({ onClick, ...props }) {
-  const { buttons } = useDictionary();
+export default function CreateButton({ className, ...props }) {
+  const classes = classnames('btn', 'btn-sm', 'btn-primary', className);
   return (
-    <SplitButton
-      icon={Icon.Plus}
-      size={Size.sm}
-      variant={Variant.primary}
-      onClick={onClick}
-      {...props}
-    >
-      {buttons.create}
-    </SplitButton>
+    <button type="button" className={classes} {...props}>
+      <i className="fas fa-fw fa-plus" />
+    </button>
   );
 }
-
-CreateButton.propTypes = {
-  onClick: PropTypes.func.isRequired,
-};
