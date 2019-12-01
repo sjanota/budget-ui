@@ -44,7 +44,7 @@ function CollapsiblePanelTitle({ children, ...props }) {
     <Panel.Title {...props}>
       <Icon
         icon={show ? Icon.ChevronUp : Icon.ChevronDown}
-        className="text-secondary"
+        className="text-secondary mr-2"
       />
       {children}
     </Panel.Title>
