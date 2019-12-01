@@ -26,14 +26,14 @@ const columns = [
   {
     dataField: 'fromEnvelope',
     sort: true,
-    sortValue: cell => cell.name,
+    sortValue: cell => (cell ? cell.name : ''),
     formatter: a => a && a.name,
   },
   {
     dataField: 'toEnvelope',
     sort: true,
-    sortValue: cell => cell.name,
-    formatter: a => a.name,
+    sortValue: cell => (cell ? cell.name : ''),
+    formatter: a => a && a.name,
   },
   {
     dataField: 'currentAmount',
