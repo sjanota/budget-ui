@@ -6,7 +6,7 @@ import { sidebarConfig } from './sidebarConfig';
 import { BudgetProvider, BudgetContext } from '../gql/budget';
 import Accounts from '../Accounts/Accounts';
 import Envelopes from '../Envelopes/EnvelopesPage';
-import Expenses from '../Expenses';
+import ExpensesPage from '../Expenses/ExpensesPage';
 import Transfers from '../Transfers';
 import Plans from '../Plans';
 import { MonthDashboardPage } from '../MonthDashboardPage';
@@ -39,7 +39,7 @@ export default function App() {
               <Switch>
                 <Route path="/accounts" component={Accounts} />
                 <Route path="/envelopes" component={Envelopes} />
-                <Route path="/expenses" component={Expenses} />
+                <Route path="/expenses" component={ExpensesPage} />
                 <Route path="/transfers" component={Transfers} />
                 <Route path="/plans" component={Plans} />
                 <Route path="/" component={MonthDashboardPage} />

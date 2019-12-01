@@ -4,6 +4,7 @@ export const Variant = {
   danger: 'danger',
   success: 'success',
   warning: 'warning',
+  white: 'white',
 };
 
 export const Size = {

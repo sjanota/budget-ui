@@ -4,19 +4,33 @@ import classnames from 'classnames';
 import Icon from '../Icon/Icon';
 import { Variant } from '../../bootstrap';
 
-export default function ClickableIcon({ icon, variant, ...props }) {
+export default function ClickableIcon({
+  icon,
+  variant,
+  className,
+  onClick,
+  ...props
+}) {
   const classes = classnames(
     'btn',
     'bg-transparent',
     'border-0',
     'p-0',
     'mx-1',
+    className,
     {
       [`text-${variant}`]: variant,
     }
   );
+
+  function handleOnClick(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    onClick && onClick(e);
+  }
+
   return (
-    <button className={classes} {...props}>
+    <button className={classes} onClick={handleOnClick} {...props}>
       <Icon icon={icon} />
     </button>
   );
@@ -24,5 +38,7 @@ export default function ClickableIcon({ icon, variant, ...props }) {
 
 ClickableIcon.propTypes = {
   icon: PropTypes.string.isRequired,
+  className: PropTypes.string,
+  onClick: PropTypes.func,
   variant: PropTypes.oneOf(Object.keys(Variant)),
 };

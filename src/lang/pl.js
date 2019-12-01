@@ -54,6 +54,7 @@ export default {
         name: 'Nazwa',
       },
     },
+    expensesTableTitle: account => `Wydatki dla konta "${account}"`,
     modal: {
       createTitle: 'Dodaj nowe konto',
       editTitle: 'Edytuj konto',

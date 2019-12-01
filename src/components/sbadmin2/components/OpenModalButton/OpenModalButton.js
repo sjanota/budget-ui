@@ -14,6 +14,7 @@ export default function OpenModalButton({
   if (onClickRef) {
     onClickRef.current = onClick;
   }
+
   return (
     <span>
       <Button onClick={onClick} />

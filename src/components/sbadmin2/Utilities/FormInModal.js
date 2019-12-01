@@ -45,7 +45,6 @@ FormInModal.propTypes = {
   children: PropTypes.node.isRequired,
   onHide: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired,
-  show: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
   formData: PropTypes.any.isRequired,
 };

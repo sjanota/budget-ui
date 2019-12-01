@@ -4,13 +4,20 @@ import { useUpdateAccount } from '../gql/accounts';
 import { useDictionary } from '../sbadmin2';
 import { Variant } from '../sbadmin2/bootstrap';
 import { AccountModal } from './AccountModal';
+import './UpdateAccountButton.css';
+
 export function UpdateAccountButton({ account }) {
   const [updateAccount] = useUpdateAccount();
   const { accounts } = useDictionary();
   return (
     <OpenModalButton
       button={props => (
-        <ClickableIcon icon={Icon.Edit} variant={Variant.primary} {...props} />
+        <ClickableIcon
+          className="accounts__update-button"
+          icon={Icon.Edit}
+          variant={Variant.primary}
+          {...props}
+        />
       )}
       modalContent={props => (
         <AccountModal
