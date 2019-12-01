@@ -9,8 +9,8 @@ export default function CancelButton({ onClick }) {
   const { buttons } = useDictionary();
   return (
     <SplitButton
-      variant={Variant.danger}
-      icon={Icon.Save}
+      variant={Variant.secondary}
+      icon={Icon.Trash}
       size={Size.sm}
       onClick={onClick}
       type="button"

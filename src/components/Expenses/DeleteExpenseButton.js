@@ -7,7 +7,7 @@ export function DeleteExpenseButton({ expense }) {
   return (
     <ClickableIcon
       icon={Icon.Trash}
-      variant={Variant.secondary}
+      variant={Variant.danger}
       onClick={() => deleteExpense(expense.id)}
     />
   );

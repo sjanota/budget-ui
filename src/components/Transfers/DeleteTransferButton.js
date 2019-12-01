@@ -7,7 +7,7 @@ export function DeleteTransferButton({ transfer }) {
   return (
     <ClickableIcon
       icon={Icon.Trash}
-      variant={Variant.secondary}
+      variant={Variant.danger}
       onClick={() => deleteTransfer(transfer.id)}
     />
   );
