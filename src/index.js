@@ -24,15 +24,17 @@ const onRedirectCallback = appState => {
   );
 };
 
+const redirectURI = `${window.location.origin}${process.env.PUBLIC_URL}`;
+
 const ProdAuthorizationProvider = ({ children }) => (
   <Auth0Provider
     domain={config.domain}
     client_id={config.clientId}
-    redirect_uri={process.env.PUBLIC_URL || window.location.origin}
+    redirect_uri={redirectURI}
     onRedirectCallback={onRedirectCallback}
     audience={config.audience}
     scope="beta"
-    returnTo={process.env.PUBLIC_URL || window.location}
+    returnTo={redirectURI}
   >
     <AuthApolloProvider>{children}</AuthApolloProvider>
   </Auth0Provider>
