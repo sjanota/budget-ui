@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useGetCurrentTransfers } from '../gql/transfers';
 import { QueryTablePanel } from '../gql/QueryTablePanel';
 import { UpdateTransferButton } from './UpdateTransferButton';
@@ -71,3 +72,9 @@ export function TransfersTablePanel({
     />
   );
 }
+
+TransfersTablePanel.propTypes = {
+  createButton: PropTypes.node.isRequired,
+  fromAccountFilter: PropTypes.string,
+  toAccountFilter: PropTypes.string,
+};

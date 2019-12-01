@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import classnames from 'classnames';
+import PropTypes from 'prop-types';
 
 import './Combobox.css';
 
@@ -138,3 +139,17 @@ export function Combobox({
     </div>
   );
 }
+
+Combobox.propTypes = {
+  _ref: PropTypes.shape({ current: PropTypes.any }),
+  allowedValues: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+    })
+  ),
+  className: PropTypes.any,
+  defaultValue: PropTypes.string,
+  disabled: PropTypes.bool,
+  required: PropTypes.bool,
+};

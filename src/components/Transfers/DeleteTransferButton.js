@@ -1,7 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { ClickableIcon, Icon } from '../sbadmin2';
 import { useDeleteTranfer } from '../gql/transfers';
 import { Variant } from '../sbadmin2/bootstrap';
+
 export function DeleteTransferButton({ transfer }) {
   const [deleteTransfer] = useDeleteTranfer();
   return (
@@ -12,3 +15,7 @@ export function DeleteTransferButton({ transfer }) {
     />
   );
 }
+
+DeleteTransferButton.propTypes = {
+  transfer: PropTypes.shape({ id: PropTypes.any }).isRequired,
+};

@@ -1,5 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
+import PropTypes from 'prop-types';
 
 export default function CreateButton({ className, ...props }) {
   const classes = classnames('btn', 'btn-sm', 'btn-primary', className);
@@ -9,3 +10,7 @@ export default function CreateButton({ className, ...props }) {
     </button>
   );
 }
+
+CreateButton.propTypes = {
+  className: PropTypes.any,
+};
