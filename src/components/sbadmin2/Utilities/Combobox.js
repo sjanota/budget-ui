@@ -62,7 +62,6 @@ export function Combobox({
   }
 
   function onKeyDown(e) {
-    console.log('aua');
     if (e.keyCode === 40) {
       // up
       e.preventDefault();
@@ -80,7 +79,11 @@ export function Combobox({
         setSelectedIdx(v => v - 1);
       }
     } else if (e.keyCode === 13 && show) {
+      // enter
       e.preventDefault();
+      onClick(filtered[selectedIdx].id);
+    } else if (e.keyCode === 9 && show) {
+      // tab
       onClick(filtered[selectedIdx].id);
     }
   }
