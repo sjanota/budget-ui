@@ -9,7 +9,7 @@ export function AccountModal({ init, ...props }) {
     name: { $init: init.name },
   });
   return (
-    <FormInModal formData={formData} autoFocusRef={formData.name} {...props}>
+    <FormInModal formData={formData} {...props}>
       <FormControl
         label={accounts.modal.labels.name}
         inline={10}

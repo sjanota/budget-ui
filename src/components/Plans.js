@@ -79,7 +79,7 @@ function PlanModal({ init, ...props }) {
     toEnvelopeID: { $init: init.toEnvelope.id },
   });
   return (
-    <FormInModal formData={formData} autoFocusRef={formData.title} {...props}>
+    <FormInModal formData={formData} {...props}>
       <WithQuery query={query}>
         {({ data }) => (
           <>

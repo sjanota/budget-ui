@@ -15,7 +15,7 @@ export function EnvelopeModal({ init, ...props }) {
     limit: { $init: Amount.format(init.limit, false), $process: Amount.parse },
   });
   return (
-    <FormInModal formData={formData} autoFocusRef={formData.name} {...props}>
+    <FormInModal formData={formData} {...props}>
       <FormControl
         label={envelopes.modal.labels.name}
         inline={9}

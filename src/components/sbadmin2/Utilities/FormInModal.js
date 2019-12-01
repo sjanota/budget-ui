@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import SaveButton from './SaveButton';
 import CancelButton from './CancelButton';
 import { Modal, Form } from 'react-bootstrap';
@@ -7,6 +7,17 @@ import PropTypes from 'prop-types';
 export function FormInModal({ title, onHide, onSave, formData, children }) {
   const [validated, setValidated] = useState(false);
   const form = useRef();
+
+  useEffect(() => {
+    if (form.current) {
+      const firstInput = form.current.getElementsByTagName('input')[0];
+      console.log(firstInput);
+      if (firstInput) {
+        firstInput.focus();
+      }
+    }
+  }, []);
+
   function handleSave(event) {
     event.preventDefault();
     event.stopPropagation();

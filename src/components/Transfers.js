@@ -80,7 +80,7 @@ function TransferModal({ init, ...props }) {
   const first = month.firstDay();
   const last = month.lastDay();
   return (
-    <FormInModal formData={formData} autoFocusRef={formData.title} {...props}>
+    <FormInModal formData={formData} {...props}>
       <WithQuery query={query}>
         {({ data }) => (
           <>

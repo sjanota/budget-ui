@@ -20,7 +20,7 @@ export function CategoryModal({ init, ...props }) {
     description: { $init: init.description },
   });
   return (
-    <FormInModal autoFocusRef={formData.name} formData={formData} {...props}>
+    <FormInModal formData={formData} {...props}>
       <WithQuery query={query}>
         {({ data }) => (
           <>
