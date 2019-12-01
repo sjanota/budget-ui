@@ -20,7 +20,7 @@ export function CreateExpenseButton({ account }) {
             date: null,
             categories: [],
           }}
-          defaultValues={{ account }}
+          account={account}
           title={expenses.modal.createTitle}
           onSave={createExpense}
           {...props}

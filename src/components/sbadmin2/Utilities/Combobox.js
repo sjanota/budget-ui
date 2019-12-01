@@ -1,7 +1,13 @@
 import React, { useRef, useState, useEffect } from 'react';
 import classnames from 'classnames';
 
-export function Combobox({ allowedValues, _ref, defaultValue, className }) {
+export function Combobox({
+  disabled,
+  allowedValues,
+  _ref,
+  defaultValue,
+  className,
+}) {
   const defaultValueObject = allowedValues.find(v => v.id === defaultValue);
   const [show, setShow] = useState(false);
   const [filter, setFilter] = useState(
@@ -77,6 +83,7 @@ export function Combobox({ allowedValues, _ref, defaultValue, className }) {
         onChange={onInputChange}
         onBlur={onInputBlur}
         onKeyDown={onKeyDown}
+        disabled={disabled}
       />
       <button
         className="btn btn-secondary dropdown-toggle dropdown-toggle-split no-arrow"
@@ -89,6 +96,7 @@ export function Combobox({ allowedValues, _ref, defaultValue, className }) {
           borderBottomLeftRadius: 0,
           margin: -1,
         }}
+        disabled={disabled}
       />
       <ul
         ref={menuRef}

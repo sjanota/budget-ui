@@ -12,7 +12,7 @@ import { Combobox } from '../sbadmin2/utilities/Combobox';
 import { InlineFormControl } from '../sbadmin2/utilities/InlineFormControl';
 import { CategoriesInput } from './CategoriesInput';
 
-export function ExpenseModal({ defaultValues, init, ...props }) {
+export function ExpenseModal({ account, init, ...props }) {
   const { selectedBudget } = useBudget();
   const { expenses } = useDictionary();
   const accountsQuery = useGetAccounts();
@@ -21,7 +21,7 @@ export function ExpenseModal({ defaultValues, init, ...props }) {
     date: { $init: init.date },
     accountID: {
       $init: init.account.id,
-      $default: defaultValues && defaultValues.account.id,
+      $default: account && account.id,
     },
     categories: {
       $init: init.categories,
@@ -69,6 +69,7 @@ export function ExpenseModal({ defaultValues, init, ...props }) {
                   id,
                   label: name,
                 }))}
+                disabled={!!account}
               />
             </InlineFormControl>
             <CategoriesInput formData={formData.categories} />
