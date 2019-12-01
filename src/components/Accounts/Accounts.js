@@ -8,6 +8,7 @@ import { ExpensesTablePanel } from '../Expenses/ExpensesTablePanel';
 import { CreateExpenseButton } from '../Expenses/CreateExpenseButton';
 import { CollapsiblePanel } from './CollapsiblePanel';
 import { TransfersTablePanel } from '../Transfers/TransfersTablePanel';
+import { CreateTransferButton } from '../Transfers/CreateTransferButton';
 
 export default function Accounts() {
   const [selectedAccount, setSelectedAccount] = useState(null);
@@ -24,7 +25,9 @@ export default function Accounts() {
             <>
               <TransfersTablePanel
                 readTitle={d => d.accounts.inTransfersTableTitle()}
-                createButton={<CreateExpenseButton account={selectedAccount} />}
+                createButton={
+                  <CreateTransferButton toAccount={selectedAccount} />
+                }
                 accountFilter={selectedAccount.id}
                 hiddenColumns={['toAccount']}
                 wrapper={CollapsiblePanel}
@@ -32,7 +35,9 @@ export default function Accounts() {
               />
               <TransfersTablePanel
                 readTitle={d => d.accounts.outTransfersTableTitle()}
-                createButton={<CreateExpenseButton account={selectedAccount} />}
+                createButton={
+                  <CreateTransferButton fromAccount={selectedAccount} />
+                }
                 accountFilter={selectedAccount.id}
                 hiddenColumns={['fromAccount']}
                 wrapper={CollapsiblePanel}

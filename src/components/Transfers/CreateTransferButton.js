@@ -4,7 +4,8 @@ import CreateButton from '../sbadmin2/utilities/CreateButton';
 import { useCreateTransfer } from '../gql/transfers';
 import { useDictionary } from '../sbadmin2';
 import { TransferModal } from './TransferModal';
-export function CreateTransferButton() {
+
+export function CreateTransferButton({ toAccount, fromAccount }) {
   const [createTransfer] = useCreateTransfer();
   const { transfers } = useDictionary();
   return (
@@ -21,6 +22,8 @@ export function CreateTransferButton() {
           }}
           title={transfers.modal.createTitle}
           onSave={createTransfer}
+          toAccount={toAccount}
+          fromAccount={fromAccount}
           {...props}
         />
       )}

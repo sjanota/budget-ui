@@ -1,7 +1,6 @@
 import React from 'react';
 import { useGetCurrentTransfers } from '../gql/transfers';
 import { QueryTablePanel } from '../gql/QueryTablePanel';
-import { CreateTransferButton } from './CreateTransferButton';
 import { UpdateTransferButton } from './UpdateTransferButton';
 import { DeleteTransferButton } from './DeleteTransferButton';
 import Amount from '../../model/Amount';
@@ -46,6 +45,7 @@ const columns = [
 export function TransfersTablePanel({
   toAccountFilter,
   fromAccountFilter,
+  createButton,
   ...props
 }) {
   const query = useGetCurrentTransfers();
@@ -63,7 +63,7 @@ export function TransfersTablePanel({
       {...props}
       query={query}
       getData={data => data.budget.currentMonth.transfers}
-      buttons={<CreateTransferButton />}
+      buttons={createButton}
       columns={columns}
       keyField="id"
       readColumnNames={d => d.transfers.table.columns}

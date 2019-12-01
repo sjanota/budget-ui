@@ -10,7 +10,8 @@ import { WithQuery } from '../gql/WithQuery';
 import { Combobox } from '../sbadmin2/utilities/Combobox';
 import { InlineFormControl } from '../sbadmin2/utilities/InlineFormControl';
 import { useDictionary } from '../sbadmin2';
-export function TransferModal({ init, ...props }) {
+
+export function TransferModal({ toAccount, fromAccount, init, ...props }) {
   const { selectedBudget } = useBudget();
   const { transfers } = useDictionary();
   const query = useGetAccounts();
@@ -24,9 +25,14 @@ export function TransferModal({ init, ...props }) {
     fromAccountID: {
       $init: init.fromAccount && init.fromAccount.id,
       $process: v => (v === '' ? null : v),
+      $default: fromAccount && fromAccount.id,
     },
-    toAccountID: { $init: init.toAccount.id },
+    toAccountID: {
+      $init: init.toAccount.id,
+      $default: toAccount && toAccount.id,
+    },
   });
+
   const month = Month.parse(selectedBudget.currentMonth.month);
   const first = month.firstDay();
   const last = month.lastDay();
@@ -72,6 +78,7 @@ export function TransferModal({ init, ...props }) {
                 }))}
                 _ref={formData.fromAccountID}
                 defaultValue={formData.fromAccountID.default()}
+                disabled={!!fromAccount}
               />
             </InlineFormControl>
             <InlineFormControl
@@ -85,6 +92,7 @@ export function TransferModal({ init, ...props }) {
                 }))}
                 _ref={formData.toAccountID}
                 defaultValue={formData.toAccountID.default()}
+                disabled={!!toAccount}
               />
             </InlineFormControl>
           </>
