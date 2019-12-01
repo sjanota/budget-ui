@@ -70,6 +70,7 @@ export function ExpenseModal({ account, init, ...props }) {
                   label: name,
                 }))}
                 disabled={!!account}
+                required
               />
             </InlineFormControl>
             <CategoriesInput formData={formData.categories} />

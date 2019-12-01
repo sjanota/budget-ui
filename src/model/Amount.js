@@ -1,9 +1,12 @@
+import * as math from 'mathjs';
+
 export default class Amount {
   static parse(string) {
     if (string === null || string === '') {
       return null;
     }
-    return Math.round(Number(string) * 100);
+    const number = math.evaluate(string);
+    return Math.round(number * 100);
   }
 
   static zero() {

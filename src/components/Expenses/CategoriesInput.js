@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { ClickableIcon, Icon } from '../sbadmin2';
 import { useGetCategories } from '../gql/categories';
 import { WithQuery } from '../gql/WithQuery';
@@ -14,7 +15,7 @@ export function CategoriesInput({ formData }) {
     <WithQuery query={query}>
       {({ data }) => (
         <>
-          <small className="d-flex align-items-center">
+          <small className="d-flex align-items-center mb-3">
             {expenses.modal.labels.categories}
             <ClickableIcon
               icon={Icon.Plus}
@@ -35,7 +36,7 @@ export function CategoriesInput({ formData }) {
               key={categoryFormData.categoryID.init() || idx}
               className="d-flex align-items-center"
             >
-              <Col sm={7}>
+              <Col sm={6}>
                 <Combobox
                   _ref={categoryFormData.categoryID}
                   defaultValue={categoryFormData.categoryID.init()}
@@ -46,17 +47,13 @@ export function CategoriesInput({ formData }) {
                   required
                 />
               </Col>
-              <Col>
-                <Form.Control
-                  type="number"
-                  required
+              <Col className="pr-0">
+                <AmountInput
                   placeholder={expenses.modal.labels.amount}
-                  defaultValue={categoryFormData.amount.init()}
-                  ref={categoryFormData.amount}
-                  step="0.01"
+                  formData={categoryFormData.amount}
                 />
               </Col>
-              <Col sm={1}>
+              <Col sm={1} className="px-0">
                 <ClickableIcon
                   icon="minus"
                   variant="danger"
@@ -72,3 +69,49 @@ export function CategoriesInput({ formData }) {
     </WithQuery>
   );
 }
+
+function AmountInput({ placeholder, formData }) {
+  const [isFunction, setIsFunction] = useState(false);
+  function onKeyDown(e) {
+    if (e.key === '=') {
+      e.preventDefault();
+      setIsFunction(true);
+    } else if (
+      e.key === 'Backspace' &&
+      formData.current &&
+      formData.current.value === ''
+    ) {
+      setIsFunction(false);
+    }
+  }
+
+  const controlProps = isFunction
+    ? { type: 'text', pattern: '\\d+([,.]\\d{1,2})?([+-]\\d+([,.]\\d{1,2})?)*' }
+    : { type: 'number', step: '0.01' };
+
+  return (
+    <div className="input-group">
+      <div className="input-group-prepend">
+        <span className="input-group-text px-2">
+          <small> {isFunction ? '=' : '$'}</small>
+        </span>
+      </div>
+      <Form.Control
+        required
+        placeholder={placeholder}
+        defaultValue={formData.default()}
+        ref={formData}
+        onKeyDown={onKeyDown}
+        {...controlProps}
+      />
+    </div>
+  );
+}
+
+AmountInput.propTypes = {
+  formData: PropTypes.shape({
+    default: PropTypes.func.isRequired,
+    current: PropTypes.shape({ value: PropTypes.string }),
+  }),
+  placeholder: PropTypes.string,
+};
