@@ -23,9 +23,7 @@ export default function Accounts() {
               readTitle={d =>
                 d.accounts.expensesTableTitle(selectedAccount.name)
               }
-              createButton={
-                <CreateExpenseButton account={selectedAccount.id} />
-              }
+              createButton={<CreateExpenseButton account={selectedAccount} />}
               accountFilter={selectedAccount.id}
               hiddenColumns={['account']}
             />

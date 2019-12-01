@@ -13,16 +13,19 @@ export function Combobox({ allowedValues, _ref, defaultValue, className }) {
   const filtered = allowedValues.filter(v =>
     v.label.toLowerCase().includes(filter.toLowerCase())
   );
+
   useEffect(() => {
     _ref.current = { value: defaultValue };
     // eslint-disable-next-line
   }, []);
+
   function onClick(id) {
     const selectedLabel = allowedValues.find(v => v.id === id).label;
     setShow(false);
     setFilter(selectedLabel);
     _ref.current = { value: id };
   }
+
   function onInputChange(e) {
     const value = e.target.value;
     setShow(true);
@@ -33,6 +36,7 @@ export function Combobox({ allowedValues, _ref, defaultValue, className }) {
       _ref.current = { value: selected.id };
     }
   }
+
   function onInputBlur() {
     setShow(false);
     const selected = allowedValues.find(v => v.label === filter);
@@ -40,6 +44,7 @@ export function Combobox({ allowedValues, _ref, defaultValue, className }) {
       setFilter('');
     }
   }
+
   function onKeyDown(e) {
     if (e.keyCode === 40) {
       // up
@@ -62,6 +67,7 @@ export function Combobox({ allowedValues, _ref, defaultValue, className }) {
       onClick(filtered[selectedIdx].id);
     }
   }
+
   return (
     <div className={classNames}>
       <input

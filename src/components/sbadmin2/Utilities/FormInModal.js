@@ -41,7 +41,6 @@ export function FormInModal({ title, onHide, onSave, formData, children }) {
 }
 
 FormInModal.propTypes = {
-  autoFocusRef: PropTypes.shape({ current: PropTypes.any }).isRequired,
   children: PropTypes.node.isRequired,
   onHide: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired,

@@ -58,10 +58,7 @@ export function CategoriesInput({ formData }) {
                   icon="minus"
                   variant="danger"
                   size="sm"
-                  onClick={() => {
-                    console.log(categoryFormData, idx);
-                    formData.removeAt(idx);
-                  }}
+                  onClick={() => formData.removeAt(idx)}
                 />
               </Col>
             </Form.Group>

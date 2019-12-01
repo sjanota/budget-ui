@@ -20,7 +20,8 @@ function simpleFormData({ $init, $process, $default }, getRoot) {
     return formData.current.value !== $init;
   };
 
-  formData.default = () => ($init !== null ? $init : _default());
+  formData.default = () =>
+    $init !== null && $init !== undefined ? $init : _default();
 
   formData.init = () => $init;
 

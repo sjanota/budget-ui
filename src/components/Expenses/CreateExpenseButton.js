@@ -8,7 +8,6 @@ import { ExpenseModal } from './ExpenseModal';
 export function CreateExpenseButton({ account }) {
   const [createExpense] = useCreateExpense();
   const { expenses } = useDictionary();
-  const initAccount = account ? { id: account } : {};
 
   return (
     <OpenModalButton
@@ -17,10 +16,11 @@ export function CreateExpenseButton({ account }) {
         <ExpenseModal
           init={{
             name: null,
-            account: initAccount,
+            account: {},
             date: null,
             categories: [],
           }}
+          defaultValues={{ account }}
           title={expenses.modal.createTitle}
           onSave={createExpense}
           {...props}
