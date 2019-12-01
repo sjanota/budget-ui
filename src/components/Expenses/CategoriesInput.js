@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { ClickableIcon, Icon } from '../sbadmin2';
 import { useGetCategories } from '../gql/categories';
@@ -7,6 +7,7 @@ import { Form, Row, Col } from 'react-bootstrap';
 import { useDictionary } from '../sbadmin2';
 import { Combobox } from '../sbadmin2/utilities/Combobox';
 import { Variant, Size } from '../sbadmin2/bootstrap';
+import Amount from '../../model/Amount';
 
 export function CategoriesInput({ formData }) {
   const query = useGetCategories();
@@ -75,14 +76,27 @@ CategoriesInput.propTypes = {
 };
 
 function AmountInput({ placeholder, formData }) {
+  const [isValid, setIsValid] = useState(false);
+  const [value, setValue] = useState(formData.default() || '');
+
+  useEffect(() => {
+    formData.current = { value };
+  }, [value]);
+
+  function onChange(e) {
+    const newValue = e.target.value;
+    setValue(newValue);
+    setIsValid(Amount.isValid(newValue));
+  }
+
   return (
     <Form.Control
       required
       type="text"
-      pattern="-?\d+([,.]\d{1,2})?([+-]\d+([,.]\d{1,2})?)*"
       placeholder={placeholder}
-      defaultValue={formData.default()}
-      ref={formData}
+      value={value}
+      onChange={onChange}
+      isValid={isValid}
     />
   );
 }

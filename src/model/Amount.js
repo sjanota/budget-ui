@@ -9,6 +9,19 @@ export default class Amount {
     return Math.round(number * 100);
   }
 
+  static isValid(string) {
+    if (string === null || string === '') {
+      return true;
+    }
+
+    try {
+      math.parse(string.replace(/,/, '.'));
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   static zero() {
     return 0;
   }
