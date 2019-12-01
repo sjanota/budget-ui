@@ -24,7 +24,6 @@ export default function ClickableIcon({
   );
 
   function handleOnClick(e) {
-    e.stopPropagation();
     e.preventDefault();
     onClick && onClick(e);
   }

@@ -1,16 +1,16 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
 import { mount } from 'enzyme';
 
 import ClickableIcon from './ClickableIcon';
 import Icon from '../Icon/Icon';
 import { Variant } from '../../bootstrap';
+import { render } from '@testing-library/react';
 
 it('ClickableIcon renders with minimal properly', () => {
-  const component = renderer.create(
+  const { container } = render(
     <ClickableIcon icon={Icon.Archive} variant={Variant.primary} />
   );
-  expect(component).toMatchSnapshot();
+  expect(container.firstChild).toMatchSnapshot();
 });
 
 describe('ClickableIcon', () => {

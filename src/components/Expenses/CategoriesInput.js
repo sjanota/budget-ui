@@ -6,6 +6,7 @@ import { Form, Row, Col } from 'react-bootstrap';
 import { useDictionary } from '../sbadmin2';
 import { Combobox } from '../sbadmin2/utilities/Combobox';
 import { Variant, Size } from '../sbadmin2/bootstrap';
+
 export function CategoriesInput({ formData }) {
   const query = useGetCategories();
   const { expenses } = useDictionary();
@@ -25,6 +26,7 @@ export function CategoriesInput({ formData }) {
                   amount: null,
                 })
               }
+              type="button"
             />
           </small>
           {formData.map((categoryFormData, idx) => (
@@ -41,6 +43,7 @@ export function CategoriesInput({ formData }) {
                     id,
                     label: name,
                   }))}
+                  required
                 />
               </Col>
               <Col>
@@ -59,6 +62,7 @@ export function CategoriesInput({ formData }) {
                   variant="danger"
                   size="sm"
                   onClick={() => formData.removeAt(idx)}
+                  type="button"
                 />
               </Col>
             </Form.Group>

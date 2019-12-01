@@ -13,6 +13,7 @@ export default function CancelButton({ onClick }) {
       icon={Icon.Save}
       size={Size.sm}
       onClick={onClick}
+      type="button"
     >
       {buttons.cancel}
     </SplitButton>

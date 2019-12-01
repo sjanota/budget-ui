@@ -7,6 +7,7 @@ export function Combobox({
   _ref,
   defaultValue,
   className,
+  required,
 }) {
   const defaultValueObject = allowedValues.find(v => v.id === defaultValue);
   const [show, setShow] = useState(false);
@@ -61,6 +62,7 @@ export function Combobox({
   }
 
   function onKeyDown(e) {
+    console.log('aua');
     if (e.keyCode === 40) {
       // up
       e.preventDefault();
@@ -92,6 +94,7 @@ export function Combobox({
         onChange={onInputChange}
         onKeyDown={onKeyDown}
         disabled={disabled}
+        required={required}
       />
       <button
         className="btn btn-secondary dropdown-toggle dropdown-toggle-split no-arrow"
@@ -106,6 +109,7 @@ export function Combobox({
         }}
         tabIndex={-1}
         disabled={disabled}
+        type="button"
       />
       <ul
         ref={menuRef}

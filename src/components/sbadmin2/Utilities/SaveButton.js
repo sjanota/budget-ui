@@ -13,6 +13,7 @@ export default function SaveButton(props) {
       icon={Icon.Save}
       size={Size.sm}
       variant={Variant.primary}
+      type="submit"
       {...props}
     >
       {buttons.save}
