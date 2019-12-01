@@ -1,6 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react';
 import classnames from 'classnames';
 
+import './Combobox.css';
+
 export function Combobox({
   disabled,
   allowedValues,
@@ -16,7 +18,7 @@ export function Combobox({
   );
   const [selectedIdx, setSelectedIdx] = useState(0);
   const menuRef = useRef();
-  const classNames = classnames('input-group', className);
+  const classNames = classnames('combobox', 'input-group', className);
   const filtered = allowedValues.filter(v =>
     v.label.toLowerCase().includes(filter.toLowerCase())
   );
