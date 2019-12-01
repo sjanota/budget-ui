@@ -14,10 +14,10 @@ export function UpdateCategoryButton({ category }) {
   };
   return (
     <OpenModalButton
-      renderButton={props => (
+      button={props => (
         <ClickableIcon icon={Icon.Edit} variant={Variant.primary} {...props} />
       )}
-      renderModal={props => (
+      modalContent={props => (
         <CategoryModal
           title={categories.modal.editTitle}
           init={category}

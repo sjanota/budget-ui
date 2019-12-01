@@ -12,8 +12,8 @@ export function CreateCategoryButton({ onClickRef }) {
   return (
     <OpenModalButton
       onClickRef={onClickRef}
-      renderButton={props => <CreateButton {...props} />}
-      renderModal={props => (
+      button={props => <CreateButton {...props} />}
+      modalContent={props => (
         <CategoryModal
           title={categories.modal.createTitle}
           init={{ name: '', envelope: { id: null }, description: '' }}

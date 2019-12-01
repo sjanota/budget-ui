@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { Page, ClickableIcon, Icon, OpenModalButton } from './sbadmin2';
 import CreateButton from './sbadmin2/utilities/CreateButton';
 import { FormControl } from './sbadmin2/utilities/FormControl';
-import FormModal from './sbadmin2/utilities/FormModal';
+import { FormInModal } from './sbadmin2/utilities/FormInModal';
 import { useFormData } from './sbadmin2/utilities/useFormData';
 import Amount from '../model/Amount';
 import {
@@ -47,14 +47,14 @@ function AccountModal({ init, ...props }) {
     name: { $init: init.name },
   });
   return (
-    <FormModal formData={formData} autoFocusRef={formData.name} {...props}>
+    <FormInModal formData={formData} autoFocusRef={formData.name} {...props}>
       <FormControl
         label={accounts.modal.labels.name}
         inline={10}
         formData={formData.name}
         feedback="Provide name"
       />
-    </FormModal>
+    </FormInModal>
   );
 }
 
@@ -63,10 +63,10 @@ function UpdateAccountButton({ account }) {
   const { accounts } = useDictionary();
   return (
     <OpenModalButton
-      renderButton={props => (
+      button={props => (
         <ClickableIcon icon={Icon.Edit} variant={Variant.primary} {...props} />
       )}
-      renderModal={props => (
+      modalContent={props => (
         <AccountModal
           init={account}
           title={accounts.modal.editTitle}
@@ -78,14 +78,13 @@ function UpdateAccountButton({ account }) {
   );
 }
 
-function CreateAccountButton({ openRef }) {
+function CreateAccountButton() {
   const [createAccount] = useCreateAccount();
   const { accounts } = useDictionary();
   return (
     <OpenModalButton
-      openRef={openRef}
-      renderButton={props => <CreateButton {...props} />}
-      renderModal={props => (
+      button={props => <CreateButton {...props} />}
+      modalContent={props => (
         <AccountModal
           init={{ name: '' }}
           title={accounts.modal.createTitle}

@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { Page, ClickableIcon, Icon, OpenModalButton } from './sbadmin2';
 import CreateButton from './sbadmin2/utilities/CreateButton';
 import { FormControl } from './sbadmin2/utilities/FormControl';
-import FormModal from './sbadmin2/utilities/FormModal';
+import { FormInModal } from './sbadmin2/utilities/FormInModal';
 import { useFormData } from './sbadmin2/utilities/useFormData';
 import Amount from '../model/Amount';
 import Month from '../model/Month';
@@ -80,7 +80,7 @@ function TransferModal({ init, ...props }) {
   const first = month.firstDay();
   const last = month.lastDay();
   return (
-    <FormModal formData={formData} autoFocusRef={formData.title} {...props}>
+    <FormInModal formData={formData} autoFocusRef={formData.title} {...props}>
       <WithQuery query={query}>
         {({ data }) => (
           <>
@@ -139,7 +139,7 @@ function TransferModal({ init, ...props }) {
           </>
         )}
       </WithQuery>
-    </FormModal>
+    </FormInModal>
   );
 }
 
@@ -159,10 +159,10 @@ function UpdateTransferButton({ transfer }) {
   const { transfers } = useDictionary();
   return (
     <OpenModalButton
-      renderButton={props => (
+      button={props => (
         <ClickableIcon icon={Icon.Edit} variant={Variant.primary} {...props} />
       )}
-      renderModal={props => (
+      modalContent={props => (
         <TransferModal
           init={transfer}
           title={transfers.modal.editTitle}
@@ -180,9 +180,8 @@ function CreateTransferButton({ openRef }) {
 
   return (
     <OpenModalButton
-      openRef={openRef}
-      renderButton={props => <CreateButton {...props} />}
-      renderModal={props => (
+      button={props => <CreateButton {...props} ref={openRef} />}
+      modalContent={props => (
         <TransferModal
           init={{
             title: null,
@@ -204,7 +203,7 @@ const keyMap = {
   openModal: 'n',
 };
 const keyHandlers = openCreateModal => ({
-  openModal: () => openCreateModal.current(),
+  openModal: () => openCreateModal.current.click(),
 });
 
 export default function Transfers() {

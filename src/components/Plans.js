@@ -3,7 +3,7 @@ import { Page, ClickableIcon, Icon, OpenModalButton } from './sbadmin2';
 import CreateButton from './sbadmin2/utilities/CreateButton';
 import { FormControl } from './sbadmin2/utilities/FormControl';
 import { OptionalFormControl } from './sbadmin2/utilities/OptionalFormControl';
-import FormModal from './sbadmin2/utilities/FormModal';
+import { FormInModal } from './sbadmin2/utilities/FormInModal';
 import { useFormData } from './sbadmin2/utilities/useFormData';
 import Amount from '../model/Amount';
 import {
@@ -79,7 +79,7 @@ function PlanModal({ init, ...props }) {
     toEnvelopeID: { $init: init.toEnvelope.id },
   });
   return (
-    <FormModal formData={formData} autoFocusRef={formData.title} {...props}>
+    <FormInModal formData={formData} autoFocusRef={formData.title} {...props}>
       <WithQuery query={query}>
         {({ data }) => (
           <>
@@ -132,7 +132,7 @@ function PlanModal({ init, ...props }) {
           </>
         )}
       </WithQuery>
-    </FormModal>
+    </FormInModal>
   );
 }
 
@@ -142,10 +142,10 @@ function UpdatePlanButton({ plan }) {
 
   return (
     <OpenModalButton
-      renderButton={props => (
+      button={props => (
         <ClickableIcon icon={Icon.Edit} variant={Variant.primary} {...props} />
       )}
-      renderModal={props => (
+      modalContent={props => (
         <PlanModal
           init={plan}
           title={plans.modal.editTitle}
@@ -174,8 +174,7 @@ function CreatePlanButton({ openRef }) {
 
   return (
     <OpenModalButton
-      openRef={openRef}
-      renderButton={props => <CreateButton {...props} />}
+      button={props => <CreateButton ref={openRef} {...props} />}
       renderModal={props => (
         <PlanModal
           init={{

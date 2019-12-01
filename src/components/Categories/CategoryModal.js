@@ -1,5 +1,5 @@
 import React from 'react';
-import FormModal from '../sbadmin2/utilities/FormModal';
+import { FormInModal } from '../sbadmin2/utilities/FormInModal';
 import { useFormData } from '../sbadmin2/utilities/useFormData';
 import { FormControl } from '../sbadmin2/utilities/FormControl';
 import PropTypes from 'prop-types';
@@ -20,7 +20,7 @@ export function CategoryModal({ init, ...props }) {
     description: { $init: init.description },
   });
   return (
-    <FormModal autoFocusRef={formData.name} formData={formData} {...props}>
+    <FormInModal autoFocusRef={formData.name} formData={formData} {...props}>
       <WithQuery query={query}>
         {({ data }) => (
           <>
@@ -52,7 +52,7 @@ export function CategoryModal({ init, ...props }) {
           </>
         )}
       </WithQuery>
-    </FormModal>
+    </FormInModal>
   );
 }
 

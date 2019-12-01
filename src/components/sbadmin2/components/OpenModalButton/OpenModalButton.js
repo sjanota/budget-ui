@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Modal } from 'react-bootstrap';
 
 export default function OpenModalButton({
-  renderButton,
-  renderModal,
+  button: Button,
+  modalContent: ModalContent,
   onClickRef,
+  ...props
 }) {
   const [show, setShow] = useState(false);
   const onHide = () => setShow(false);
@@ -13,15 +15,17 @@ export default function OpenModalButton({
     onClickRef.current = onClick;
   }
   return (
-    <>
-      {renderButton({ onClick })}
-      {renderModal({ onHide, show })}
-    </>
+    <span>
+      <Button onClick={onClick} />
+      <Modal show={show} onHide={onHide} {...props}>
+        <ModalContent onHide={onHide} />
+      </Modal>
+    </span>
   );
 }
 
 OpenModalButton.propTypes = {
-  renderButton: PropTypes.elementType.isRequired,
-  renderModal: PropTypes.elementType.isRequired,
+  button: PropTypes.elementType.isRequired,
+  modalContent: PropTypes.elementType.isRequired,
   onClickRef: PropTypes.shape({ current: PropTypes.any }),
 };

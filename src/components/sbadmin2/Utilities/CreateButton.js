@@ -5,7 +5,7 @@ import { useDictionary } from '../language';
 import Icon from '../components/Icon/Icon';
 import { Size, Variant } from '../bootstrap';
 
-export default function CreateButton({ onClick }) {
+export default function CreateButton({ onClick, ...props }) {
   const { buttons } = useDictionary();
   return (
     <SplitButton
@@ -13,6 +13,7 @@ export default function CreateButton({ onClick }) {
       size={Size.sm}
       variant={Variant.primary}
       onClick={onClick}
+      {...props}
     >
       {buttons.create}
     </SplitButton>

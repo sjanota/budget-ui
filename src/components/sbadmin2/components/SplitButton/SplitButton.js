@@ -11,6 +11,7 @@ export default function SplitButton({
   size,
   className,
   disabled,
+  _ref,
   ...props
 }) {
   const classNames = classnames('btn', 'btn-icon-split', className, {
@@ -20,7 +21,7 @@ export default function SplitButton({
   });
 
   return (
-    <button className={classNames} disabled={disabled} {...props}>
+    <button className={classNames} disabled={disabled} ref={_ref} {...props}>
       <span className="icon text-white-50">
         <Icon icon={icon} />
       </span>
@@ -36,4 +37,5 @@ SplitButton.propTypes = {
   icon: PropTypes.string.isRequired,
   size: PropTypes.oneOf(Object.keys(Size)),
   variant: PropTypes.oneOf(Object.keys(Variant)),
+  _ref: PropTypes.any,
 };

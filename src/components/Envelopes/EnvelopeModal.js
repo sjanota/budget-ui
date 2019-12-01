@@ -2,7 +2,7 @@ import React from 'react';
 import Amount from '../../model/Amount';
 import { FormControl } from '../sbadmin2/utilities/FormControl';
 import { OptionalFormControl } from '../sbadmin2/utilities/OptionalFormControl';
-import FormModal from '../sbadmin2/utilities/FormModal';
+import { FormInModal } from '../sbadmin2/utilities/FormInModal';
 import { useFormData } from '../sbadmin2/utilities/useFormData';
 import PropTypes from 'prop-types';
 import * as model from '../../model/propTypes';
@@ -15,7 +15,7 @@ export function EnvelopeModal({ init, ...props }) {
     limit: { $init: Amount.format(init.limit, false), $process: Amount.parse },
   });
   return (
-    <FormModal formData={formData} autoFocusRef={formData.name} {...props}>
+    <FormInModal formData={formData} autoFocusRef={formData.name} {...props}>
       <FormControl
         label={envelopes.modal.labels.name}
         inline={9}
@@ -33,7 +33,7 @@ export function EnvelopeModal({ init, ...props }) {
         formData={formData.limit}
         step="0.01"
       />
-    </FormModal>
+    </FormInModal>
   );
 }
 

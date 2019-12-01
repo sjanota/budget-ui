@@ -12,8 +12,8 @@ export function CreateEnvelopeButton({ onClickRef }) {
   return (
     <OpenModalButton
       onClickRef={onClickRef}
-      renderButton={props => <CreateButton {...props} />}
-      renderModal={props => (
+      button={props => <CreateButton {...props} />}
+      modalContent={props => (
         <EnvelopeModal
           title={envelopes.modal.createTitle}
           init={{ name: '', limit: null }}

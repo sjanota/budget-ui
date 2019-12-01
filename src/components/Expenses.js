@@ -2,7 +2,7 @@ import React from 'react';
 import { Page, ClickableIcon, Icon, OpenModalButton } from './sbadmin2';
 import CreateButton from './sbadmin2/utilities/CreateButton';
 import { FormControl } from './sbadmin2/utilities/FormControl';
-import FormModal from './sbadmin2/utilities/FormModal';
+import { FormInModal } from './sbadmin2/utilities/FormInModal';
 import { useFormData } from './sbadmin2/utilities/useFormData';
 import Amount from '../model/Amount';
 import { QueryTablePanel } from './gql/QueryTablePanel';
@@ -163,7 +163,7 @@ function ExpenseModal({ init, ...props }) {
   const first = month.firstDay();
   const last = month.lastDay();
   return (
-    <FormModal formData={formData} autoFocusRef={formData.title} {...props}>
+    <FormInModal formData={formData} autoFocusRef={formData.title} {...props}>
       <WithQuery query={accountsQuery}>
         {({ data: accountsData }) => (
           <>
@@ -198,7 +198,7 @@ function ExpenseModal({ init, ...props }) {
           </>
         )}
       </WithQuery>
-    </FormModal>
+    </FormInModal>
   );
 }
 
@@ -219,10 +219,10 @@ function UpdateExpenseButton({ expense }) {
 
   return (
     <OpenModalButton
-      renderButton={props => (
+      button={props => (
         <ClickableIcon icon={Icon.Edit} variant={Variant.primary} {...props} />
       )}
-      renderModal={props => (
+      modalContent={props => (
         <ExpenseModal
           init={expense}
           title={expenses.modal.editTitle}
@@ -240,8 +240,8 @@ function CreateExpenseButton() {
 
   return (
     <OpenModalButton
-      renderButton={props => <CreateButton {...props} />}
-      renderModal={props => (
+      button={props => <CreateButton {...props} />}
+      modalContent={props => (
         <ExpenseModal
           init={{
             name: null,

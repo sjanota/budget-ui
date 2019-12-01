@@ -15,10 +15,10 @@ export function UpdateEnvelopeButton({ envelope }) {
   };
   return (
     <OpenModalButton
-      renderButton={props => (
+      button={props => (
         <ClickableIcon icon={Icon.Edit} variant={Variant.primary} {...props} />
       )}
-      renderModal={props => (
+      modalContent={props => (
         <EnvelopeModal
           title={envelopes.modal.editTitle}
           init={envelope}
