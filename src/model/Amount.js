@@ -5,7 +5,7 @@ export default class Amount {
     if (string === null || string === '') {
       return null;
     }
-    const number = math.evaluate(string);
+    const number = math.evaluate(string.replace(/,/, '.'));
     return Math.round(number * 100);
   }
 

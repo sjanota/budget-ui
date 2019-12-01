@@ -70,41 +70,20 @@ export function CategoriesInput({ formData }) {
   );
 }
 
+CategoriesInput.propTypes = {
+  formData: PropTypes.array.isRequired,
+};
+
 function AmountInput({ placeholder, formData }) {
-  const [isFunction, setIsFunction] = useState(false);
-  function onKeyDown(e) {
-    if (e.key === '=') {
-      e.preventDefault();
-      setIsFunction(true);
-    } else if (
-      e.key === 'Backspace' &&
-      formData.current &&
-      formData.current.value === ''
-    ) {
-      setIsFunction(false);
-    }
-  }
-
-  const controlProps = isFunction
-    ? { type: 'text', pattern: '\\d+([,.]\\d{1,2})?([+-]\\d+([,.]\\d{1,2})?)*' }
-    : { type: 'number', step: '0.01' };
-
   return (
-    <div className="input-group">
-      <div className="input-group-prepend">
-        <span className="input-group-text px-2">
-          <small> {isFunction ? '=' : '$'}</small>
-        </span>
-      </div>
-      <Form.Control
-        required
-        placeholder={placeholder}
-        defaultValue={formData.default()}
-        ref={formData}
-        onKeyDown={onKeyDown}
-        {...controlProps}
-      />
-    </div>
+    <Form.Control
+      required
+      type="text"
+      pattern="-?\d+([,.]\d{1,2})?([+-]\d+([,.]\d{1,2})?)*"
+      placeholder={placeholder}
+      defaultValue={formData.default()}
+      ref={formData}
+    />
   );
 }
 
