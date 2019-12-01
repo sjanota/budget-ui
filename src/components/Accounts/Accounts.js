@@ -6,6 +6,7 @@ import { Row, Col } from 'react-bootstrap';
 import { AccountsTablePanel } from './AccountsTablePanel';
 import { ExpensesTablePanel } from '../Expenses/ExpensesTablePanel';
 import { CreateExpenseButton } from '../Expenses/CreateExpenseButton';
+import { CollapsiblePanel } from './CollapsiblePanel';
 
 export default function Accounts() {
   const [selectedAccount, setSelectedAccount] = useState(null);
@@ -26,6 +27,7 @@ export default function Accounts() {
               createButton={<CreateExpenseButton account={selectedAccount} />}
               accountFilter={selectedAccount.id}
               hiddenColumns={['account']}
+              wrapper={CollapsiblePanel}
             />
           )}
         </Col>

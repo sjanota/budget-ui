@@ -10,6 +10,7 @@ function TablePanel({
   columns,
   headerButtons,
   panelClassName,
+  wrapper: Wrapper,
   ...props
 }) {
   const paddedFirstColumn = {
@@ -23,15 +24,15 @@ function TablePanel({
   ];
 
   return (
-    <Panel className={panelClassName}>
-      <Panel.Header className="p-2 pl-3">
+    <Wrapper className={panelClassName}>
+      <Wrapper.Header className="p-2 pl-3">
         <div className="d-flex justify-content-between align-items-center">
-          <Panel.Title title={title} className="table-panel--title" />
+          <Wrapper.Title title={title} className="table-panel--title" />
           <div>{headerButtons}</div>
         </div>
-      </Panel.Header>
+      </Wrapper.Header>
 
-      <Panel.Body className="p-0">
+      <Wrapper.Body className="p-0">
         <Table
           classes="table-layout-auto table-sm m-0"
           striped
@@ -40,16 +41,21 @@ function TablePanel({
           columns={modifiedColumns}
           {...props}
         />
-      </Panel.Body>
-    </Panel>
+      </Wrapper.Body>
+    </Wrapper>
   );
 }
 
 TablePanel.propTypes = {
+  wrapper: PropTypes.elementType,
   title: PropTypes.string.isRequired,
   headerButtons: PropTypes.node,
   columns: PropTypes.array.isRequired,
   panelClassName: PropTypes.string,
+};
+
+TablePanel.defaultProps = {
+  wrapper: Panel,
 };
 
 export default withDictionary('title', TablePanel);
