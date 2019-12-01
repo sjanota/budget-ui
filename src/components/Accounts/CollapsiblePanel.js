@@ -1,8 +1,10 @@
 import React, { useState, createContext, useContext } from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 import Panel from '../sbadmin2/components/Panel/Panel';
 import { Collapse } from 'react-bootstrap';
 import { Icon } from '../sbadmin2';
+import './CollapsiblePanel.css';
 
 const CollapsibleContext = createContext();
 
@@ -24,17 +26,26 @@ CollapsiblePanel.defaultProps = {
   initialyShown: false,
 };
 
-function CollapsiblePanelHeader(props) {
+function CollapsiblePanelHeader({ className, ...props }) {
   const { toggle } = useContext(CollapsibleContext);
-  return <Panel.Header onClick={() => toggle()} {...props} />;
+  const classNames = classnames('collapsible-panel__header', className);
+  return (
+    <Panel.Header onClick={() => toggle()} className={classNames} {...props} />
+  );
 }
+CollapsiblePanelHeader.propTypes = {
+  className: PropTypes.string,
+};
 CollapsiblePanel.Header = CollapsiblePanelHeader;
 
 function CollapsiblePanelTitle({ children, ...props }) {
   const { show } = useContext(CollapsibleContext);
   return (
     <Panel.Title {...props}>
-      <Icon icon={show ? Icon.ChevronUp : Icon.ChevronDown} />
+      <Icon
+        icon={show ? Icon.ChevronUp : Icon.ChevronDown}
+        className="text-secondary"
+      />
       {children}
     </Panel.Title>
   );
