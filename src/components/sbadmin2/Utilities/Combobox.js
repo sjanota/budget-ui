@@ -104,6 +104,7 @@ export function Combobox({
           borderBottomLeftRadius: 0,
           margin: -1,
         }}
+        tabIndex={-1}
         disabled={disabled}
       />
       <ul
