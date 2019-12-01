@@ -7,6 +7,7 @@ import { AccountsTablePanel } from './AccountsTablePanel';
 import { ExpensesTablePanel } from '../Expenses/ExpensesTablePanel';
 import { CreateExpenseButton } from '../Expenses/CreateExpenseButton';
 import { CollapsiblePanel } from './CollapsiblePanel';
+import { TransfersTablePanel } from '../Transfers/TransfersTablePanel';
 
 export default function Accounts() {
   const [selectedAccount, setSelectedAccount] = useState(null);
@@ -20,15 +21,34 @@ export default function Accounts() {
         </Col>
         <Col>
           {!selectedAccount ? null : (
-            <ExpensesTablePanel
-              readTitle={d =>
-                d.accounts.expensesTableTitle(selectedAccount.name)
-              }
-              createButton={<CreateExpenseButton account={selectedAccount} />}
-              accountFilter={selectedAccount.id}
-              hiddenColumns={['account']}
-              wrapper={CollapsiblePanel}
-            />
+            <>
+              <TransfersTablePanel
+                readTitle={d => d.accounts.inTransfersTableTitle()}
+                createButton={<CreateExpenseButton account={selectedAccount} />}
+                accountFilter={selectedAccount.id}
+                hiddenColumns={['toAccount']}
+                wrapper={CollapsiblePanel}
+                toAccountFilter={selectedAccount.id}
+              />
+              <TransfersTablePanel
+                readTitle={d => d.accounts.outTransfersTableTitle()}
+                createButton={<CreateExpenseButton account={selectedAccount} />}
+                accountFilter={selectedAccount.id}
+                hiddenColumns={['fromAccount']}
+                wrapper={CollapsiblePanel}
+                fromAccountFilter={selectedAccount.id}
+              />
+              <ExpensesTablePanel
+                readTitle={d =>
+                  d.accounts.expensesTableTitle(selectedAccount.name)
+                }
+                createButton={<CreateExpenseButton account={selectedAccount} />}
+                accountFilter={selectedAccount.id}
+                hiddenColumns={['account']}
+                wrapper={CollapsiblePanel}
+                wrapperProps={{ initialyShown: true }}
+              />
+            </>
           )}
         </Col>
       </Row>

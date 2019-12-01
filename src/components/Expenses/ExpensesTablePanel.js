@@ -54,18 +54,6 @@ const expandRow = {
   ),
 };
 
-function getExpenses(...filters) {
-  return data =>
-    filters.reduce(
-      (expenses, filter) => expenses.filter(filter),
-      data.budget.currentMonth.expenses
-    );
-}
-
-function filterByAccount(account) {
-  return expense => expense.account.id === account;
-}
-
 const defaultSorted = [
   {
     dataField: 'date',
@@ -77,25 +65,22 @@ export function ExpensesTablePanel({
   readTitle,
   createButton,
   accountFilter,
-  hiddenColumns,
   ...props
 }) {
   const query = useGetCurrentExpenses();
-  const filter = getExpenses(
-    accountFilter ? filterByAccount(accountFilter) : e => e
-  );
-  const hideColumns = columns.map(c => ({
-    ...c,
-    hidden: hiddenColumns && hiddenColumns.some(hc => c.dataField === hc),
-  }));
+
+  let filters = [];
+  if (accountFilter) {
+    filters.push(row => row.account.id === accountFilter);
+  }
 
   return (
     <QueryTablePanel
       {...props}
       query={query}
-      getData={filter}
+      getData={d => d.budget.currentMonth.expenses}
       buttons={createButton}
-      columns={hideColumns}
+      columns={columns}
       keyField="id"
       expandRow={expandRow}
       rowClasses={rowClasses}
@@ -103,6 +88,7 @@ export function ExpensesTablePanel({
       readTitle={readTitle}
       readColumnNames={d => d.expenses.table.columns}
       defaultSorted={defaultSorted}
+      filters={filters}
     />
   );
 }

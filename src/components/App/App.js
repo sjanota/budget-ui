@@ -7,7 +7,7 @@ import { BudgetProvider, BudgetContext } from '../gql/budget';
 import Accounts from '../Accounts/Accounts';
 import Envelopes from '../Envelopes/EnvelopesPage';
 import ExpensesPage from '../Expenses/ExpensesPage';
-import Transfers from '../Transfers';
+import { TransfersPage } from '../Transfers/TransfersPage';
 import Plans from '../Plans';
 import { MonthDashboardPage } from '../MonthDashboardPage';
 import pl from '../../lang/pl';
@@ -40,7 +40,7 @@ export default function App() {
                 <Route path="/accounts" component={Accounts} />
                 <Route path="/envelopes" component={Envelopes} />
                 <Route path="/expenses" component={ExpensesPage} />
-                <Route path="/transfers" component={Transfers} />
+                <Route path="/transfers" component={TransfersPage} />
                 <Route path="/plans" component={Plans} />
                 <Route path="/" component={MonthDashboardPage} />
               </Switch>

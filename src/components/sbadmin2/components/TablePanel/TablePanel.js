@@ -11,6 +11,10 @@ function TablePanel({
   headerButtons,
   panelClassName,
   wrapper: Wrapper,
+  wrapperProps,
+  hiddenColumns,
+  data,
+  filters,
   ...props
 }) {
   const paddedFirstColumn = {
@@ -22,9 +26,19 @@ function TablePanel({
     paddedFirstColumn,
     ...columns.slice(1, columns.length),
   ];
+  const wihtouHidden = modifiedColumns.map(c => ({
+    ...c,
+    hidden: hiddenColumns && hiddenColumns.some(hc => c.dataField === hc),
+  }));
+
+  function filtersMatch(row) {
+    return filters.every(f => f(row));
+  }
+
+  const filteredData = data.filter(row => filtersMatch(row));
 
   return (
-    <Wrapper className={panelClassName}>
+    <Wrapper className={panelClassName} {...wrapperProps}>
       <Wrapper.Header className="p-2 pl-3">
         <div className="d-flex justify-content-between align-items-center">
           <Wrapper.Title title={title} className="table-panel--title" />
@@ -38,7 +52,8 @@ function TablePanel({
           striped
           hover
           bordered={false}
-          columns={modifiedColumns}
+          columns={wihtouHidden}
+          data={filteredData}
           {...props}
         />
       </Wrapper.Body>
@@ -48,14 +63,20 @@ function TablePanel({
 
 TablePanel.propTypes = {
   wrapper: PropTypes.elementType,
+  wrapperProps: PropTypes.object,
   title: PropTypes.string.isRequired,
   headerButtons: PropTypes.node,
   columns: PropTypes.array.isRequired,
   panelClassName: PropTypes.string,
+  hiddenColumns: PropTypes.arrayOf(PropTypes.string),
+  filters: PropTypes.arrayOf(PropTypes.func),
 };
 
 TablePanel.defaultProps = {
   wrapper: Panel,
+  wrapperProps: {},
+  hiddenColumns: [],
+  filters: [],
 };
 
 export default withDictionary('title', TablePanel);
