@@ -56,8 +56,8 @@ export default function Accounts() {
           buttons={<CreateAccountButton openRef={openCreateModal} />}
           columns={columns}
           keyField="id"
-          readTitle={d => d.categories.table.title}
-          readColumnNames={d => d.categories.table.columns}
+          readTitle={d => d.accounts.table.title}
+          readColumnNames={d => d.accounts.table.columns}
         />
       </Page>
     </GlobalHotKeys>

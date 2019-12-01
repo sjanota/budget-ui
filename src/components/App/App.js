@@ -4,7 +4,7 @@ import Topbar from '../Topbar';
 import { SBAdmin2 } from '../sbadmin2';
 import { sidebarConfig } from './sidebarConfig';
 import { BudgetProvider, BudgetContext } from '../gql/budget';
-import Accounts from '../Accounts';
+import Accounts from '../Accounts/Accounts';
 import Envelopes from '../Envelopes/EnvelopesPage';
 import Expenses from '../Expenses';
 import Transfers from '../Transfers';

@@ -21,5 +21,5 @@ export function AccountModal({ init, ...props }) {
 }
 
 AccountModal.propTypes = {
-  init: PropTypes.shape({ name }).isRequired,
+  init: PropTypes.shape({ name: PropTypes.string }).isRequired,
 };

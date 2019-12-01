@@ -11,6 +11,8 @@ export { SBAdmin2 } from './SBAdmin2';
 export { NotFoundPage } from './NotFoundPage';
 
 export { useDictionary } from './language';
+export { FormControl } from './utilities/FormControl';
+export { FormInModal } from './utilities/FormInModal';
 
 export {
   Table,
