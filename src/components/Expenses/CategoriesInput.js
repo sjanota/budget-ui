@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { ClickableIcon, Icon } from '../sbadmin2';
 import { useGetCategories } from '../gql/categories';
@@ -7,7 +7,7 @@ import { Form, Row, Col } from 'react-bootstrap';
 import { useDictionary } from '../sbadmin2';
 import { Combobox } from '../sbadmin2/utilities/Combobox';
 import { Variant, Size } from '../sbadmin2/bootstrap';
-import Amount from '../../model/Amount';
+import { AmountInput } from './AmountInput';
 
 export function CategoriesInput({ formData }) {
   const query = useGetCategories();
@@ -73,38 +73,4 @@ export function CategoriesInput({ formData }) {
 
 CategoriesInput.propTypes = {
   formData: PropTypes.array.isRequired,
-};
-
-function AmountInput({ placeholder, formData }) {
-  const [isValid, setIsValid] = useState(false);
-  const [value, setValue] = useState(formData.default() || '');
-
-  useEffect(() => {
-    formData.current = { value };
-  }, [formData, value]);
-
-  function onChange(e) {
-    const newValue = e.target.value;
-    setValue(newValue);
-    setIsValid(Amount.isValid(newValue));
-  }
-
-  return (
-    <Form.Control
-      required
-      type="text"
-      placeholder={placeholder}
-      value={value}
-      onChange={onChange}
-      isValid={isValid}
-    />
-  );
-}
-
-AmountInput.propTypes = {
-  formData: PropTypes.shape({
-    default: PropTypes.func.isRequired,
-    current: PropTypes.shape({ value: PropTypes.string }),
-  }),
-  placeholder: PropTypes.string,
 };

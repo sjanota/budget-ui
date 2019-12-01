@@ -11,16 +11,14 @@ export function FormControl({ label, inline, ...props }) {
   );
 }
 
-FormControl.Input = ({ inline, formData, feedback, ...props }) => {
+FormControl.Input = ({ inline, formData, feedback, children, ...props }) => {
   const wrap = inline ? c => <Col sm={inline}>{c}</Col> : c => c;
-
+  const child = children || (
+    <Form.Control ref={formData} defaultValue={formData.default()} {...props} />
+  );
   return wrap(
     <>
-      <Form.Control
-        ref={formData}
-        defaultValue={formData.default()}
-        {...props}
-      />
+      {child}
       <Form.Control.Feedback type="invalid">{feedback}</Form.Control.Feedback>
     </>
   );

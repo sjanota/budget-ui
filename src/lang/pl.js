@@ -32,7 +32,7 @@ export default {
     noProblems: 'Wszystko w porządku',
     problems: {
       title: 'Problemy',
-      overplanned: 'Plany na bieżący miesiąc przekraczają wydatki',
+      overplanned: 'Plany na bieżący miesiąc przekraczają wpływy',
       underplanned: 'Część środków jest nierozplanowana',
       expensesExceedPlans: envelope =>
         `Wydatki przekroczyły zaplanowany budżet na kopercie "${envelope}"`,

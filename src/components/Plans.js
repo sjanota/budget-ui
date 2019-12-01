@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { Page, ClickableIcon, Icon, OpenModalButton } from './sbadmin2';
 import CreateButton from './sbadmin2/utilities/CreateButton';
 import { FormControl } from './sbadmin2/utilities/FormControl';
@@ -15,20 +15,24 @@ import {
 import { QueryTablePanel } from './gql/QueryTablePanel';
 import { useGetEnvelopes } from './gql/envelopes';
 import { WithQuery } from './gql/WithQuery';
-import { GlobalHotKeys } from 'react-hotkeys';
 import { InlineFormControl } from './sbadmin2/utilities/InlineFormControl';
 import { Combobox } from './sbadmin2/utilities/Combobox';
 import { useDictionary } from './sbadmin2';
 import { Variant } from './sbadmin2/bootstrap';
+import { AmountInput } from './Expenses/AmountInput';
 
 const columns = [
-  { dataField: 'title' },
+  { dataField: 'title', sort: true },
   {
     dataField: 'fromEnvelope',
+    sort: true,
+    sortValue: cell => cell.name,
     formatter: a => a && a.name,
   },
   {
     dataField: 'toEnvelope',
+    sort: true,
+    sortValue: cell => cell.name,
     formatter: a => a.name,
   },
   {
@@ -55,6 +59,13 @@ const columns = [
       whiteSpace: 'nowrap',
       width: '1%',
     },
+  },
+];
+
+const defaultSorted = [
+  {
+    dataField: 'title',
+    order: 'asc',
   },
 ];
 
@@ -90,15 +101,9 @@ function PlanModal({ init, ...props }) {
               formData={formData.title}
               feedback="Provide title"
             />
-            <FormControl
-              inline={8}
-              label={plans.modal.labels.amount}
-              feedback="Provide amount"
-              type="number"
-              required
-              formData={formData.currentAmount}
-              step="0.01"
-            />
+            <FormControl inline={8} label={plans.modal.labels.amount}>
+              <AmountInput formData={formData.currentAmount} />
+            </FormControl>
             <OptionalFormControl
               initEnabled={init.recurringAmount !== null}
               inline={8}
@@ -168,14 +173,14 @@ function DeletePlanButton({ plan }) {
   );
 }
 
-function CreatePlanButton({ openRef }) {
+function CreatePlanButton() {
   const [createPlan] = useCreatePlan();
   const { plans } = useDictionary();
 
   return (
     <OpenModalButton
-      button={props => <CreateButton ref={openRef} {...props} />}
-      renderModal={props => (
+      button={props => <CreateButton {...props} />}
+      modalContent={props => (
         <PlanModal
           init={{
             title: null,
@@ -194,30 +199,21 @@ function CreatePlanButton({ openRef }) {
   );
 }
 
-const keyMap = {
-  create: 'n',
-};
-
-const handlers = openCreateModalRef => ({
-  create: () => openCreateModalRef.current(),
-});
-
 export default function Plans() {
-  const openCreateModalRef = useRef();
   const query = useGetCurrentPlans();
 
   return (
     <Page>
-      <GlobalHotKeys keyMap={keyMap} handlers={handlers(openCreateModalRef)} />
       <Page.Header readTitle={d => d.sidebar.pages.plans} />
       <QueryTablePanel
         query={query}
         getData={data => data.budget.currentMonth.plans}
-        buttons={<CreatePlanButton openRef={openCreateModalRef} />}
+        buttons={<CreatePlanButton />}
         columns={columns}
         keyField="id"
         readTitle={d => d.plans.table.title}
         readColumnNames={d => d.plans.table.columns}
+        defaultSorted={defaultSorted}
       />
     </Page>
   );
