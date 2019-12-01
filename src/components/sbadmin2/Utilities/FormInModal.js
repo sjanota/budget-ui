@@ -11,7 +11,6 @@ export function FormInModal({ title, onHide, onSave, formData, children }) {
   useEffect(() => {
     if (form.current) {
       const firstInput = form.current.getElementsByTagName('input')[0];
-      console.log(firstInput);
       if (firstInput) {
         firstInput.focus();
       }
