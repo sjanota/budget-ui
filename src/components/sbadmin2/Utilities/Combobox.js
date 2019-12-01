@@ -19,11 +19,28 @@ export function Combobox({
   const filtered = allowedValues.filter(v =>
     v.label.toLowerCase().includes(filter.toLowerCase())
   );
+  const wrapperRef = useRef();
 
   useEffect(() => {
     _ref.current = { value: defaultValue };
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    function onClickOutside(event) {
+      if (!wrapperRef.current || wrapperRef.current.contains(event.target)) {
+        return;
+      }
+
+      setShow(false);
+      const selected = allowedValues.find(v => v.label === filter);
+      if (!selected) {
+        setFilter('');
+      }
+    }
+    document.addEventListener('mousedown', onClickOutside);
+    return () => document.removeEventListener('mousedown', onClickOutside);
+  });
 
   function onClick(id) {
     const selectedLabel = allowedValues.find(v => v.id === id).label;
@@ -40,14 +57,6 @@ export function Combobox({
     const selected = allowedValues.find(v => v.label === value);
     if (selected) {
       _ref.current = { value: selected.id };
-    }
-  }
-
-  function onInputBlur() {
-    setShow(false);
-    const selected = allowedValues.find(v => v.label === filter);
-    if (!selected) {
-      setFilter('');
     }
   }
 
@@ -75,13 +84,12 @@ export function Combobox({
   }
 
   return (
-    <div className={classNames}>
+    <div className={classNames} ref={wrapperRef}>
       <input
         className="form-control"
         value={filter}
         type="text"
         onChange={onInputChange}
-        onBlur={onInputBlur}
         onKeyDown={onKeyDown}
         disabled={disabled}
       />
