@@ -81,7 +81,7 @@ function AmountInput({ placeholder, formData }) {
 
   useEffect(() => {
     formData.current = { value };
-  }, [value]);
+  }, [formData, value]);
 
   function onChange(e) {
     const newValue = e.target.value;
