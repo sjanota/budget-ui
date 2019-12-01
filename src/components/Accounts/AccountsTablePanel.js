@@ -7,7 +7,7 @@ import { CreateAccountButton } from './CreateAccountButton';
 import { UpdateAccountButton } from './UpdateAccountButton';
 
 const columns = [
-  { dataField: 'name' },
+  { dataField: 'name', sort: true },
   {
     dataField: 'balance',
     align: 'right',
@@ -32,6 +32,13 @@ const columns = [
   },
 ];
 
+const defaultSorted = [
+  {
+    dataField: 'name',
+    order: 'asc',
+  },
+];
+
 export function AccountsTablePanel({ onSelectAcount }) {
   const query = useGetAccounts();
 
@@ -53,6 +60,7 @@ export function AccountsTablePanel({ onSelectAcount }) {
       readTitle={d => d.accounts.table.title}
       readColumnNames={d => d.accounts.table.columns}
       selectRow={selectRow}
+      defaultSorted={defaultSorted}
     />
   );
 }

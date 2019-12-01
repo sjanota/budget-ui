@@ -8,7 +8,7 @@ import { Variant } from '../sbadmin2/bootstrap';
 import { Icon, ClickableIcon } from '../sbadmin2';
 
 const columns = [
-  { dataField: 'name' },
+  { dataField: 'name', sort: true },
   {
     dataField: 'limit',
     formatter: Amount.format,
@@ -46,6 +46,13 @@ const columns = [
   },
 ];
 
+const defaultSorted = [
+  {
+    dataField: 'name',
+    order: 'asc',
+  },
+];
+
 export function EnvelopesListPanel({ createFunRef }) {
   const query = useGetEnvelopes();
   return (
@@ -57,6 +64,7 @@ export function EnvelopesListPanel({ createFunRef }) {
       keyField="id"
       readTitle={d => d.envelopes.table.title}
       readColumnNames={d => d.envelopes.table.columns}
+      defaultSorted={defaultSorted}
     />
   );
 }
