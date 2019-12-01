@@ -23,8 +23,9 @@ export default function Accounts() {
         <Col>
           {!selectedAccount ? null : (
             <>
+              <h3>{selectedAccount.name}</h3>
               <TransfersTablePanel
-                readTitle={d => d.accounts.inTransfersTableTitle()}
+                readTitle={d => d.accounts.inTransfersTableTitle}
                 createButton={
                   <CreateTransferButton toAccount={selectedAccount} />
                 }
@@ -34,7 +35,7 @@ export default function Accounts() {
                 toAccountFilter={selectedAccount.id}
               />
               <TransfersTablePanel
-                readTitle={d => d.accounts.outTransfersTableTitle()}
+                readTitle={d => d.accounts.outTransfersTableTitle}
                 createButton={
                   <CreateTransferButton fromAccount={selectedAccount} />
                 }
@@ -44,9 +45,7 @@ export default function Accounts() {
                 fromAccountFilter={selectedAccount.id}
               />
               <ExpensesTablePanel
-                readTitle={d =>
-                  d.accounts.expensesTableTitle(selectedAccount.name)
-                }
+                readTitle={d => d.accounts.expensesTableTitle}
                 createButton={<CreateExpenseButton account={selectedAccount} />}
                 accountFilter={selectedAccount.id}
                 hiddenColumns={['account']}

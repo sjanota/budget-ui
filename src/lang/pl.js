@@ -54,9 +54,9 @@ export default {
         name: 'Nazwa',
       },
     },
-    expensesTableTitle: account => `Wydatki dla konta "${account}"`,
-    inTransfersTableTitle: () => 'Przelewy przychodzące',
-    outTransfersTableTitle: () => 'Przelewy wychodzące',
+    expensesTableTitle: 'Wydatki',
+    inTransfersTableTitle: 'Przelewy przychodzące',
+    outTransfersTableTitle: 'Przelewy wychodzące',
     modal: {
       createTitle: 'Dodaj nowe konto',
       editTitle: 'Edytuj konto',
