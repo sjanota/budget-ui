@@ -7,7 +7,7 @@ import { UpdateExpenseButton } from './UpdateExpenseButton';
 
 const columns = [
   { dataField: 'title' },
-  { dataField: 'date' },
+  { dataField: 'date', sort: true },
   {
     dataField: 'account',
     formatter: a => a.name,
@@ -66,6 +66,13 @@ function filterByAccount(account) {
   return expense => expense.account.id === account;
 }
 
+const defaultSorted = [
+  {
+    dataField: 'date',
+    order: 'desc',
+  },
+];
+
 export function ExpensesTablePanel({
   readTitle,
   createButton,
@@ -95,6 +102,7 @@ export function ExpensesTablePanel({
       striped={false}
       readTitle={readTitle}
       readColumnNames={d => d.expenses.table.columns}
+      defaultSorted={defaultSorted}
     />
   );
 }
