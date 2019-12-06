@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
+import { Col, Row } from 'react-bootstrap';
 
-import { Page } from '../sbadmin2';
-
-import { Row, Col } from 'react-bootstrap';
-import { AccountsTablePanel } from './AccountsTablePanel';
-import { ExpensesTablePanel } from '../Expenses/ExpensesTablePanel';
 import { CreateExpenseButton } from '../Expenses/CreateExpenseButton';
-import { CollapsiblePanel } from './CollapsiblePanel';
-import { TransfersTablePanel } from '../Transfers/TransfersTablePanel';
+import { ExpensesTablePanel } from '../Expenses/ExpensesTablePanel';
+import { Page } from '../sbadmin2';
 import { CreateTransferButton } from '../Transfers/CreateTransferButton';
+import { TransfersTablePanel } from '../Transfers/TransfersTablePanel';
+import { AccountsTablePanel } from './AccountsTablePanel';
+import { CollapsiblePanel } from './CollapsiblePanel';
 
-export default function Accounts() {
+export default function AccountsPage() {
   const [selectedAccount, setSelectedAccount] = useState(null);
 
   return (

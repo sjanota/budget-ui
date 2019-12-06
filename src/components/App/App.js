@@ -1,17 +1,18 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Topbar from '../Topbar';
-import { SBAdmin2 } from '../sbadmin2';
-import { sidebarConfig } from './sidebarConfig';
-import { BudgetProvider, BudgetContext } from '../gql/budget';
-import Accounts from '../Accounts/Accounts';
-import Envelopes from '../Envelopes/EnvelopesPage';
-import ExpensesPage from '../Expenses/ExpensesPage';
-import { TransfersPage } from '../Transfers/TransfersPage';
-import Plans from '../Plans';
-import { MonthDashboardPage } from '../MonthDashboardPage';
+
 import pl from '../../lang/pl';
 import { useAuth0 } from '../../react-auth0-spa';
+import AccountsPage from '../Accounts/AccountsPage';
+import Envelopes from '../Envelopes/EnvelopesPage';
+import ExpensesPage from '../Expenses/ExpensesPage';
+import { BudgetContext, BudgetProvider } from '../gql/budget';
+import { MonthDashboardPage } from '../MonthDashboardPage';
+import Plans from '../Plans';
+import { SBAdmin2 } from '../sbadmin2';
+import Topbar from '../Topbar';
+import { TransfersPage } from '../Transfers/TransfersPage';
+import { sidebarConfig } from './sidebarConfig';
 
 const dictionaries = {
   pl,
@@ -24,7 +25,7 @@ export default function App() {
       <SBAdmin2
         sidebarProps={{
           renderBrandName: () => 'Budget',
-          renderBrandIcon: () => <i className="fas fa-bold" />,
+          renderBrandIcon: () => <i className='fas fa-bold' />,
           config: sidebarConfig(pl),
         }}
         topbar={Topbar}
@@ -37,12 +38,12 @@ export default function App() {
           {({ selectedBudget }) =>
             selectedBudget && (
               <Switch>
-                <Route path="/accounts" component={Accounts} />
-                <Route path="/envelopes" component={Envelopes} />
-                <Route path="/expenses" component={ExpensesPage} />
-                <Route path="/transfers" component={TransfersPage} />
-                <Route path="/plans" component={Plans} />
-                <Route path="/" component={MonthDashboardPage} />
+                <Route path='/accounts' component={AccountsPage} />
+                <Route path='/envelopes' component={Envelopes} />
+                <Route path='/expenses' component={ExpensesPage} />
+                <Route path='/transfers' component={TransfersPage} />
+                <Route path='/plans' component={Plans} />
+                <Route path='/' component={MonthDashboardPage} />
               </Switch>
             )
           }
