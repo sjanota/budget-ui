@@ -7,7 +7,7 @@ import AccountsPage from '../Accounts/AccountsPage';
 import Envelopes from '../Envelopes/EnvelopesPage';
 import ExpensesPage from '../Expenses/ExpensesPage';
 import { BudgetContext, BudgetProvider } from '../gql/budget';
-import { MonthDashboardPage } from '../MonthDashboardPage';
+import { MonthDashboardPage } from '../MonthDashboardPage/MonthDashboardPage';
 import PlansPage from '../Plans/PlansPage';
 import { SBAdmin2 } from '../sbadmin2';
 import Topbar from '../Topbar';
