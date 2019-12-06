@@ -1,81 +1,51 @@
+import { faArchive } from '@fortawesome/free-solid-svg-icons';
+import { render } from '@testing-library/react';
 import React from 'react';
-import renderer from 'react-test-renderer';
-import { mount } from 'enzyme';
 
+import { Size, Variant } from '../../bootstrap';
 import SplitButton from './SplitButton';
-import Icon from '../Icon/Icon';
-import { Variant, Size } from '../../bootstrap';
-
-it('SplitButton renders with minimal props', () => {
-  const component = renderer.create(<SplitButton icon={Icon.Archive} />);
-  expect(component).toMatchSnapshot();
-});
-
-it('SplitButton renders with all props', () => {
-  const component = renderer.create(
-    <SplitButton
-      icon={Icon.Archive}
-      variant={Variant.danger}
-      size={Size.lg}
-      className="my-class"
-      disabled
-    >
-      Text
-    </SplitButton>
-  );
-  expect(component).toMatchSnapshot();
-});
 
 describe('SplitButton', () => {
-  describe('when enabled', () => {
-    const component = mount(
-      <SplitButton
-        icon={Icon.Archive}
-        variant={Variant.danger}
-        size={Size.lg}
-        className="my-class"
-      >
+  it('renders properly', () => {
+    const onClick = jest.fn();
+    const { getByLabelText, queryByText, getByRole } = render(
+      <SplitButton onClick={onClick} icon={faArchive} variant={Variant.danger}>
         Text
       </SplitButton>
     );
-    it('passes icon to Icon', () => {
-      expect(component.find(Icon)).toHaveProp('icon', Icon.Archive);
-    });
 
-    it('sets custom class', () => {
-      expect(component.find('button')).toHaveClassName('my-class');
-    });
+    expect(queryByText('Text')).toBeTruthy();
 
-    it('renders children', () => {
-      expect(component.find('button')).toHaveText('Text');
-    });
+    const button = getByLabelText('Text');
+    expect(button).toHaveClass('btn-danger');
 
-    it('sets proper btn-variant class', () => {
-      expect(component.find('button')).toHaveClassName('btn-danger');
-    });
+    button.click();
+    expect(onClick).toHaveBeenCalled();
 
-    it('sets proper btn-size class', () => {
-      expect(component.find('button')).toHaveClassName('btn-lg');
-    });
-
-    it('does not set disabled class', () => {
-      expect(component.find('button')).not.toHaveClassName('disabled');
-    });
-
-    it('does not set disabled button prop', () => {
-      expect(component.find('button')).toHaveProp('disabled', undefined);
-    });
+    const icon = getByRole('img', { hidden: true });
+    expect(icon).toHaveClass('fa-archive');
   });
 
-  describe('when disabled', () => {
-    const component = mount(<SplitButton icon={Icon.Archive} disabled />);
+  it('renders when disabled', () => {
+    const { getByLabelText } = render(
+      <SplitButton icon={faArchive} variant={Variant.danger} disabled>
+        Text
+      </SplitButton>
+    );
 
-    it('sets disabled class', () => {
-      expect(component.find('button')).toHaveClassName('disabled');
-    });
+    const button = getByLabelText('Text');
+    expect(button).toHaveClass('disabled');
+    expect(button).toBeDisabled();
+  });
 
-    it('sets disabled button prop', () => {
-      expect(component.find('button')).toHaveProp('disabled', true);
-    });
+  it('renders with non-default size', () => {
+    const { getByLabelText } = render(
+      <SplitButton icon={faArchive} variant={Variant.danger} size={Size.lg}>
+        Text
+      </SplitButton>
+    );
+
+    const button = getByLabelText('Text');
+    expect(button).toHaveClass('btn-lg');
   });
 });

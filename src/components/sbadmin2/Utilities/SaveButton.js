@@ -1,19 +1,20 @@
-import React from 'react';
-import SplitButton from '../components/SplitButton/SplitButton';
+import { faSave } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
-import { useDictionary } from '../language';
+import React from 'react';
+
 import { Size, Variant } from '../bootstrap';
-import Icon from '../components/Icon/Icon';
+import SplitButton from '../components/SplitButton/SplitButton';
+import { useDictionary } from '../language';
 
 export default function SaveButton(props) {
   const { buttons } = useDictionary();
 
   return (
     <SplitButton
-      icon={Icon.Save}
+      icon={faSave}
       size={Size.sm}
       variant={Variant.primary}
-      type="submit"
+      type='submit'
       {...props}
     >
       {buttons.save}

@@ -1,41 +1,53 @@
-import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
-import Icon from '../Icon/Icon';
-import { Variant, Size } from '../../bootstrap';
+import React from 'react';
+
+import { Size, Variant } from '../../bootstrap';
 
 export default function SplitButton({
-  children,
   icon,
   variant,
   size,
   className,
   disabled,
   _ref,
+  children,
   ...props
 }) {
-  const classNames = classnames('btn', 'btn-icon-split', className, {
-    disabled,
-    [`btn-${size}`]: size,
-    [`btn-${variant}`]: variant,
-  });
+  const classNames = classnames(
+    'btn',
+    'btn-icon-split',
+    'icon',
+    'text-white-50',
+    className,
+    {
+      disabled,
+      [`btn-${size}`]: size,
+      [`btn-${variant}`]: variant,
+    }
+  );
 
   return (
-    <button className={classNames} disabled={disabled} ref={_ref} {...props}>
-      <span className="icon text-white-50">
-        <Icon icon={icon} />
-      </span>
-      <span className="text">{children}</span>
+    <button
+      className={classNames}
+      disabled={disabled}
+      ref={_ref}
+      aria-label={children}
+      {...props}
+    >
+      <FontAwesomeIcon icon={icon} />
+      <span className='text'>{children}</span>
     </button>
   );
 }
 
 SplitButton.propTypes = {
-  children: PropTypes.node,
+  children: PropTypes.string.isRequired,
   className: PropTypes.string,
   disabled: PropTypes.bool,
-  icon: PropTypes.string.isRequired,
+  icon: PropTypes.any.isRequired,
   size: PropTypes.oneOf(Object.keys(Size)),
-  variant: PropTypes.oneOf(Object.keys(Variant)),
+  variant: PropTypes.oneOf(Object.keys(Variant)).isRequired,
   _ref: PropTypes.any,
 };

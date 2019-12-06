@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Icon renders with minimal props 1`] = `
-<i
-  className="fas fa-archive fa-fw"
-/>
-`;

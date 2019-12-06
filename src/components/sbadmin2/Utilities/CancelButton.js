@@ -1,19 +1,20 @@
-import React from 'react';
-import SplitButton from '../components/SplitButton/SplitButton';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
-import { useDictionary } from '../language';
-import Icon from '../components/Icon/Icon';
+import React from 'react';
+
 import { Size, Variant } from '../bootstrap';
+import SplitButton from '../components/SplitButton/SplitButton';
+import { useDictionary } from '../language';
 
 export default function CancelButton({ onClick }) {
   const { buttons } = useDictionary();
   return (
     <SplitButton
       variant={Variant.secondary}
-      icon={Icon.Trash}
+      icon={faTrash}
       size={Size.sm}
       onClick={onClick}
-      type="button"
+      type='button'
     >
       {buttons.cancel}
     </SplitButton>
