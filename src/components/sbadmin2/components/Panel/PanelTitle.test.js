@@ -1,26 +1,21 @@
+import { render } from '@testing-library/react';
 import React from 'react';
-import renderer from 'react-test-renderer';
-import PanelTitle from './PanelTitle';
-import { mount } from 'enzyme';
+
 import { DictionaryContext } from '../../language';
+import PanelTitle from './PanelTitle';
 
 describe('PanelTitle', () => {
-  it('uses provided with title', () => {
-    const component = mount(<PanelTitle title="My page" />);
-    expect(component).toHaveText('My page');
+  it('renders provided title', () => {
+    const { queryByText } = render(<PanelTitle title='My page' />);
+    expect(queryByText('My page')).toBeTruthy();
   });
 
   it('reads title from dictionary', () => {
-    const component = mount(
+    const { queryByText } = render(
       <DictionaryContext.Provider value={{ title: 'My page' }}>
         <PanelTitle readTitle={d => d.title} />
       </DictionaryContext.Provider>
     );
-    expect(component).toHaveText('My page');
-  });
-
-  it('renders with minimal props', () => {
-    const component = renderer.create(<PanelTitle title="" />);
-    expect(component).toMatchSnapshot();
+    expect(queryByText('My page')).toBeTruthy();
   });
 });
