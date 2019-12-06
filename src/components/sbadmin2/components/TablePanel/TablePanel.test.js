@@ -1,13 +1,14 @@
+import { render } from '@testing-library/react';
 import React from 'react';
-import TablePanel from './TablePanel';
-import { render } from 'enzyme';
+
 import { DictionaryContext } from '../../language';
+import TablePanel from './TablePanel';
 
 const consoleError = jest.spyOn(global.console, 'error').mockImplementation();
 
 describe('TablePanel', () => {
   it('renders title provided as prop', () => {
-    const component = whenRenderedWithTitleProp();
+    const component = render(<TablePanel {...commonProps} title={fakeTitle} />);
 
     expectNoConsoleErrors();
     expectTitleToBeSet(component);
@@ -15,7 +16,11 @@ describe('TablePanel', () => {
   });
 
   it('accepts title from context', () => {
-    const component = whenRenderedWithContext();
+    const component = render(
+      <DictionaryContext.Provider value={fakeTitle}>
+        <TablePanel {...commonProps} readTitle={d => d} />
+      </DictionaryContext.Provider>
+    );
 
     expectNoConsoleErrors();
     expectTitleToBeSet(component);
@@ -34,35 +39,24 @@ beforeEach(() => {
 const fakeTitle = 'fake-title';
 const commonProps = {
   columns: [{ dataField: 'id' }, { dataField: 'name' }],
-  data: [{ id: 'my-id', name: 'my-name' }, { id: 'my-id1', name: 'my-name1' }],
+  data: [
+    { id: 'my-id', name: 'my-name' },
+    { id: 'my-id1', name: 'my-name1' },
+  ],
   keyField: 'id',
   columnNames: { id: 'ID', name: 'Name' },
 };
-function whenRenderedWithTitleProp() {
-  return render(<TablePanel {...commonProps} title={fakeTitle} />);
-}
-
-function whenRenderedWithContext() {
-  return render(
-    <DictionaryContext.Provider value={fakeTitle}>
-      <TablePanel {...commonProps} readTitle={d => d} />
-    </DictionaryContext.Provider>
-  );
-}
 
 function expectNoConsoleErrors() {
   expect(consoleError).not.toHaveBeenCalled();
 }
 
-function expectTitleToBeSet(component) {
-  expect(component.find('.table-panel--title').text()).toBe(fakeTitle);
+function expectTitleToBeSet({ queryByText }) {
+  expect(queryByText(fakeTitle)).toBeTruthy();
 }
 
-function expectFirstColumnToBePadded(component) {
-  const idHeader = component.find('th').eq(0);
-  expect(idHeader.hasClass('pl-3')).toBe(true);
-
-  const ids = component.find('tr > td:first-child');
-  expect(ids.eq(0).hasClass('pl-3')).toBe(true);
-  expect(ids.eq(1).hasClass('pl-3')).toBe(true);
+function expectFirstColumnToBePadded({ queryByText }) {
+  expect(queryByText(commonProps.columnNames.id)).toHaveClass('pl-3');
+  expect(queryByText(commonProps.data[0].id)).toHaveClass('pl-3');
+  expect(queryByText(commonProps.data[1].id)).toHaveClass('pl-3');
 }

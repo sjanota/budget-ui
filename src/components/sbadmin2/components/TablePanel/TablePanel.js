@@ -1,9 +1,9 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
+import { withDictionary } from '../../language';
 import Panel from '../Panel/Panel';
 import Table from '../Table/Table';
-import { withDictionary } from '../../language';
 
 function TablePanel({
   title,
@@ -39,16 +39,16 @@ function TablePanel({
 
   return (
     <Wrapper className={panelClassName} {...wrapperProps}>
-      <Wrapper.Header className="p-2 pl-3">
-        <div className="d-flex justify-content-between align-items-center">
-          <Wrapper.Title title={title} className="table-panel--title" />
+      <Wrapper.Header className='p-2 pl-3'>
+        <div className='d-flex justify-content-between align-items-center'>
+          <Wrapper.Title title={title} className='table-panel--title' />
           <div>{headerButtons}</div>
         </div>
       </Wrapper.Header>
 
-      <Wrapper.Body className="p-0">
+      <Wrapper.Body className='p-0'>
         <Table
-          classes="table-layout-auto table-sm m-0"
+          classes='table-layout-auto table-sm m-0'
           striped
           hover
           bordered={false}
@@ -70,6 +70,7 @@ TablePanel.propTypes = {
   panelClassName: PropTypes.string,
   hiddenColumns: PropTypes.arrayOf(PropTypes.string),
   filters: PropTypes.arrayOf(PropTypes.func),
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 TablePanel.defaultProps = {
