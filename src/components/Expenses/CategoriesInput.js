@@ -5,9 +5,8 @@ import { Col, Form, Row } from 'react-bootstrap';
 
 import { useGetCategories } from '../gql/categories';
 import { WithQuery } from '../gql/WithQuery';
-import { IconButton, useDictionary } from '../sbadmin2';
+import { Combobox, IconButton, useDictionary } from '../sbadmin2';
 import { Size, Variant } from '../sbadmin2/bootstrap';
-import { Combobox } from '../sbadmin2/utilities/Combobox';
 import { AmountInput } from './AmountInput';
 
 export function CategoriesInput({ formData }) {

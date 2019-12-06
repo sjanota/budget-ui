@@ -1,15 +1,15 @@
 import React from 'react';
-import { FormControl } from '../sbadmin2/utilities/FormControl';
-import { FormInModal } from '../sbadmin2/utilities/FormInModal';
-import { useFormData } from '../sbadmin2/utilities/useFormData';
+
 import Amount from '../../model/Amount';
 import Month from '../../model/Month';
 import { useGetAccounts } from '../gql/accounts';
 import { useBudget } from '../gql/budget';
 import { WithQuery } from '../gql/WithQuery';
-import { Combobox } from '../sbadmin2/utilities/Combobox';
+import { Combobox, useDictionary } from '../sbadmin2';
+import { FormControl } from '../sbadmin2/utilities/FormControl';
+import { FormInModal } from '../sbadmin2/utilities/FormInModal';
 import { InlineFormControl } from '../sbadmin2/utilities/InlineFormControl';
-import { useDictionary } from '../sbadmin2';
+import { useFormData } from '../sbadmin2/utilities/useFormData';
 
 export function TransferModal({ toAccount, fromAccount, init, ...props }) {
   const { selectedBudget } = useBudget();
@@ -46,14 +46,14 @@ export function TransferModal({ toAccount, fromAccount, init, ...props }) {
               label={transfers.modal.labels.title}
               inline={10}
               formData={formData.title}
-              feedback="Provide title"
+              feedback='Provide title'
             />
             <FormControl
               label={transfers.modal.labels.date}
               inline={10}
               formData={formData.date}
-              feedback="Provide date"
-              type="date"
+              feedback='Provide date'
+              type='date'
               required
               min={first.format()}
               max={last.format()}
@@ -61,11 +61,11 @@ export function TransferModal({ toAccount, fromAccount, init, ...props }) {
             <FormControl
               inline={10}
               label={transfers.modal.labels.amount}
-              feedback="Provide amount"
-              type="number"
+              feedback='Provide amount'
+              type='number'
               required
               formData={formData.amount}
-              step="0.01"
+              step='0.01'
             />
             <InlineFormControl
               size={10}

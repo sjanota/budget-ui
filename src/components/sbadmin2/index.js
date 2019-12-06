@@ -1,3 +1,4 @@
+import Combobox from './components/Combobox/Combobox';
 import IconButton from './components/IconButton/IconButton';
 import OpenModalButton from './components/OpenModalButton/OpenModalButton';
 import Page from './components/Page/Page';
@@ -21,4 +22,5 @@ export {
   Page,
   IconButton,
   SplitButton,
+  Combobox,
 };

@@ -1,15 +1,16 @@
 import React from 'react';
+
+import Amount from '../../model/Amount';
+import Month from '../../model/Month';
+import { useGetAccounts } from '../gql/accounts';
+import { useBudget } from '../gql/budget';
+import { WithQuery } from '../gql/WithQuery';
+import { useDictionary } from '../sbadmin2';
+import { Combobox } from '../sbadmin2';
 import { FormControl } from '../sbadmin2/utilities/FormControl';
 import { FormInModal } from '../sbadmin2/utilities/FormInModal';
-import { useFormData } from '../sbadmin2/utilities/useFormData';
-import Amount from '../../model/Amount';
-import { useGetAccounts } from '../gql/accounts';
-import { WithQuery } from '../gql/WithQuery';
-import { useBudget } from '../gql/budget';
-import Month from '../../model/Month';
-import { useDictionary } from '../sbadmin2';
-import { Combobox } from '../sbadmin2/utilities/Combobox';
 import { InlineFormControl } from '../sbadmin2/utilities/InlineFormControl';
+import { useFormData } from '../sbadmin2/utilities/useFormData';
 import { CategoriesInput } from './CategoriesInput';
 
 export function ExpenseModal({ account, init, ...props }) {
@@ -48,15 +49,15 @@ export function ExpenseModal({ account, init, ...props }) {
               label={expenses.modal.labels.title}
               inline={10}
               formData={formData.title}
-              feedback="Provide name"
+              feedback='Provide name'
               required
             />
             <FormControl
               label={expenses.modal.labels.date}
               inline={10}
               formData={formData.date}
-              feedback="Provide date"
-              type="date"
+              feedback='Provide date'
+              type='date'
               required
               min={first.format()}
               max={last.format()}

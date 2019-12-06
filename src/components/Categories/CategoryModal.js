@@ -1,13 +1,14 @@
-import React from 'react';
-import { FormInModal } from '../sbadmin2/utilities/FormInModal';
-import { useFormData } from '../sbadmin2/utilities/useFormData';
-import { FormControl } from '../sbadmin2/utilities/FormControl';
 import PropTypes from 'prop-types';
+import React from 'react';
+
 import { useGetEnvelopes } from '../gql/envelopes';
 import { WithQuery } from '../gql/WithQuery';
-import { Combobox } from '../sbadmin2/utilities/Combobox';
-import { InlineFormControl } from '../sbadmin2/utilities/InlineFormControl';
+import { Combobox } from '../sbadmin2';
 import { useDictionary } from '../sbadmin2/language';
+import { FormControl } from '../sbadmin2/utilities/FormControl';
+import { FormInModal } from '../sbadmin2/utilities/FormInModal';
+import { InlineFormControl } from '../sbadmin2/utilities/InlineFormControl';
+import { useFormData } from '../sbadmin2/utilities/useFormData';
 
 export function CategoryModal({ init, ...props }) {
   const query = useGetEnvelopes();
@@ -28,7 +29,7 @@ export function CategoryModal({ init, ...props }) {
               label={categories.modal.labels.name}
               inline={9}
               formData={formData.name}
-              feedback="Provide name"
+              feedback='Provide name'
             />
             <InlineFormControl
               size={9}
@@ -47,7 +48,7 @@ export function CategoryModal({ init, ...props }) {
               label={categories.modal.labels.description}
               inline={9}
               formData={formData.description}
-              feedback="Provide description"
+              feedback='Provide description'
             />
           </>
         )}

@@ -15,9 +15,14 @@ import {
 } from './gql/plans';
 import { QueryTablePanel } from './gql/QueryTablePanel';
 import { WithQuery } from './gql/WithQuery';
-import { IconButton, OpenModalButton, Page, useDictionary } from './sbadmin2';
+import {
+  Combobox,
+  IconButton,
+  OpenModalButton,
+  Page,
+  useDictionary,
+} from './sbadmin2';
 import { Variant } from './sbadmin2/bootstrap';
-import { Combobox } from './sbadmin2/utilities/Combobox';
 import { FormControl } from './sbadmin2/utilities/FormControl';
 import { FormInModal } from './sbadmin2/utilities/FormInModal';
 import { InlineFormControl } from './sbadmin2/utilities/InlineFormControl';

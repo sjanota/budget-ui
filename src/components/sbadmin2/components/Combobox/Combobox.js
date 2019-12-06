@@ -1,10 +1,10 @@
-import React, { useRef, useState, useEffect } from 'react';
-import classnames from 'classnames';
-import PropTypes from 'prop-types';
-
 import './Combobox.css';
 
-export function Combobox({
+import classnames from 'classnames';
+import PropTypes from 'prop-types';
+import React, { useEffect, useRef, useState } from 'react';
+
+export default function Combobox({
   disabled,
   allowedValues,
   _ref,
@@ -26,9 +26,10 @@ export function Combobox({
   const wrapperRef = useRef();
 
   useEffect(() => {
-    _ref.current = { value: defaultValue };
-    // eslint-disable-next-line
-  }, []);
+    if (_ref) {
+      _ref.current = { value: defaultValue };
+    }
+  }, [_ref, defaultValue]);
 
   useEffect(() => {
     function onClickOutside(event) {
@@ -94,19 +95,19 @@ export function Combobox({
   return (
     <div className={classNames} ref={wrapperRef}>
       <input
-        className="form-control"
+        className='form-control'
         value={filter}
-        type="text"
+        type='text'
         onChange={onInputChange}
         onKeyDown={onKeyDown}
         disabled={disabled}
         required={required}
       />
       <button
-        className="btn btn-secondary dropdown-toggle dropdown-toggle-split no-arrow"
-        data-toggle="dropdown"
-        data-reference="parent"
-        data-flip="false"
+        className='btn btn-secondary dropdown-toggle dropdown-toggle-split no-arrow'
+        data-toggle='dropdown'
+        data-reference='parent'
+        data-flip='false'
         style={{
           maxWidth: '2rem',
           borderTopLeftRadius: 0,
@@ -115,11 +116,11 @@ export function Combobox({
         }}
         tabIndex={-1}
         disabled={disabled}
-        type="button"
+        type='button'
       />
       <ul
         ref={menuRef}
-        role="menu"
+        role='menu'
         className={classnames('dropdown-menu', { show })}
         style={{
           maxHeight: '200px',
@@ -147,7 +148,7 @@ Combobox.propTypes = {
       id: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
     })
-  ),
+  ).isRequired,
   className: PropTypes.any,
   defaultValue: PropTypes.string,
   disabled: PropTypes.bool,
