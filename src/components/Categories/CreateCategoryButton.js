@@ -1,10 +1,11 @@
-import React from 'react';
-import { OpenModalButton } from '../sbadmin2';
-import CreateButton from '../sbadmin2/utilities/CreateButton';
-import { useCreateCategory } from '../gql/categories';
-import { CategoryModal } from './CategoryModal';
-import { useDictionary } from '../sbadmin2/language';
 import PropTypes from 'prop-types';
+import React from 'react';
+
+import CreateButton from '../common/CreateButton';
+import { useCreateCategory } from '../gql/categories';
+import { OpenModalButton } from '../sbadmin2';
+import { useDictionary } from '../sbadmin2/language';
+import { CategoryModal } from './CategoryModal';
 
 export function CreateCategoryButton({ onClickRef }) {
   const [createCategory] = useCreateCategory();

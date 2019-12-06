@@ -1,25 +1,26 @@
 import React from 'react';
-import { Page, ClickableIcon, Icon, OpenModalButton } from './sbadmin2';
-import CreateButton from './sbadmin2/utilities/CreateButton';
-import { FormControl } from './sbadmin2/utilities/FormControl';
-import { OptionalFormControl } from './sbadmin2/utilities/OptionalFormControl';
-import { FormInModal } from './sbadmin2/utilities/FormInModal';
-import { useFormData } from './sbadmin2/utilities/useFormData';
+
 import Amount from '../model/Amount';
+import CreateButton from './common/CreateButton';
+import { AmountInput } from './Expenses/AmountInput';
+import { useGetEnvelopes } from './gql/envelopes';
 import {
   useCreatePlan,
+  useDeletePlan,
   useGetCurrentPlans,
   useUpdatePlan,
-  useDeletePlan,
 } from './gql/plans';
 import { QueryTablePanel } from './gql/QueryTablePanel';
-import { useGetEnvelopes } from './gql/envelopes';
 import { WithQuery } from './gql/WithQuery';
-import { InlineFormControl } from './sbadmin2/utilities/InlineFormControl';
-import { Combobox } from './sbadmin2/utilities/Combobox';
+import { ClickableIcon, Icon, OpenModalButton, Page } from './sbadmin2';
 import { useDictionary } from './sbadmin2';
 import { Variant } from './sbadmin2/bootstrap';
-import { AmountInput } from './Expenses/AmountInput';
+import { Combobox } from './sbadmin2/utilities/Combobox';
+import { FormControl } from './sbadmin2/utilities/FormControl';
+import { FormInModal } from './sbadmin2/utilities/FormInModal';
+import { InlineFormControl } from './sbadmin2/utilities/InlineFormControl';
+import { OptionalFormControl } from './sbadmin2/utilities/OptionalFormControl';
+import { useFormData } from './sbadmin2/utilities/useFormData';
 
 const columns = [
   { dataField: 'title', sort: true },
@@ -44,7 +45,7 @@ const columns = [
   {
     dataField: 'recurringAmount',
     formatter: a =>
-      a !== null ? <i className="fas fa-fw fa-sync-alt" /> : null,
+      a !== null ? <i className='fas fa-fw fa-sync-alt' /> : null,
   },
   {
     dataField: 'actions',
@@ -99,7 +100,7 @@ function PlanModal({ init, ...props }) {
               label={plans.modal.labels.title}
               inline={10}
               formData={formData.title}
-              feedback="Provide title"
+              feedback='Provide title'
             />
             <FormControl inline={8} label={plans.modal.labels.amount}>
               <AmountInput formData={formData.currentAmount} />
@@ -108,11 +109,11 @@ function PlanModal({ init, ...props }) {
               initEnabled={init.recurringAmount !== null}
               inline={8}
               label={plans.modal.labels.recurring}
-              feedback="Provide amount for recurring plans"
-              type="number"
+              feedback='Provide amount for recurring plans'
+              type='number'
               required
               formData={formData.recurringAmount}
-              step="0.01"
+              step='0.01'
             />
             <InlineFormControl size={8} label={plans.modal.labels.fromEnvelope}>
               <Combobox
@@ -210,7 +211,7 @@ export default function Plans() {
         getData={data => data.budget.currentMonth.plans}
         buttons={<CreatePlanButton />}
         columns={columns}
-        keyField="id"
+        keyField='id'
         readTitle={d => d.plans.table.title}
         readColumnNames={d => d.plans.table.columns}
         defaultSorted={defaultSorted}

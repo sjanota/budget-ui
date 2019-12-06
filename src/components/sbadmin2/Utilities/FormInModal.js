@@ -1,8 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
-import SaveButton from './SaveButton';
-import CancelButton from './CancelButton';
-import { Modal, Form } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import React, { useEffect, useRef, useState } from 'react';
+import { Form, Modal } from 'react-bootstrap';
+
+import CancelButton from '../../common/CancelButton';
+import SaveButton from '../../common/SaveButton';
 
 export function FormInModal({ title, onHide, onSave, formData, children }) {
   const [validated, setValidated] = useState(false);
@@ -37,12 +38,12 @@ export function FormInModal({ title, onHide, onSave, formData, children }) {
     <Form validated={validated} ref={form} onSubmit={handleSave}>
       <Modal.Header
         closeButton
-        className="m-0 font-weight-bold text-primary bg-light"
+        className='m-0 font-weight-bold text-primary bg-light'
       >
         <Modal.Title>{title}</Modal.Title>
       </Modal.Header>
       <Modal.Body>{children}</Modal.Body>
-      <Modal.Footer className=" bg-light">
+      <Modal.Footer className=' bg-light'>
         <CancelButton onClick={onHide} />
         <SaveButton onClick={handleSave} />
       </Modal.Footer>

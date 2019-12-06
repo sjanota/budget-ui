@@ -1,7 +1,8 @@
 import React from 'react';
-import { OpenModalButton } from '../sbadmin2';
-import CreateButton from '../sbadmin2/utilities/CreateButton';
+
+import CreateButton from '../common/CreateButton';
 import { useCreateAccount } from '../gql/accounts';
+import { OpenModalButton } from '../sbadmin2';
 import { useDictionary } from '../sbadmin2';
 import { AccountModal } from './AccountModal';
 
