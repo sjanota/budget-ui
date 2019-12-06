@@ -1,26 +1,21 @@
+import { render } from '@testing-library/react';
 import React from 'react';
-import renderer from 'react-test-renderer';
-import { mount } from 'enzyme';
-import PageHeader from './PageHeader';
+
 import { DictionaryContext } from '../../language';
+import PageHeader from './PageHeader';
 
 describe('PageHeader', () => {
-  it('uses provided with title', () => {
-    const component = mount(<PageHeader title="My page" />);
-    expect(component).toHaveText('My page');
+  it('renders provided title', () => {
+    const { queryByText } = render(<PageHeader title='My page' />);
+    expect(queryByText('My page')).toBeTruthy();
   });
 
-  it('reads title from dictionary', () => {
-    const component = mount(
+  it('renders title from dictionary', () => {
+    const { queryByText } = render(
       <DictionaryContext.Provider value={{ title: 'My page' }}>
         <PageHeader readTitle={d => d.title} />
       </DictionaryContext.Provider>
     );
-    expect(component).toHaveText('My page');
-  });
-
-  it('renders with minimal props', () => {
-    const component = renderer.create(<PageHeader title="" />);
-    expect(component).toMatchSnapshot();
+    expect(queryByText('My page')).toBeTruthy();
   });
 });
