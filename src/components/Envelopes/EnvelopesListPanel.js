@@ -4,7 +4,7 @@ import React from 'react';
 import Amount from '../../model/Amount';
 import { useGetEnvelopes } from '../gql/envelopes';
 import { QueryTablePanel } from '../gql/QueryTablePanel';
-import { ClickableIcon } from '../sbadmin2';
+import { IconButton } from '../sbadmin2';
 import { Variant } from '../sbadmin2/bootstrap';
 import { CreateEnvelopeButton } from './CreateEnvelopeButton';
 import { UpdateEnvelopeButton } from './UpdateEnvelopeButton';
@@ -38,7 +38,7 @@ const columns = [
     formatter: (cell, row) => (
       <span>
         <UpdateEnvelopeButton envelope={row} />
-        <ClickableIcon icon={faArchive} variant={Variant.secondary} />
+        <IconButton icon={faArchive} variant={Variant.secondary} borderless />
       </span>
     ),
     style: {

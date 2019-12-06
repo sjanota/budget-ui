@@ -3,26 +3,26 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { Variant } from '../../bootstrap';
+import { Size, Variant } from '../../bootstrap';
 
-export default function ClickableIcon({
+export default function IconButton({
   icon,
   variant,
   className,
   onClick,
+  borderless,
+  size,
   ...props
 }) {
-  const classes = classnames(
-    'btn',
-    'bg-transparent',
-    'border-0',
-    'p-0',
-    'mx-1',
-    className,
-    {
-      [`text-${variant}`]: variant,
-    }
-  );
+  const prefix = borderless ? 'text' : 'btn';
+  const classes = classnames('btn', className, {
+    [`${prefix}-${variant}`]: variant,
+    [`${prefix}-${size}`]: size,
+    'bg-transparent': borderless,
+    'border-0': borderless,
+    'p-0': borderless,
+    'mx-1': borderless,
+  });
 
   function handleOnClick(e) {
     e.preventDefault();
@@ -36,9 +36,11 @@ export default function ClickableIcon({
   );
 }
 
-ClickableIcon.propTypes = {
+IconButton.propTypes = {
   icon: PropTypes.any.isRequired,
+  borderless: PropTypes.bool,
   className: PropTypes.string,
   onClick: PropTypes.func,
   variant: PropTypes.oneOf(Object.keys(Variant)).isRequired,
+  size: PropTypes.oneOf(Object.keys(Size)),
 };

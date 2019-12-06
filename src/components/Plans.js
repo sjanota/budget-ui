@@ -15,12 +15,7 @@ import {
 } from './gql/plans';
 import { QueryTablePanel } from './gql/QueryTablePanel';
 import { WithQuery } from './gql/WithQuery';
-import {
-  ClickableIcon,
-  OpenModalButton,
-  Page,
-  useDictionary,
-} from './sbadmin2';
+import { IconButton, OpenModalButton, Page, useDictionary } from './sbadmin2';
 import { Variant } from './sbadmin2/bootstrap';
 import { Combobox } from './sbadmin2/utilities/Combobox';
 import { FormControl } from './sbadmin2/utilities/FormControl';
@@ -156,7 +151,12 @@ function UpdatePlanButton({ plan }) {
   return (
     <OpenModalButton
       button={props => (
-        <ClickableIcon icon={faEdit} variant={Variant.primary} {...props} />
+        <IconButton
+          icon={faEdit}
+          variant={Variant.primary}
+          borderless
+          {...props}
+        />
       )}
       modalContent={props => (
         <PlanModal
@@ -173,10 +173,11 @@ function UpdatePlanButton({ plan }) {
 function DeletePlanButton({ plan }) {
   const [deletePlan] = useDeletePlan();
   return (
-    <ClickableIcon
+    <IconButton
       icon={faTrash}
       variant={Variant.secondary}
       onClick={() => deletePlan(plan.id)}
+      borderless
     />
   );
 }

@@ -3,16 +3,17 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import { useDeleteExpense } from '../gql/expenses';
-import { ClickableIcon } from '../sbadmin2';
+import { IconButton } from '../sbadmin2';
 import { Variant } from '../sbadmin2/bootstrap';
 
 export function DeleteExpenseButton({ expense }) {
   const [deleteExpense] = useDeleteExpense();
   return (
-    <ClickableIcon
+    <IconButton
       icon={faTrash}
       variant={Variant.danger}
       onClick={() => deleteExpense(expense.id)}
+      borderless
     />
   );
 }

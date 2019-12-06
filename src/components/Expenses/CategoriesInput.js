@@ -5,7 +5,7 @@ import { Col, Form, Row } from 'react-bootstrap';
 
 import { useGetCategories } from '../gql/categories';
 import { WithQuery } from '../gql/WithQuery';
-import { ClickableIcon, useDictionary } from '../sbadmin2';
+import { IconButton, useDictionary } from '../sbadmin2';
 import { Size, Variant } from '../sbadmin2/bootstrap';
 import { Combobox } from '../sbadmin2/utilities/Combobox';
 import { AmountInput } from './AmountInput';
@@ -19,7 +19,7 @@ export function CategoriesInput({ formData }) {
         <>
           <small className='d-flex align-items-center mb-3'>
             {expenses.modal.labels.categories}
-            <ClickableIcon
+            <IconButton
               icon={faPlus}
               variant={Variant.primary}
               size={Size.sm}
@@ -30,6 +30,7 @@ export function CategoriesInput({ formData }) {
                 })
               }
               type='button'
+              borderless
             />
           </small>
           {formData.map((categoryFormData, idx) => (
@@ -56,7 +57,7 @@ export function CategoriesInput({ formData }) {
                 />
               </Col>
               <Col sm={1} className='px-0'>
-                <ClickableIcon
+                <IconButton
                   icon={faMinus}
                   variant={Variant.danger}
                   size={Size.sm}

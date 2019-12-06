@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import { useUpdateEnvelope } from '../gql/envelopes';
-import { ClickableIcon, OpenModalButton, useDictionary } from '../sbadmin2';
+import { IconButton, OpenModalButton, useDictionary } from '../sbadmin2';
 import { Variant } from '../sbadmin2/bootstrap';
 import { EnvelopeModal } from './EnvelopeModal';
 
@@ -17,7 +17,12 @@ export function UpdateEnvelopeButton({ envelope }) {
   return (
     <OpenModalButton
       button={props => (
-        <ClickableIcon icon={faEdit} variant={Variant.primary} {...props} />
+        <IconButton
+          icon={faEdit}
+          variant={Variant.primary}
+          borderless
+          {...props}
+        />
       )}
       modalContent={props => (
         <EnvelopeModal

@@ -1,4 +1,4 @@
-import ClickableIcon from './components/ClickableIcon/ClickableIcon';
+import IconButton from './components/IconButton/IconButton';
 import OpenModalButton from './components/OpenModalButton/OpenModalButton';
 import Page from './components/Page/Page';
 import Panel from './components/Panel/Panel';
@@ -19,6 +19,6 @@ export {
   Panel,
   OpenModalButton,
   Page,
-  ClickableIcon,
+  IconButton,
   SplitButton,
 };

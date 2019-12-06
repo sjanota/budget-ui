@@ -3,18 +3,19 @@ import { render } from '@testing-library/react';
 import React from 'react';
 
 import { Variant } from '../../bootstrap';
-import ClickableIcon from './ClickableIcon';
+import IconButton from './IconButton';
 
 describe('ClickableIcon', () => {
-  it('renders properly', () => {
+  it('renders borderless', () => {
     const label = 'my button';
     const onClick = jest.fn();
     const { getByLabelText, getByRole } = render(
-      <ClickableIcon
+      <IconButton
         icon={faArchive}
         variant={Variant.primary}
         aria-label={label}
         onClick={onClick}
+        borderless
       />
     );
 

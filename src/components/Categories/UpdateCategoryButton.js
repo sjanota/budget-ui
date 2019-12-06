@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import { useUpdateCategory } from '../gql/categories';
-import { ClickableIcon, OpenModalButton, useDictionary } from '../sbadmin2';
+import { IconButton, OpenModalButton, useDictionary } from '../sbadmin2';
 import { Variant } from '../sbadmin2/bootstrap';
 import { CategoryModal } from './CategoryModal';
 
@@ -16,7 +16,12 @@ export function UpdateCategoryButton({ category }) {
   return (
     <OpenModalButton
       button={props => (
-        <ClickableIcon icon={faEdit} variant={Variant.primary} {...props} />
+        <IconButton
+          icon={faEdit}
+          variant={Variant.primary}
+          {...props}
+          borderless
+        />
       )}
       modalContent={props => (
         <CategoryModal

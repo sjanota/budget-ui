@@ -3,7 +3,7 @@ import React from 'react';
 
 import { useGetCategories } from '../gql/categories';
 import { QueryTablePanel } from '../gql/QueryTablePanel';
-import { ClickableIcon } from '../sbadmin2';
+import { IconButton } from '../sbadmin2';
 import { Variant } from '../sbadmin2/bootstrap';
 import { CreateCategoryButton } from './CreateCategoryButton';
 import { UpdateCategoryButton } from './UpdateCategoryButton';
@@ -22,7 +22,7 @@ const columns = [
     formatter: (cell, row) => (
       <span>
         <UpdateCategoryButton category={row} />
-        <ClickableIcon icon={faArchive} variant={Variant.secondary} />
+        <IconButton icon={faArchive} variant={Variant.secondary} borderless />
       </span>
     ),
     style: {

@@ -2,7 +2,7 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 
 import { useUpdateExpense } from '../gql/expenses';
-import { ClickableIcon, OpenModalButton } from '../sbadmin2';
+import { IconButton, OpenModalButton } from '../sbadmin2';
 import { useDictionary } from '../sbadmin2';
 import { Variant } from '../sbadmin2/bootstrap';
 import { ExpenseModal } from './ExpenseModal';
@@ -13,7 +13,12 @@ export function UpdateExpenseButton({ expense }) {
   return (
     <OpenModalButton
       button={props => (
-        <ClickableIcon icon={faEdit} variant={Variant.primary} {...props} />
+        <IconButton
+          icon={faEdit}
+          variant={Variant.primary}
+          {...props}
+          borderless
+        />
       )}
       modalContent={props => (
         <ExpenseModal

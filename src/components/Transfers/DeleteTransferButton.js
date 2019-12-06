@@ -3,16 +3,17 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import { useDeleteTranfer } from '../gql/transfers';
-import { ClickableIcon } from '../sbadmin2';
+import { IconButton } from '../sbadmin2';
 import { Variant } from '../sbadmin2/bootstrap';
 
 export function DeleteTransferButton({ transfer }) {
   const [deleteTransfer] = useDeleteTranfer();
   return (
-    <ClickableIcon
+    <IconButton
       icon={faTrash}
       variant={Variant.danger}
       onClick={() => deleteTransfer(transfer.id)}
+      borderless
     />
   );
 }

@@ -1,17 +1,18 @@
-import React from 'react';
-import RefreshButton from '../sbadmin2/utilities/RefreshButton';
-import { WithQuery } from '../gql/WithQuery';
 import PropTypes from 'prop-types';
+import React from 'react';
+
+import RefreshButton from '../common/RefreshButton';
+import { WithQuery } from '../gql/WithQuery';
 import { TablePanel } from '../sbadmin2';
 
 export function QueryTablePanel({ query, buttons, getData, ...props }) {
   return (
-    <WithQuery query={query} size="sm" showError={false}>
+    <WithQuery query={query} size='sm' showError={false}>
       {({ refetch, data }) => (
         <TablePanel
           headerButtons={
             <>
-              <RefreshButton onClick={() => refetch()} className="mr-1" />
+              <RefreshButton onClick={() => refetch()} className='mr-1' />
               {buttons}
             </>
           }

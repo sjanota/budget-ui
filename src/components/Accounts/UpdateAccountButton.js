@@ -4,7 +4,7 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 
 import { useUpdateAccount } from '../gql/accounts';
-import { ClickableIcon, OpenModalButton, useDictionary } from '../sbadmin2';
+import { IconButton, OpenModalButton, useDictionary } from '../sbadmin2';
 import { Variant } from '../sbadmin2/bootstrap';
 import { AccountModal } from './AccountModal';
 
@@ -14,10 +14,11 @@ export function UpdateAccountButton({ account }) {
   return (
     <OpenModalButton
       button={props => (
-        <ClickableIcon
+        <IconButton
           className='accounts__update-button'
           icon={faEdit}
           variant={Variant.primary}
+          borderless
           {...props}
         />
       )}
