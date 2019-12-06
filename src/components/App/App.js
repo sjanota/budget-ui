@@ -8,7 +8,7 @@ import Envelopes from '../Envelopes/EnvelopesPage';
 import ExpensesPage from '../Expenses/ExpensesPage';
 import { BudgetContext, BudgetProvider } from '../gql/budget';
 import { MonthDashboardPage } from '../MonthDashboardPage';
-import Plans from '../Plans';
+import PlansPage from '../Plans/PlansPage';
 import { SBAdmin2 } from '../sbadmin2';
 import Topbar from '../Topbar';
 import { TransfersPage } from '../Transfers/TransfersPage';
@@ -42,7 +42,7 @@ export default function App() {
                 <Route path='/envelopes' component={Envelopes} />
                 <Route path='/expenses' component={ExpensesPage} />
                 <Route path='/transfers' component={TransfersPage} />
-                <Route path='/plans' component={Plans} />
+                <Route path='/plans' component={PlansPage} />
                 <Route path='/' component={MonthDashboardPage} />
               </Switch>
             )

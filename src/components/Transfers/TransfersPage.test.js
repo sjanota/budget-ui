@@ -12,7 +12,7 @@ const selectedBudget = {
   name: 'my budget',
 };
 
-it('Accounts', async () => {
+it('Transfers', async () => {
   const { container } = render(
     <DictionaryContext.Provider value={dict}>
       <MockedProvider mocks={[]}>
