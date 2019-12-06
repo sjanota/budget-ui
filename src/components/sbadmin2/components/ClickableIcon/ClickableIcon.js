@@ -1,7 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
-import Icon from '../Icon/Icon';
+import PropTypes from 'prop-types';
+import React from 'react';
+
 import { Variant } from '../../bootstrap';
 
 export default function ClickableIcon({
@@ -30,14 +31,14 @@ export default function ClickableIcon({
 
   return (
     <button className={classes} onClick={handleOnClick} {...props}>
-      <Icon icon={icon} />
+      <FontAwesomeIcon icon={icon} />
     </button>
   );
 }
 
 ClickableIcon.propTypes = {
-  icon: PropTypes.string.isRequired,
+  icon: PropTypes.any.isRequired,
   className: PropTypes.string,
   onClick: PropTypes.func,
-  variant: PropTypes.oneOf(Object.keys(Variant)),
+  variant: PropTypes.oneOf(Object.keys(Variant)).isRequired,
 };

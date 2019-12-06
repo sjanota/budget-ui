@@ -1,39 +1,30 @@
-import React from 'react';
-import { mount } from 'enzyme';
-
-import ClickableIcon from './ClickableIcon';
-import Icon from '../Icon/Icon';
-import { Variant } from '../../bootstrap';
+import { faArchive } from '@fortawesome/free-solid-svg-icons';
 import { render } from '@testing-library/react';
+import React from 'react';
 
-it('ClickableIcon renders with minimal properly', () => {
-  const { container } = render(
-    <ClickableIcon icon={Icon.Archive} variant={Variant.primary} />
-  );
-  expect(container.firstChild).toMatchSnapshot();
-});
+import { Variant } from '../../bootstrap';
+import ClickableIcon from './ClickableIcon';
 
 describe('ClickableIcon', () => {
-  const component = mount(
-    <ClickableIcon icon={Icon.Archive} variant={Variant.primary} />
-  );
-
-  it('sets proper text-variant class', () => {
-    expect(component.find('button')).toHaveClassName('text-primary');
-    expect(component.find('button')).toMatchSelector('[className*=" text-"]');
-  });
-
-  it('passes icon to Icon', () => {
-    expect(component.find(Icon)).toHaveProp('icon', Icon.Archive);
-  });
-
-  it('does not set text-variant class if variant is missing', () => {
-    const component = mount(<ClickableIcon icon={Icon.Archive} />);
-    expect(component.find('button')).not.toMatchSelector(
-      '[className*=" text-"]'
+  it('renders properly', () => {
+    const label = 'my button';
+    const onClick = jest.fn();
+    const { getByLabelText, getByRole } = render(
+      <ClickableIcon
+        icon={faArchive}
+        variant={Variant.primary}
+        aria-label={label}
+        onClick={onClick}
+      />
     );
-    expect(component.find('button')).not.toMatchSelector(
-      '[className^="text-"]'
-    );
+
+    const button = getByLabelText(label);
+    button.click();
+    expect(onClick).toHaveBeenCalled();
+    expect(button).toHaveClass('text-primary');
+
+    const icon = getByRole('img', { hidden: true });
+    expect(icon).toHaveAttribute('aria-hidden', 'true');
+    expect(icon).toHaveClass('fa-archive');
   });
 });

@@ -8,6 +8,7 @@ module.exports = {
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:jest/recommended',
+    'plugin:jest-dom/recommended',
   ],
   globals: {
     Atomics: 'readonly',
@@ -20,7 +21,7 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  plugins: ['react', 'prettier', 'jest'],
+  plugins: ['react', 'prettier', 'jest', 'jest-dom'],
   rules: { 'react/display-name': 'off' },
   settings: {
     react: {
