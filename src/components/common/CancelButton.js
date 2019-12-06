@@ -1,26 +1,20 @@
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import PropTypes from 'prop-types';
 import React from 'react';
 
+import { SplitButton, useDictionary } from '../sbadmin2';
 import { Size, Variant } from '../sbadmin2/bootstrap';
-import SplitButton from '../sbadmin2/components/SplitButton/SplitButton';
-import { useDictionary } from '../sbadmin2/language';
 
-export default function CancelButton({ onClick }) {
+export default function CancelButton(props) {
   const { buttons } = useDictionary();
   return (
     <SplitButton
       variant={Variant.secondary}
       icon={faTrash}
       size={Size.sm}
-      onClick={onClick}
       type='button'
+      {...props}
     >
       {buttons.cancel}
     </SplitButton>
   );
 }
-
-CancelButton.propTypes = {
-  onClick: PropTypes.func.isRequired,
-};

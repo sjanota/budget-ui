@@ -1,16 +1,20 @@
-import classnames from 'classnames';
-import PropTypes from 'prop-types';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 
-export default function CreateButton({ className, ...props }) {
-  const classes = classnames('btn', 'btn-sm', 'btn-primary', className);
+import { SplitButton, useDictionary } from '../sbadmin2';
+import { Size, Variant } from '../sbadmin2/bootstrap';
+
+export default function CreateButton(props) {
+  const { buttons } = useDictionary();
   return (
-    <button type='button' className={classes} {...props}>
-      <i className='fas fa-fw fa-plus' />
-    </button>
+    <SplitButton
+      icon={faPlus}
+      size={Size.sm}
+      variant={Variant.primary}
+      type='button'
+      {...props}
+    >
+      {buttons.save}
+    </SplitButton>
   );
 }
-
-CreateButton.propTypes = {
-  className: PropTypes.any,
-};
