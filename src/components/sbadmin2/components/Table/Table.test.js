@@ -1,11 +1,20 @@
+import { render } from '@testing-library/react';
 import React from 'react';
-import { render } from 'enzyme';
-import Table from './Table';
+
 import { DictionaryContext } from '../../language';
+import Table from './Table';
 
 describe('Table', () => {
   it('renders with column names as a prop', () => {
-    const component = whenRenderedWithColumnNamesProps();
+    const component = render(
+      <Table
+        columns={[{ dataField: 'id' }, { dataField: 'name' }]}
+        columnNames={{ id: fakeColumnName1, name: fakeColumnName2 }}
+        data={[fakeItem]}
+        keyField='id'
+        condensed
+      />
+    );
 
     expectNoConsoleErrors();
     expectColumnNamesToBeSet(component);
@@ -14,7 +23,19 @@ describe('Table', () => {
   });
 
   it('renders with column names from context', () => {
-    const component = whenRenderedWithContext();
+    const component = render(
+      <DictionaryContext.Provider
+        value={{ id: fakeColumnName1, name: fakeColumnName2 }}
+      >
+        <Table
+          columns={[{ dataField: 'id' }, { dataField: 'name' }]}
+          readColumnNames={d => d}
+          data={[fakeItem]}
+          keyField='id'
+          condensed
+        />
+      </DictionaryContext.Provider>
+    );
 
     expectNoConsoleErrors();
     expectColumnNamesToBeSet(component);
@@ -37,54 +58,20 @@ const fakeColumnName1 = 'ID';
 const fakeColumnName2 = 'Name';
 const fakeItem = { id: 'my-id', name: 'my-name' };
 
-function whenRenderedWithColumnNamesProps() {
-  return render(
-    <Table
-      columns={[{ dataField: 'id' }, { dataField: 'name' }]}
-      columnNames={{ id: fakeColumnName1, name: fakeColumnName2 }}
-      data={[fakeItem]}
-      keyField="id"
-      condensed
-    />
-  );
-}
-
-function whenRenderedWithContext() {
-  return render(
-    <DictionaryContext.Provider
-      value={{ id: fakeColumnName1, name: fakeColumnName2 }}
-    >
-      <Table
-        columns={[{ dataField: 'id' }, { dataField: 'name' }]}
-        readColumnNames={d => d}
-        data={[fakeItem]}
-        keyField="id"
-        condensed
-      />
-    </DictionaryContext.Provider>
-  );
-}
-
 function expectNoConsoleErrors() {
   expect(consoleError).not.toHaveBeenCalled();
 }
 
-function expectColumnNamesToBeSet(component) {
-  const idHeader = component.find('th').eq(0);
-  expect(idHeader.text()).toBe(fakeColumnName1);
-
-  const nameHeader = component.find('th').eq(1);
-  expect(nameHeader.text()).toBe(fakeColumnName2);
+function expectColumnNamesToBeSet({ queryByText }) {
+  expect(queryByText(fakeColumnName1)).toBeTruthy();
+  expect(queryByText(fakeColumnName2)).toBeTruthy();
 }
 
-function expectToWorkInBootstrap4Mode(component) {
-  expect(component.find('table').hasClass('table-sm')).toBe(true);
+function expectToWorkInBootstrap4Mode({ getByRole }) {
+  expect(getByRole('table')).toHaveClass('table-sm');
 }
 
-function expectItemsToBeRendered(component) {
-  const idCell = component.find('td').eq(0);
-  expect(idCell.text()).toBe(fakeItem.id);
-
-  const nameCell = component.find('td').eq(1);
-  expect(nameCell.text()).toBe(fakeItem.name);
+function expectItemsToBeRendered({ queryByText }) {
+  expect(queryByText(fakeItem.id)).toBeTruthy();
+  expect(queryByText(fakeItem.name)).toBeTruthy();
 }
