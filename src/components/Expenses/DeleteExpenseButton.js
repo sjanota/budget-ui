@@ -1,14 +1,16 @@
-import React from 'react';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
-import { ClickableIcon, Icon } from '../sbadmin2';
+import React from 'react';
+
 import { useDeleteExpense } from '../gql/expenses';
+import { ClickableIcon } from '../sbadmin2';
 import { Variant } from '../sbadmin2/bootstrap';
 
 export function DeleteExpenseButton({ expense }) {
   const [deleteExpense] = useDeleteExpense();
   return (
     <ClickableIcon
-      icon={Icon.Trash}
+      icon={faTrash}
       variant={Variant.danger}
       onClick={() => deleteExpense(expense.id)}
     />

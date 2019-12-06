@@ -1,3 +1,6 @@
+import {} from './sbadmin2';
+
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 
 import Amount from '../model/Amount';
@@ -12,8 +15,12 @@ import {
 } from './gql/plans';
 import { QueryTablePanel } from './gql/QueryTablePanel';
 import { WithQuery } from './gql/WithQuery';
-import { ClickableIcon, Icon, OpenModalButton, Page } from './sbadmin2';
-import { useDictionary } from './sbadmin2';
+import {
+  ClickableIcon,
+  OpenModalButton,
+  Page,
+  useDictionary,
+} from './sbadmin2';
 import { Variant } from './sbadmin2/bootstrap';
 import { Combobox } from './sbadmin2/utilities/Combobox';
 import { FormControl } from './sbadmin2/utilities/FormControl';
@@ -149,7 +156,7 @@ function UpdatePlanButton({ plan }) {
   return (
     <OpenModalButton
       button={props => (
-        <ClickableIcon icon={Icon.Edit} variant={Variant.primary} {...props} />
+        <ClickableIcon icon={faEdit} variant={Variant.primary} {...props} />
       )}
       modalContent={props => (
         <PlanModal
@@ -167,7 +174,7 @@ function DeletePlanButton({ plan }) {
   const [deletePlan] = useDeletePlan();
   return (
     <ClickableIcon
-      icon={Icon.Trash}
+      icon={faTrash}
       variant={Variant.secondary}
       onClick={() => deletePlan(plan.id)}
     />

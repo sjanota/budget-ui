@@ -1,10 +1,11 @@
-import React from 'react';
-import { OpenModalButton, ClickableIcon, Icon } from '../sbadmin2';
-import { CategoryModal } from './CategoryModal';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
+import React from 'react';
+
 import { useUpdateCategory } from '../gql/categories';
-import { useDictionary } from '../sbadmin2/language';
+import { ClickableIcon, OpenModalButton, useDictionary } from '../sbadmin2';
 import { Variant } from '../sbadmin2/bootstrap';
+import { CategoryModal } from './CategoryModal';
 
 export function UpdateCategoryButton({ category }) {
   const [updateEnvelope] = useUpdateCategory();
@@ -15,7 +16,7 @@ export function UpdateCategoryButton({ category }) {
   return (
     <OpenModalButton
       button={props => (
-        <ClickableIcon icon={Icon.Edit} variant={Variant.primary} {...props} />
+        <ClickableIcon icon={faEdit} variant={Variant.primary} {...props} />
       )}
       modalContent={props => (
         <CategoryModal

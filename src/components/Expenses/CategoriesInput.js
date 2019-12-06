@@ -1,12 +1,13 @@
-import React from 'react';
+import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
-import { ClickableIcon, Icon } from '../sbadmin2';
+import React from 'react';
+import { Col, Form, Row } from 'react-bootstrap';
+
 import { useGetCategories } from '../gql/categories';
 import { WithQuery } from '../gql/WithQuery';
-import { Form, Row, Col } from 'react-bootstrap';
-import { useDictionary } from '../sbadmin2';
+import { ClickableIcon, useDictionary } from '../sbadmin2';
+import { Size, Variant } from '../sbadmin2/bootstrap';
 import { Combobox } from '../sbadmin2/utilities/Combobox';
-import { Variant, Size } from '../sbadmin2/bootstrap';
 import { AmountInput } from './AmountInput';
 
 export function CategoriesInput({ formData }) {
@@ -16,10 +17,10 @@ export function CategoriesInput({ formData }) {
     <WithQuery query={query}>
       {({ data }) => (
         <>
-          <small className="d-flex align-items-center mb-3">
+          <small className='d-flex align-items-center mb-3'>
             {expenses.modal.labels.categories}
             <ClickableIcon
-              icon={Icon.Plus}
+              icon={faPlus}
               variant={Variant.primary}
               size={Size.sm}
               onClick={() =>
@@ -28,14 +29,14 @@ export function CategoriesInput({ formData }) {
                   amount: null,
                 })
               }
-              type="button"
+              type='button'
             />
           </small>
           {formData.map((categoryFormData, idx) => (
             <Form.Group
               as={Row}
               key={categoryFormData.categoryID.init() || idx}
-              className="d-flex align-items-center"
+              className='d-flex align-items-center'
             >
               <Col sm={6}>
                 <Combobox
@@ -48,19 +49,19 @@ export function CategoriesInput({ formData }) {
                   required
                 />
               </Col>
-              <Col className="pr-0">
+              <Col className='pr-0'>
                 <AmountInput
                   placeholder={expenses.modal.labels.amount}
                   formData={categoryFormData.amount}
                 />
               </Col>
-              <Col sm={1} className="px-0">
+              <Col sm={1} className='px-0'>
                 <ClickableIcon
-                  icon="minus"
-                  variant="danger"
-                  size="sm"
+                  icon={faMinus}
+                  variant={Variant.danger}
+                  size={Size.sm}
                   onClick={() => formData.removeAt(idx)}
-                  type="button"
+                  type='button'
                 />
               </Col>
             </Form.Group>

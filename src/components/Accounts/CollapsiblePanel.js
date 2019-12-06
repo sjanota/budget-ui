@@ -1,10 +1,13 @@
-import React, { useState, createContext, useContext } from 'react';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
-import Panel from '../sbadmin2/components/Panel/Panel';
-import { Collapse } from 'react-bootstrap';
-import { Icon } from '../sbadmin2';
 import './CollapsiblePanel.css';
+
+import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classnames from 'classnames';
+import PropTypes from 'prop-types';
+import React, { createContext, useContext, useState } from 'react';
+import { Collapse } from 'react-bootstrap';
+
+import Panel from '../sbadmin2/components/Panel/Panel';
 
 const CollapsibleContext = createContext();
 
@@ -42,10 +45,9 @@ function CollapsiblePanelTitle({ children, ...props }) {
   const { show } = useContext(CollapsibleContext);
   return (
     <Panel.Title {...props}>
-      <Icon
-        icon={show ? Icon.ChevronUp : Icon.ChevronDown}
-        className="text-secondary mr-2"
-      />
+      <span className='text-secondary mr-2'>
+        <FontAwesomeIcon icon={show ? faChevronUp : faChevronDown} />
+      </span>
       {children}
     </Panel.Title>
   );

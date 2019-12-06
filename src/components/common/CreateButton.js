@@ -14,7 +14,7 @@ export default function CreateButton(props) {
       type='button'
       {...props}
     >
-      {buttons.save}
+      {buttons.create}
     </SplitButton>
   );
 }

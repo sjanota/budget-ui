@@ -1,10 +1,12 @@
+import { faArchive } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
+
 import { useGetCategories } from '../gql/categories';
 import { QueryTablePanel } from '../gql/QueryTablePanel';
+import { ClickableIcon } from '../sbadmin2';
+import { Variant } from '../sbadmin2/bootstrap';
 import { CreateCategoryButton } from './CreateCategoryButton';
 import { UpdateCategoryButton } from './UpdateCategoryButton';
-import { ClickableIcon, Icon } from '../sbadmin2';
-import { Variant } from '../sbadmin2/bootstrap';
 
 const columns = [
   { dataField: 'name', sort: true },
@@ -20,7 +22,7 @@ const columns = [
     formatter: (cell, row) => (
       <span>
         <UpdateCategoryButton category={row} />
-        <ClickableIcon icon={Icon.Archive} variant={Variant.secondary} />
+        <ClickableIcon icon={faArchive} variant={Variant.secondary} />
       </span>
     ),
     style: {
@@ -41,7 +43,7 @@ export function CategoriesListPanel({ createFunRef }) {
   const query = useGetCategories();
   return (
     <QueryTablePanel
-      keyField="id"
+      keyField='id'
       columns={columns}
       buttons={<CreateCategoryButton openRef={createFunRef} />}
       query={query}

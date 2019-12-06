@@ -1,10 +1,11 @@
-import React from 'react';
-import { OpenModalButton, ClickableIcon, Icon } from '../sbadmin2';
-import { useUpdateEnvelope } from '../gql/envelopes';
-import { EnvelopeModal } from './EnvelopeModal';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
-import { useDictionary } from '../sbadmin2/language';
+import React from 'react';
+
+import { useUpdateEnvelope } from '../gql/envelopes';
+import { ClickableIcon, OpenModalButton, useDictionary } from '../sbadmin2';
 import { Variant } from '../sbadmin2/bootstrap';
+import { EnvelopeModal } from './EnvelopeModal';
 
 export function UpdateEnvelopeButton({ envelope }) {
   const [updateEnvelope] = useUpdateEnvelope();
@@ -16,7 +17,7 @@ export function UpdateEnvelopeButton({ envelope }) {
   return (
     <OpenModalButton
       button={props => (
-        <ClickableIcon icon={Icon.Edit} variant={Variant.primary} {...props} />
+        <ClickableIcon icon={faEdit} variant={Variant.primary} {...props} />
       )}
       modalContent={props => (
         <EnvelopeModal

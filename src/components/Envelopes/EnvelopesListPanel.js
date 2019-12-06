@@ -1,11 +1,13 @@
+import { faArchive } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
-import { useGetEnvelopes } from '../gql/envelopes';
-import { CreateEnvelopeButton } from './CreateEnvelopeButton';
+
 import Amount from '../../model/Amount';
-import { UpdateEnvelopeButton } from './UpdateEnvelopeButton';
+import { useGetEnvelopes } from '../gql/envelopes';
 import { QueryTablePanel } from '../gql/QueryTablePanel';
+import { ClickableIcon } from '../sbadmin2';
 import { Variant } from '../sbadmin2/bootstrap';
-import { Icon, ClickableIcon } from '../sbadmin2';
+import { CreateEnvelopeButton } from './CreateEnvelopeButton';
+import { UpdateEnvelopeButton } from './UpdateEnvelopeButton';
 
 const columns = [
   { dataField: 'name', sort: true },
@@ -36,7 +38,7 @@ const columns = [
     formatter: (cell, row) => (
       <span>
         <UpdateEnvelopeButton envelope={row} />
-        <ClickableIcon icon={Icon.Archive} variant={Variant.secondary} />
+        <ClickableIcon icon={faArchive} variant={Variant.secondary} />
       </span>
     ),
     style: {
@@ -61,7 +63,7 @@ export function EnvelopesListPanel({ createFunRef }) {
       buttons={<CreateEnvelopeButton openRef={createFunRef} />}
       getData={data => data.envelopes}
       columns={columns}
-      keyField="id"
+      keyField='id'
       readTitle={d => d.envelopes.table.title}
       readColumnNames={d => d.envelopes.table.columns}
       defaultSorted={defaultSorted}

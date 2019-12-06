@@ -15,18 +15,11 @@ export default function SplitButton({
   children,
   ...props
 }) {
-  const classNames = classnames(
-    'btn',
-    'btn-icon-split',
-    'icon',
-    'text-white-50',
-    className,
-    {
-      disabled,
-      [`btn-${size}`]: size,
-      [`btn-${variant}`]: variant,
-    }
-  );
+  const classNames = classnames('btn', 'btn-icon-split', className, {
+    disabled,
+    [`btn-${size}`]: size,
+    [`btn-${variant}`]: variant,
+  });
 
   return (
     <button
@@ -36,7 +29,9 @@ export default function SplitButton({
       aria-label={children}
       {...props}
     >
-      <FontAwesomeIcon icon={icon} />
+      <span className='icon text-white-50'>
+        <FontAwesomeIcon icon={icon} />
+      </span>
       <span className='text'>{children}</span>
     </button>
   );
