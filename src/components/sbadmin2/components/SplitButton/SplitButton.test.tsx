@@ -1,8 +1,9 @@
+import { jsxAttribute } from '@babel/types';
 import { faArchive } from '@fortawesome/free-solid-svg-icons';
 import { render } from '@testing-library/react';
 import React from 'react';
 
-import { Size, Variant } from '../../bootstrap';
+import { Size, Variant } from '../../bootstrap.typed';
 import SplitButton from './SplitButton';
 
 describe('SplitButton', () => {

@@ -1,9 +1,19 @@
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
-import PropTypes from 'prop-types';
-import React from 'react';
+import React, { ButtonHTMLAttributes, HTMLProps } from 'react';
 
-import { Size, Variant } from '../../bootstrap';
+import { Size, Variant } from '../../bootstrap.typed';
+
+interface Props {
+  icon: IconProp;
+  variant: Variant;
+  size?: Size;
+  className?: string;
+  disabled?: boolean;
+  _ref?: { current: any };
+  children?: string;
+}
 
 export default function SplitButton({
   icon,
@@ -14,7 +24,7 @@ export default function SplitButton({
   _ref,
   children,
   ...props
-}) {
+}: Props & ButtonHTMLAttributes<HTMLButtonElement>) {
   const classNames = classnames('btn', 'btn-icon-split', className, {
     disabled,
     [`btn-${size}`]: size,
@@ -36,13 +46,3 @@ export default function SplitButton({
     </button>
   );
 }
-
-SplitButton.propTypes = {
-  children: PropTypes.string.isRequired,
-  className: PropTypes.string,
-  disabled: PropTypes.bool,
-  icon: PropTypes.any.isRequired,
-  size: PropTypes.oneOf(Object.keys(Size)),
-  variant: PropTypes.oneOf(Object.keys(Variant)).isRequired,
-  _ref: PropTypes.any,
-};
