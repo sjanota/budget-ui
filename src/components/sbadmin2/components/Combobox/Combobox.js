@@ -18,6 +18,7 @@ export default function Combobox({
   defaultValue: defaultID,
   className,
   required,
+  'aria-label': ariaLabel,
 }) {
   function valueByID(id) {
     return allowedValues.find(v => v.id === id);
@@ -70,7 +71,7 @@ export default function Combobox({
     const label = e.target.value;
     setFilter(label);
     const selected = valueByLabel(label);
-    if (selected) {
+    if (selected && _ref) {
       _ref.current = { value: selected.id };
     } else {
       setShow(true);
@@ -80,7 +81,9 @@ export default function Combobox({
   function onClick(id) {
     const selected = valueByID(id);
     setFilter(selected.label);
-    _ref.current = { value: id };
+    if (_ref) {
+      _ref.current = { value: id };
+    }
   }
 
   return (
@@ -101,6 +104,7 @@ export default function Combobox({
               onChange={onInputChange}
               disabled={disabled}
               required={required}
+              aria-label={ariaLabel}
             />
             <button
               className='btn btn-secondary dropdown-toggle dropdown-toggle-split no-arrow'
