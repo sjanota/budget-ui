@@ -1,4 +1,5 @@
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import { useUpdateTransfer } from '../gql/transfers';
@@ -31,3 +32,9 @@ export function UpdateTransferButton({ transfer }) {
     />
   );
 }
+
+UpdateTransferButton.propTypes = {
+  transfer: PropTypes.shape({
+    id: PropTypes.string,
+  }),
+};

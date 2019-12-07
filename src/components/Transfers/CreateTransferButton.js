@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import CreateButton from '../common/CreateButton';
@@ -31,3 +32,14 @@ export function CreateTransferButton({ toAccount, fromAccount }) {
     />
   );
 }
+
+CreateTransferButton.propTypes = {
+  fromAccount: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  }),
+  toAccount: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  }),
+};

@@ -39,13 +39,13 @@ const defaultSorted = [
   },
 ];
 
-export function CategoriesListPanel({ createFunRef }) {
+export function CategoriesListPanel() {
   const query = useGetCategories();
   return (
     <QueryTablePanel
       keyField='id'
       columns={columns}
-      buttons={<CreateCategoryButton openRef={createFunRef} />}
+      buttons={<CreateCategoryButton />}
       query={query}
       getData={data => data.categories}
       readTitle={d => d.categories.table.title}

@@ -1,4 +1,5 @@
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import { useUpdateExpense } from '../gql/expenses';
@@ -31,3 +32,9 @@ export function UpdateExpenseButton({ expense }) {
     />
   );
 }
+
+UpdateExpenseButton.propTypes = {
+  expense: PropTypes.shape({
+    id: PropTypes.string,
+  }),
+};

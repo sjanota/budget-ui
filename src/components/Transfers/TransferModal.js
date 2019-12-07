@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import Amount from '../../model/Amount';
@@ -101,3 +102,27 @@ export function TransferModal({ toAccount, fromAccount, init, ...props }) {
     </FormInModal>
   );
 }
+
+TransferModal.propTypes = {
+  fromAccount: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  }),
+  init: PropTypes.shape({
+    title: PropTypes.string,
+    date: PropTypes.string,
+    amount: PropTypes.number,
+    fromAccount: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+    }),
+    toAccount: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+    }),
+  }),
+  toAccount: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  }),
+};

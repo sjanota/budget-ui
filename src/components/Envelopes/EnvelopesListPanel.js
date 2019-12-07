@@ -55,12 +55,12 @@ const defaultSorted = [
   },
 ];
 
-export function EnvelopesListPanel({ createFunRef }) {
+export function EnvelopesListPanel() {
   const query = useGetEnvelopes();
   return (
     <QueryTablePanel
       query={query}
-      buttons={<CreateEnvelopeButton openRef={createFunRef} />}
+      buttons={<CreateEnvelopeButton />}
       getData={data => data.envelopes}
       columns={columns}
       keyField='id'

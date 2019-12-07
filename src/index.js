@@ -1,16 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+
 import './sb-admin-2.css';
 import './index.css';
-import App from './components/App/App';
-import * as serviceWorker from './serviceWorker';
-import { BrowserRouter } from 'react-router-dom';
-import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
-import { AuthApolloProvider, createClient } from './apollo';
-import { Auth0Provider, Auth0Context } from './react-auth0-spa';
-import config from './auth_config.json';
-import { Beta } from './components/Beta';
+
 import { ApolloProvider } from '@apollo/react-hooks';
+import PropTypes from 'prop-types';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+
+import { AuthApolloProvider, createClient } from './apollo';
+import config from './auth_config.json';
+import App from './components/App/App';
+import { Beta } from './components/Beta';
+import { Auth0Context, Auth0Provider } from './react-auth0-spa';
+import * as serviceWorker from './serviceWorker';
 
 // A function that routes the user to the right place
 // after login
@@ -33,12 +37,16 @@ const ProdAuthorizationProvider = ({ children }) => (
     redirect_uri={redirectURI}
     onRedirectCallback={onRedirectCallback}
     audience={config.audience}
-    scope="beta"
+    scope='beta'
     returnTo={redirectURI}
   >
     <AuthApolloProvider>{children}</AuthApolloProvider>
   </Auth0Provider>
 );
+
+ProdAuthorizationProvider.propTypes = {
+  children: PropTypes.node,
+};
 
 const DevAuthorizationProvider = ({ children }) => (
   <Auth0Context.Provider
@@ -58,6 +66,10 @@ const DevAuthorizationProvider = ({ children }) => (
     <ApolloProvider client={createClient()}>{children}</ApolloProvider>
   </Auth0Context.Provider>
 );
+
+DevAuthorizationProvider.propTypes = {
+  children: PropTypes.node,
+};
 
 const authDisabled = process.env.REACT_APP_INSECURE_AUTH_DISABLED;
 const AuthorizationProvider =

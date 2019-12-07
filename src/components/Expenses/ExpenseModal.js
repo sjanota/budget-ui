@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import Amount from '../../model/Amount';
@@ -81,3 +82,18 @@ export function ExpenseModal({ account, init, ...props }) {
     </FormInModal>
   );
 }
+
+ExpenseModal.propTypes = {
+  account: PropTypes.shape({
+    id: PropTypes.string,
+  }),
+  init: PropTypes.shape({
+    id: PropTypes.string,
+    title: PropTypes.string,
+    date: PropTypes.string,
+    account: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+    categories: PropTypes.array,
+  }),
+};

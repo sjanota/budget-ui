@@ -1,6 +1,7 @@
 import './UpdateAccountButton.css';
 
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import { useUpdateAccount } from '../gql/accounts';
@@ -33,3 +34,9 @@ export function UpdateAccountButton({ account }) {
     />
   );
 }
+
+UpdateAccountButton.propTypes = {
+  account: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+  }),
+};

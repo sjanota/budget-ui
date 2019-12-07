@@ -1,5 +1,7 @@
+import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+
 import { useAuth0 } from '../react-auth0-spa';
-import React, { useState, useEffect } from 'react';
 
 export function Beta({ children }) {
   const { getTokenScopes } = useAuth0();
@@ -20,3 +22,7 @@ export function Beta({ children }) {
   }
   return <div>This conent is available only to beta users</div>;
 }
+
+Beta.propTypes = {
+  children: PropTypes.node,
+};

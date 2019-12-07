@@ -58,9 +58,17 @@ export function CategoryModal({ init, ...props }) {
 }
 
 CategoryModal.propTypes = {
+  envelope: PropTypes.shape({
+    id: PropTypes.string,
+  }).isRequired,
+  id: PropTypes.string,
   init: PropTypes.shape({
     name: PropTypes.string,
-    envelope: PropTypes.shape({ id: PropTypes.string }).isRequired,
+    envelope: PropTypes.shape({
+      id: PropTypes.string,
+    }).isRequired,
+    description: PropTypes.string,
   }),
+  name: PropTypes.string,
   onSave: PropTypes.func.isRequired,
 };

@@ -16,6 +16,11 @@ function ErrorMessageList({ errorMessage, subErrors }) {
   );
 }
 
+ErrorMessageList.propTypes = {
+  errorMessage: PropTypes.string.isRequired,
+  subErrors: PropTypes.arrayOf(PropTypes.string),
+};
+
 function ErrorMessage({ error }) {
   const subErrors = error.networkError
     ? error.networkError.result
@@ -30,6 +35,23 @@ function ErrorMessage({ error }) {
     </div>
   );
 }
+
+ErrorMessage.propTypes = {
+  error: PropTypes.shape({
+    networkError: PropTypes.shape({
+      result: PropTypes.shape({
+        errors: PropTypes.array,
+      }),
+    }),
+    graphQLErrors: PropTypes.arrayOf(
+      PropTypes.shape({
+        path: PropTypes.arrayOf(PropTypes.string),
+        message: PropTypes.string,
+      })
+    ),
+    message: PropTypes.string,
+  }),
+};
 
 export function WithQuery({ query, showError, children, ...props }) {
   const { loading, error } = query;

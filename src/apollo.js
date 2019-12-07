@@ -1,16 +1,17 @@
-import ApolloClient from 'apollo-client';
+import { ApolloProvider } from '@apollo/react-hooks';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import { createHttpLink } from 'apollo-link-http';
-import { ApolloLink } from 'apollo-link';
-import { getMainDefinition } from 'apollo-utilities';
-import { onError } from 'apollo-link-error';
-import { setContext } from 'apollo-link-context';
-
 import { IntrospectionFragmentMatcher } from 'apollo-cache-inmemory';
+import ApolloClient from 'apollo-client';
+import { ApolloLink } from 'apollo-link';
+import { setContext } from 'apollo-link-context';
+import { onError } from 'apollo-link-error';
+import { createHttpLink } from 'apollo-link-http';
+import { getMainDefinition } from 'apollo-utilities';
+import PropTypes from 'prop-types';
+import React, { useEffect } from 'react';
+
 import introspectionQueryResultData from './fragmentTypes.json';
 import { useAuth0 } from './react-auth0-spa.js';
-import React, { useEffect } from 'react';
-import { ApolloProvider } from '@apollo/react-hooks';
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData,
@@ -90,3 +91,7 @@ export function AuthApolloProvider({ children }) {
     <ApolloProvider client={createClient(token)}>{children}</ApolloProvider>
   );
 }
+
+AuthApolloProvider.propTypes = {
+  children: PropTypes.node,
+};

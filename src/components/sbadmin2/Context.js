@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
+import React, { useContext, useState } from 'react';
 
 const SBAdmin2Context = React.createContext();
 
@@ -20,7 +20,12 @@ export function SBAdmin2Provider({ user, logout, children }) {
 }
 
 SBAdmin2Provider.propTypes = {
-  children: PropTypes.any,
+  children: PropTypes.node,
+  logout: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    picture: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export const useSBAdmin2 = () => useContext(SBAdmin2Context);

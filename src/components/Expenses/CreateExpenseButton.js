@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import CreateButton from '../common/CreateButton';
@@ -30,3 +31,7 @@ export function CreateExpenseButton({ account }) {
     />
   );
 }
+
+CreateExpenseButton.propTypes = {
+  account: PropTypes.any,
+};
