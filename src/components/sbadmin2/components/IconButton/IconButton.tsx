@@ -1,11 +1,9 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
-import PropTypes from 'prop-types';
 import React, { MouseEvent } from 'react';
 
-import { Size } from '../../bootstrap';
-import { Variant } from '../../bootstrap.typed';
+import { Size, Variant } from '../../bootstrap.typed';
 
 interface Props {
   icon: IconProp;
@@ -13,7 +11,7 @@ interface Props {
   onClick(event: MouseEvent<HTMLButtonElement>): void;
   className?: string;
   borderless?: boolean;
-  size?: string;
+  size?: Size;
 }
 
 export default function IconButton({
@@ -46,12 +44,3 @@ export default function IconButton({
     </button>
   );
 }
-
-IconButton.propTypes = {
-  icon: PropTypes.any.isRequired,
-  borderless: PropTypes.bool,
-  className: PropTypes.string,
-  onClick: PropTypes.func,
-  variant: PropTypes.oneOf(Object.keys(Variant)).isRequired,
-  size: PropTypes.oneOf(Object.keys(Size)),
-};
