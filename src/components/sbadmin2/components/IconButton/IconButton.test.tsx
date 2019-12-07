@@ -2,7 +2,7 @@ import { faArchive } from '@fortawesome/free-solid-svg-icons';
 import { render } from '@testing-library/react';
 import React from 'react';
 
-import { Variant } from '../../bootstrap';
+import { Variant } from '../../bootstrap.typed';
 import IconButton from './IconButton';
 
 describe('ClickableIcon', () => {

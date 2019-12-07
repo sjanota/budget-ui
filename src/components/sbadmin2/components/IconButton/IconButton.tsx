@@ -1,9 +1,20 @@
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { MouseEvent } from 'react';
 
-import { Size, Variant } from '../../bootstrap';
+import { Size } from '../../bootstrap';
+import { Variant } from '../../bootstrap.typed';
+
+interface Props {
+  icon: IconProp;
+  variant: Variant;
+  onClick(event: MouseEvent<HTMLButtonElement>): void;
+  className?: string;
+  borderless?: boolean;
+  size?: string;
+}
 
 export default function IconButton({
   icon,
@@ -13,7 +24,7 @@ export default function IconButton({
   borderless,
   size,
   ...props
-}) {
+}: Props) {
   const prefix = borderless ? 'text' : 'btn';
   const classes = classnames('btn', className, {
     [`${prefix}-${variant}`]: variant,
@@ -24,7 +35,7 @@ export default function IconButton({
     'mx-1': borderless,
   });
 
-  function handleOnClick(e) {
+  function handleOnClick(e: MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     onClick && onClick(e);
   }
