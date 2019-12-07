@@ -1,13 +1,29 @@
+import './Combobox.css';
+
 import classnames from 'classnames';
-import PropTypes from 'prop-types';
 import React, {
+  ButtonHTMLAttributes,
+  ChangeEvent,
+  ReactNode,
   forwardRef,
   useCallback,
   useEffect,
   useRef,
   useState,
 } from 'react';
-import { Dropdown } from 'react-bootstrap';
+import { Button, Dropdown, FormControl, InputGroup } from 'react-bootstrap';
+
+import { Variant } from '../../bootstrap.typed';
+
+interface Props {
+  disabled?: boolean;
+  allowedValues: { id: string; label: string }[];
+  _ref?: { current: any };
+  defaultValue?: string;
+  className?: string;
+  required?: boolean;
+  'aria-label': string;
+}
 
 export default function Combobox({
   disabled,
@@ -17,8 +33,8 @@ export default function Combobox({
   className,
   required,
   'aria-label': ariaLabel,
-}) {
-  function valueByID(id) {
+}: Props) {
+  function valueByID(id: string) {
     return allowedValues.find(v => v.id === id);
   }
 
@@ -28,11 +44,11 @@ export default function Combobox({
   );
 
   const [show, setShow] = useState(false);
-  const [filter, setFilter] = useState(
-    defaultID ? valueByID(defaultID).label : ''
-  );
 
-  const dropdownRef = useRef();
+  const defaultValue = defaultID ? valueByID(defaultID) : { label: '' };
+  const [filter, setFilter] = useState(defaultValue ? defaultValue.label : '');
+
+  const dropdownRef = useRef<HTMLDivElement>();
 
   const filtered = filter
     ? allowedValues.filter(v =>
@@ -47,11 +63,14 @@ export default function Combobox({
   }, [_ref, defaultID]);
 
   useEffect(() => {
-    function isClickedInside(event) {
-      return !dropdownRef.current || dropdownRef.current.contains(event.target);
+    function isClickedInside(event: MouseEvent) {
+      return (
+        !dropdownRef.current ||
+        dropdownRef.current!.contains(event.target as Node)
+      );
     }
 
-    function handleClickOutside(event) {
+    function handleClickOutside(event: MouseEvent) {
       if (isClickedInside(event)) {
         return;
       }
@@ -65,7 +84,7 @@ export default function Combobox({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [filter, valueByLabel]);
 
-  function onInputChange(e) {
+  function onInputChange(e: ChangeEvent<HTMLInputElement>) {
     const label = e.target.value;
     setFilter(label);
     const selected = valueByLabel(label);
@@ -76,9 +95,11 @@ export default function Combobox({
     }
   }
 
-  function onClick(id) {
+  function onClick(id: string) {
     const selected = valueByID(id);
-    setFilter(selected.label);
+    if (selected) {
+      setFilter(selected.label);
+    }
     if (_ref) {
       _ref.current = { value: id };
     }
@@ -86,17 +107,21 @@ export default function Combobox({
 
   return (
     <Dropdown
+      // @ts-ignore
       ref={dropdownRef}
       show={show}
       onToggle={isOpen => {
         setShow(isOpen);
       }}
+      className={classnames('combobox', className)}
     >
-      <Dropdown.Toggle as={Toggle} className={className}>
-        {props => (
+      <Dropdown.Toggle
+        // @ts-ignore
+        as={Toggle}
+      >
+        {({ className, ...props }: ButtonHTMLAttributes<HTMLButtonElement>) => (
           <>
-            <input
-              className='form-control'
+            <FormControl
               value={filter}
               type='text'
               onChange={onInputChange}
@@ -104,14 +129,13 @@ export default function Combobox({
               required={required}
               aria-label={ariaLabel}
             />
-            <button
-              className='btn btn-secondary dropdown-toggle dropdown-toggle-split no-arrow'
-              style={{
-                maxWidth: '2rem',
-                borderTopLeftRadius: 0,
-                borderBottomLeftRadius: 0,
-                margin: -1,
-              }}
+            <Button
+              variant={Variant.secondary}
+              className={classnames(
+                'dropdown-toggle-split',
+                'no-arrow',
+                className
+              )}
               tabIndex={-1}
               disabled={disabled}
               type='button'
@@ -120,12 +144,7 @@ export default function Combobox({
           </>
         )}
       </Dropdown.Toggle>
-      <Dropdown.Menu
-        style={{
-          maxHeight: '200px',
-          overflowY: 'auto',
-        }}
-      >
+      <Dropdown.Menu>
         {filtered.map(v => (
           <Dropdown.Item
             eventKey={v.id}
@@ -140,26 +159,17 @@ export default function Combobox({
   );
 }
 
-Combobox.propTypes = {
-  _ref: PropTypes.shape({ current: PropTypes.any }),
-  allowedValues: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-  className: PropTypes.any,
-  defaultValue: PropTypes.string,
-  disabled: PropTypes.bool,
-  required: PropTypes.bool,
-};
+interface ToggleProps {
+  children(props: object): ReactNode;
+}
 
-const Toggle = forwardRef(({ className, children, ...props }, ref) => {
-  const classNames = classnames('combobox', 'input-group', className);
-
+const Toggle = forwardRef(({ children, ...props }: ToggleProps, ref) => {
   return (
-    <div className={classNames.replace('dropdown-toggle', '')} ref={ref}>
+    <InputGroup
+      // @ts-ignore
+      ref={ref}
+    >
       {children(props)}
-    </div>
+    </InputGroup>
   );
 });

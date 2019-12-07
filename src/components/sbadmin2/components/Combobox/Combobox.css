@@ -1,0 +1,11 @@
+.combobox .dropdown-toggle {
+  max-width: '2rem';
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  margin: -1;
+}
+
+.combobox .dropdown-menu {
+  max-height: 200px;
+  overflow-y: auto;
+}
