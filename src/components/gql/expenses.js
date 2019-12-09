@@ -41,6 +41,18 @@ export const GET_CURRENT_EXPENSES = gql`
   ${EXPENSE_FRAGMENT}
 `;
 
+export const GET_EXPENSES = gql`
+  query getExpenses($budgetID: ID!, $month: Month!) {
+    monthlyReport(budgetID: $budgetID, month: $month) {
+      expenses {
+        ...Expense
+      }
+    }
+  }
+
+  ${EXPENSE_FRAGMENT}
+`;
+
 const CREATE_EXPENSE = gql`
   mutation createExpense($budgetID: ID!, $input: ExpenseInput!) {
     createExpense(budgetID: $budgetID, in: $input) {
@@ -126,6 +138,13 @@ export function useGetCurrentExpenses() {
   const { selectedBudget } = useBudget();
   return useQuery(GET_CURRENT_EXPENSES, {
     variables: { budgetID: selectedBudget.id },
+  });
+}
+
+export function useGetExpenses(month) {
+  const { selectedBudget } = useBudget();
+  return useQuery(GET_EXPENSES, {
+    variables: { budgetID: selectedBudget.id, month },
   });
 }
 

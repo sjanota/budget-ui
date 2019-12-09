@@ -1,7 +1,9 @@
 import React from 'react';
-import { QueryTablePanel } from '../gql/QueryTablePanel';
-import { useGetCurrentExpenses } from '../gql/expenses';
+
 import Amount from '../../model/Amount';
+import { useMonth } from '../context/Month';
+import { useGetExpenses } from '../gql/expenses';
+import { QueryTablePanel } from '../gql/QueryTablePanel';
 import { DeleteExpenseButton } from './DeleteExpenseButton';
 import { UpdateExpenseButton } from './UpdateExpenseButton';
 
@@ -41,11 +43,11 @@ const rowClasses = (row, rowIndex) => {
 const expandRow = {
   className: 'background-color-white',
   renderer: row => (
-    <table className="table table-sm mb-0">
+    <table className='table table-sm mb-0'>
       <tbody>
         {row.categories.map((category, idx) => (
           <tr key={idx}>
-            <td className="pl-3">{category.category.name}</td>
+            <td className='pl-3'>{category.category.name}</td>
             <td>{Amount.format(category.amount)}</td>
           </tr>
         ))}
@@ -67,7 +69,8 @@ export function ExpensesTablePanel({
   accountFilter,
   ...props
 }) {
-  const query = useGetCurrentExpenses();
+  const { selectedMonth } = useMonth();
+  const query = useGetExpenses(selectedMonth);
 
   let filters = [];
   if (accountFilter) {
@@ -78,10 +81,10 @@ export function ExpensesTablePanel({
     <QueryTablePanel
       {...props}
       query={query}
-      getData={d => d.budget.currentMonth.expenses}
+      getData={d => d.monthlyReport.expenses}
       buttons={createButton}
       columns={columns}
-      keyField="id"
+      keyField='id'
       expandRow={expandRow}
       rowClasses={rowClasses}
       striped={false}
