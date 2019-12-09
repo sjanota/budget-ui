@@ -3,6 +3,7 @@ import { render, waitForDomChange } from '@testing-library/react';
 import React from 'react';
 
 import dict from '../../lang/pl';
+import { MonthProvider } from '../context/Month';
 import { BudgetContext } from '../gql/budget';
 import { DictionaryContext } from '../sbadmin2/language';
 import ExpensesPage from './ExpensesPage';
@@ -17,7 +18,9 @@ it('Expenses', async () => {
     <DictionaryContext.Provider value={dict}>
       <MockedProvider mocks={[]}>
         <BudgetContext.Provider value={{ selectedBudget }}>
-          <ExpensesPage />
+          <MonthProvider currentMonth='12-2019'>
+            <ExpensesPage />
+          </MonthProvider>
         </BudgetContext.Provider>
       </MockedProvider>
     </DictionaryContext.Provider>

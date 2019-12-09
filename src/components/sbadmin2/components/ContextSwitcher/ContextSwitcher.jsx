@@ -1,6 +1,7 @@
 import './ContextSwitcher.css';
 
 import classNames from 'classnames';
+import classnames from 'classnames';
 import React, { forwardRef } from 'react';
 import { Button, ButtonGroup, Dropdown, InputGroup } from 'react-bootstrap';
 
@@ -11,21 +12,38 @@ export default function ContextSwitcher({
   label,
   value,
   variant,
+  displayBg = 'light',
+  labelBg,
 }) {
+  const labelClasses = classnames('border-0', { [`bg-${labelBg}`]: labelBg });
+
   return (
-    <Dropdown className={classNames('context-switcher', className)}>
-      <Dropdown.Menu>
-        {allowedValues.map(v => (
-          <Dropdown.Item onClick={() => onChange(v.id)} key={v.id}>
-            {v.label}
-          </Dropdown.Item>
-        ))}
-      </Dropdown.Menu>
+    <Dropdown
+      className={classNames(
+        'context-switcher',
+        'input-group',
+        'align-items-stretch',
+        className
+      )}
+    >
+      <InputGroup.Prepend className='context-switcher__label d-flex align-items-stretch'>
+        <InputGroup.Text as='label' className={classnames(labelClasses)}>
+          {label}
+        </InputGroup.Text>
+      </InputGroup.Prepend>
+
       <Dropdown.Toggle as={Toggle}>
         {({ className, ...props }) => (
           <>
+            <Dropdown.Menu>
+              {allowedValues.map(v => (
+                <Dropdown.Item onClick={() => onChange(v.id)} key={v.id}>
+                  {v.label}
+                </Dropdown.Item>
+              ))}
+            </Dropdown.Menu>
             <InputGroup.Text
-              className='bg-light border-0 context_switcher__context-display text-dark'
+              className={`bg-${displayBg} border-0 context_switcher__context-display text-dark`}
               aria-label={label}
             >
               {value}
@@ -47,7 +65,10 @@ export default function ContextSwitcher({
 
 const Toggle = forwardRef(({ children, ...props }, ref) => {
   return (
-    <ButtonGroup className='context-switcher__toggle-group' ref={ref}>
+    <ButtonGroup
+      className='context-switcher__toggle-group input-group-append'
+      ref={ref}
+    >
       {children(props)}
     </ButtonGroup>
   );

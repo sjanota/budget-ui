@@ -1,9 +1,15 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
+
 import { withDictionary } from '../../language';
 
-function PageHeader({ title }) {
-  return <h1 className="h3 mb-4 text-gray-800">{title}</h1>;
+function PageHeader({ children, title }) {
+  return (
+    <h1 className='h3 mb-4 text-gray-800 d-flex justify-content-between'>
+      {title}
+      {children && <div>{children}</div>}
+    </h1>
+  );
 }
 
 PageHeader.propTypes = {

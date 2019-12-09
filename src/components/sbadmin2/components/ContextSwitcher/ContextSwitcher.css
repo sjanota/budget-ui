@@ -2,6 +2,11 @@
   display: flex;
 }
 
+.context-switcher .dropdown {
+  display: flex;
+  flex-grow: 1;
+}
+
 .context-switcher .context-switcher__toggle-group {
   flex-grow: 1;
 }
@@ -9,7 +14,6 @@
 .context-switcher .context_switcher__context-display {
   flex-grow: 1;
   font-size: 0.85rem;
-  height: auto;
 }
 
 .context-switcher .context-switcher__toggle-group button {

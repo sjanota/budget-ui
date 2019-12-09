@@ -137,14 +137,6 @@
   color: #3a3b45;
 }
 
-.topbar .navbar-context-switcher {
-  display: flex;
-}
-
-.topbar .navbar-context-switcher .context-switcher {
-  flex-grow: 1;
-}
-
 @media (min-width: 576px) {
   .topbar .dropdown {
     position: relative;
@@ -160,13 +152,13 @@
     max-width: 13.375rem;
   }
 
-  .topbar .navbar-context-switcher-label {
+  .topbar .context-switcher__label {
     display: none;
   }
 }
 
 @media (min-width: 768px) {
-  .topbar .navbar-context-switcher-label {
+  .topbar .context-switcher__label {
     display: inline;
   }
 }
