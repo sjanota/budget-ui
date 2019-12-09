@@ -23,6 +23,8 @@ interface Props {
   className?: string;
   required?: boolean;
   'aria-label': string;
+  variant?: Variant;
+  prependLabel?: string;
 }
 
 export default function Combobox({
@@ -33,6 +35,8 @@ export default function Combobox({
   className,
   required,
   'aria-label': ariaLabel,
+  variant = 'secondary',
+  prependLabel,
 }: Props) {
   function valueByID(id: string) {
     return allowedValues.find(v => v.id === id);
@@ -130,7 +134,7 @@ export default function Combobox({
               aria-label={ariaLabel}
             />
             <Button
-              variant={Variant.secondary}
+              variant={variant}
               className={classnames(
                 'dropdown-toggle-split',
                 'no-arrow',
