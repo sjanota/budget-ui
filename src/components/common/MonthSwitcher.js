@@ -53,7 +53,8 @@ export default function MonthSwitcher(props) {
       displayBg='white'
       label='Month'
       showLabel={false}
-      //   labelBg='light'
+      variant='secondary'
+      size='sm'
     />
   );
 }

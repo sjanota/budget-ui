@@ -15,6 +15,7 @@ export default function ContextSwitcher({
   displayBg = 'light',
   labelBg,
   showLabel = true,
+  size,
 }) {
   const labelClasses = classnames('border-0', { [`bg-${labelBg}`]: labelBg });
 
@@ -24,7 +25,8 @@ export default function ContextSwitcher({
         'context-switcher',
         'input-group',
         'align-items-stretch',
-        className
+        className,
+        { [`input-group-${size}`]: size }
       )}
     >
       {showLabel && (
@@ -35,7 +37,7 @@ export default function ContextSwitcher({
         </InputGroup.Prepend>
       )}
 
-      <Dropdown.Toggle as={Toggle} append={showLabel}>
+      <Dropdown.Toggle as={Toggle} append={showLabel} size={size}>
         {({ className, ...props }) => (
           <>
             <Dropdown.Menu>
@@ -66,11 +68,12 @@ export default function ContextSwitcher({
   );
 }
 
-const Toggle = forwardRef(({ children, append, ...props }, ref) => {
+const Toggle = forwardRef(({ children, append, size, ...props }, ref) => {
   return (
     <ButtonGroup
       className={classnames('context-switcher__toggle-group', {
         'input-group-append': append,
+        [`btn-group-${size}`]: size,
       })}
       ref={ref}
     >
