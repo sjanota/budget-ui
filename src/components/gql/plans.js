@@ -1,9 +1,10 @@
-import gql from 'graphql-tag';
 import { useMutation, useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+
+import { removeFromListByID } from '../../util/immutable';
 import { useBudget } from './budget';
 import { GET_ENVELOPES } from './envelopes';
-import { GET_CURRENT_MONTHLY_REPORT } from './monthlyReport';
-import { removeFromListByID } from '../../util/immutable';
+import { GET_MONTHLY_REPORT } from './monthlyReport';
 
 const PLAN_FRAGMENT = gql`
   fragment Plan on Plan {
@@ -76,8 +77,11 @@ export function useCreatePlan() {
     refetchQueries: () => [
       { query: GET_ENVELOPES, variables: { budgetID: selectedBudget.id } },
       {
-        query: GET_CURRENT_MONTHLY_REPORT,
-        variables: { budgetID: selectedBudget.id },
+        query: GET_MONTHLY_REPORT,
+        variables: {
+          budgetID: selectedBudget.id,
+          month: selectedBudget.currentMonth.month,
+        },
       },
     ],
   });
@@ -102,8 +106,11 @@ export function useUpdatePlan() {
     refetchQueries: () => [
       { query: GET_ENVELOPES, variables: { budgetID: selectedBudget.id } },
       {
-        query: GET_CURRENT_MONTHLY_REPORT,
-        variables: { budgetID: selectedBudget.id },
+        query: GET_MONTHLY_REPORT,
+        variables: {
+          budgetID: selectedBudget.id,
+          month: selectedBudget.currentMonth.month,
+        },
       },
     ],
   });
@@ -149,7 +156,7 @@ export function useDeletePlan() {
     refetchQueries: () => [
       { query: GET_ENVELOPES, variables: { budgetID: selectedBudget.id } },
       {
-        query: GET_CURRENT_MONTHLY_REPORT,
+        query: GET_MONTHLY_REPORT,
         variables: { budgetID: selectedBudget.id },
       },
     ],

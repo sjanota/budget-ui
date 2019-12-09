@@ -1,10 +1,11 @@
-import gql from 'graphql-tag';
 import { useMutation, useQuery } from '@apollo/react-hooks';
-import { useBudget } from './budget';
+import gql from 'graphql-tag';
+
 import { removeFromListByID } from '../../util/immutable';
 import { GET_ACCOUNTS } from './accounts';
-import { GET_CURRENT_MONTHLY_REPORT } from './monthlyReport';
+import { useBudget } from './budget';
 import { GET_ENVELOPES } from './envelopes';
+import { GET_MONTHLY_REPORT } from './monthlyReport';
 
 const EXPENSE_FRAGMENT = gql`
   fragment Expense on Expense {
@@ -86,8 +87,11 @@ export function useCreateExpense() {
       { query: GET_ACCOUNTS, variables: { budgetID: selectedBudget.id } },
       { query: GET_ENVELOPES, variables: { budgetID: selectedBudget.id } },
       {
-        query: GET_CURRENT_MONTHLY_REPORT,
-        variables: { budgetID: selectedBudget.id },
+        query: GET_MONTHLY_REPORT,
+        variables: {
+          budgetID: selectedBudget.id,
+          month: selectedBudget.currentMonth.month,
+        },
       },
     ],
   });
@@ -104,8 +108,11 @@ export function useUpdateExpense() {
       { query: GET_ACCOUNTS, variables: { budgetID: selectedBudget.id } },
       { query: GET_ENVELOPES, variables: { budgetID: selectedBudget.id } },
       {
-        query: GET_CURRENT_MONTHLY_REPORT,
-        variables: { budgetID: selectedBudget.id },
+        query: GET_MONTHLY_REPORT,
+        variables: {
+          budgetID: selectedBudget.id,
+          month: selectedBudget.currentMonth.month,
+        },
       },
     ],
   });
@@ -159,7 +166,7 @@ export function useDeleteExpense() {
       { query: GET_ACCOUNTS, variables: { budgetID: selectedBudget.id } },
       { query: GET_ENVELOPES, variables: { budgetID: selectedBudget.id } },
       {
-        query: GET_CURRENT_MONTHLY_REPORT,
+        query: GET_MONTHLY_REPORT,
         variables: { budgetID: selectedBudget.id },
       },
     ],

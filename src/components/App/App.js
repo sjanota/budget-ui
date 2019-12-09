@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import pl from '../../lang/pl';
 import { useAuth0 } from '../../react-auth0-spa';
 import AccountsPage from '../Accounts/AccountsPage';
+import { MonthProvider } from '../context/Month';
 import Envelopes from '../Envelopes/EnvelopesPage';
 import ExpensesPage from '../Expenses/ExpensesPage';
 import { BudgetContext, BudgetProvider } from '../gql/budget';
@@ -37,14 +38,16 @@ export default function App() {
         <BudgetContext.Consumer>
           {({ selectedBudget }) =>
             selectedBudget && (
-              <Switch>
-                <Route path='/accounts' component={AccountsPage} />
-                <Route path='/envelopes' component={Envelopes} />
-                <Route path='/expenses' component={ExpensesPage} />
-                <Route path='/transfers' component={TransfersPage} />
-                <Route path='/plans' component={PlansPage} />
-                <Route path='/' component={MonthDashboardPage} />
-              </Switch>
+              <MonthProvider currentMonth={selectedBudget.currentMonth.month}>
+                <Switch>
+                  <Route path='/accounts' component={AccountsPage} />
+                  <Route path='/envelopes' component={Envelopes} />
+                  <Route path='/expenses' component={ExpensesPage} />
+                  <Route path='/transfers' component={TransfersPage} />
+                  <Route path='/plans' component={PlansPage} />
+                  <Route path='/' component={MonthDashboardPage} />
+                </Switch>
+              </MonthProvider>
             )
           }
         </BudgetContext.Consumer>

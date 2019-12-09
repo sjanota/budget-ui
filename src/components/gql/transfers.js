@@ -1,9 +1,10 @@
-import gql from 'graphql-tag';
 import { useMutation, useQuery } from '@apollo/react-hooks';
-import { useBudget } from './budget';
-import { GET_CURRENT_MONTHLY_REPORT } from './monthlyReport';
-import { GET_ACCOUNTS } from './accounts';
+import gql from 'graphql-tag';
+
 import { removeFromListByID } from '../../util/immutable';
+import { GET_ACCOUNTS } from './accounts';
+import { useBudget } from './budget';
+import { GET_MONTHLY_REPORT } from './monthlyReport';
 
 const TRANSFER_FRAGMENT = gql`
   fragment Transfer on Transfer {
@@ -76,8 +77,11 @@ export function useCreateTransfer() {
     refetchQueries: () => [
       { query: GET_ACCOUNTS, variables: { budgetID: selectedBudget.id } },
       {
-        query: GET_CURRENT_MONTHLY_REPORT,
-        variables: { budgetID: selectedBudget.id },
+        query: GET_MONTHLY_REPORT,
+        variables: {
+          budgetID: selectedBudget.id,
+          month: selectedBudget.currentMonth.month,
+        },
       },
     ],
   });
@@ -102,8 +106,11 @@ export function useUpdateTransfer() {
     refetchQueries: () => [
       { query: GET_ACCOUNTS, variables: { budgetID: selectedBudget.id } },
       {
-        query: GET_CURRENT_MONTHLY_REPORT,
-        variables: { budgetID: selectedBudget.id },
+        query: GET_MONTHLY_REPORT,
+        variables: {
+          budgetID: selectedBudget.id,
+          month: selectedBudget.currentMonth.month,
+        },
       },
     ],
   });
@@ -149,7 +156,7 @@ export function useDeleteTranfer() {
     refetchQueries: () => [
       { query: GET_ACCOUNTS, variables: { budgetID: selectedBudget.id } },
       {
-        query: GET_CURRENT_MONTHLY_REPORT,
+        query: GET_MONTHLY_REPORT,
         variables: { budgetID: selectedBudget.id },
       },
     ],

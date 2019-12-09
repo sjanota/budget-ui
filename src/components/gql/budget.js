@@ -1,11 +1,12 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import { useQuery, useMutation } from '@apollo/react-hooks';
-import { GET_CURRENT_MONTHLY_REPORT } from './monthlyReport';
+import PropTypes from 'prop-types';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+
+import { GET_CURRENT_EXPENSES } from './expenses';
+import { GET_MONTHLY_REPORT } from './monthlyReport';
 import { GET_CURRENT_PLANS } from './plans';
 import { GET_CURRENT_TRANSFERS } from './transfers';
-import { GET_CURRENT_EXPENSES } from './expenses';
 
 export const BudgetContext = createContext();
 export const useBudget = () => useContext(BudgetContext);
@@ -27,11 +28,13 @@ const storageKey = 'LAST-CHOSEN-BUDGET-ID';
 export function BudgetProvider({ children }) {
   const [selectedBudget, setSelectedBudget] = useState(null);
   const { loading, error, data } = useQuery(GET_BUDGETS);
+
   useEffect(() => {
     if (selectedBudget) {
       sessionStorage.setItem(storageKey, selectedBudget.id);
     }
   }, [selectedBudget]);
+
   useEffect(() => {
     if (!selectedBudget && data && data.budgets) {
       const lastChosenID = sessionStorage.getItem(storageKey);
@@ -41,6 +44,7 @@ export function BudgetProvider({ children }) {
       }
     }
   }, [data, selectedBudget]);
+
   const value = {
     selectedBudget,
     setSelectedBudget,
@@ -48,6 +52,7 @@ export function BudgetProvider({ children }) {
     error,
     budgets: !loading && !error ? data.budgets : [],
   };
+
   if (error) {
     console.error(error);
   }
@@ -73,8 +78,11 @@ export function useCloseCurrentMonth() {
   const [mutation, ...rest] = useMutation(CLOSE_CURRENT_MONTH, {
     refetchQueries: () => [
       {
-        query: GET_CURRENT_MONTHLY_REPORT,
-        variables: { budgetID: selectedBudget.id },
+        query: GET_MONTHLY_REPORT,
+        variables: {
+          budgetID: selectedBudget.id,
+          month: selectedBudget.currentMonth,
+        },
       },
       {
         query: GET_CURRENT_PLANS,

@@ -1,6 +1,7 @@
-import gql from 'graphql-tag';
-import { useBudget } from './budget';
 import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+
+import { useBudget } from './budget';
 
 const MONTHLY_REPORT_FRAGMENT = gql`
   fragment MonthlyReport on MonthlyReport {
@@ -26,21 +27,19 @@ const MONTHLY_REPORT_FRAGMENT = gql`
   }
 `;
 
-export const GET_CURRENT_MONTHLY_REPORT = gql`
-  query GetCurrentMonthlyReport($budgetID: ID!) {
-    budget(budgetID: $budgetID) {
-      currentMonth {
-        ...MonthlyReport
-      }
+export const GET_MONTHLY_REPORT = gql`
+  query GetMonthlyReport($budgetID: ID!, $month: Month!) {
+    monthlyReport(budgetID: $budgetID, month: $month) {
+      ...MonthlyReport
     }
   }
   ${MONTHLY_REPORT_FRAGMENT}
 `;
 
-export function useGetCurrentMonthlyReport() {
+export function useGetMonthlyReport(month) {
   const { selectedBudget } = useBudget();
-  return useQuery(GET_CURRENT_MONTHLY_REPORT, {
-    variables: { budgetID: selectedBudget.id },
+  return useQuery(GET_MONTHLY_REPORT, {
+    variables: { budgetID: selectedBudget.id, month },
     fetchPolicy: 'network-only',
   });
 }
