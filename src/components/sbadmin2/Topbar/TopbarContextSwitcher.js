@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import React, { ReactNode, forwardRef } from 'react';
 import { Button, ButtonGroup, Dropdown, InputGroup } from 'react-bootstrap';
 
+import ContextSwitcher from '../components/ContextSwitcher/ContextSwitcher';
+
 export default function TopbarContextSwitcher({
   label,
   value,
@@ -16,35 +18,11 @@ export default function TopbarContextSwitcher({
           {label}
         </InputGroup.Text>
       </InputGroup.Prepend>
-      <Dropdown className='input-group-append'>
-        <Dropdown.Menu>
-          {allowedValues.map(v => (
-            <Dropdown.Item onClick={() => onChange(v.id)} key={v.id}>
-              {v.label}
-            </Dropdown.Item>
-          ))}
-        </Dropdown.Menu>
-        <Dropdown.Toggle as={Toggle}>
-          {({ className, ...props }) => (
-            <>
-              <InputGroup.Text
-                className='bg-light border-0 navbar-context-display text-dark'
-                aria-label={label}
-              >
-                {value}
-              </InputGroup.Text>
-              <Button
-                variant='primary'
-                className={classnames(
-                  'dropdown-toggle-split no-arrow',
-                  className
-                )}
-                {...props}
-              />
-            </>
-          )}
-        </Dropdown.Toggle>
-      </Dropdown>
+      <ContextSwitcher
+        allowedValues={allowedValues}
+        value={value}
+        onChange={onChange}
+      />
     </div>
   );
 }

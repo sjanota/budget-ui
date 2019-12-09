@@ -1,8 +1,9 @@
 import React from 'react';
-import TopbarContextSwitcher from './sbadmin2/Topbar/TopbarContextSwitcher';
+
 import { useBudget } from './gql/budget';
-import Spinner from './sbadmin2/utilities/Spinner';
 import { useDictionary } from './sbadmin2';
+import TopbarContextSwitcher from './sbadmin2/Topbar/TopbarContextSwitcher';
+import Spinner from './sbadmin2/utilities/Spinner';
 
 export default function TopbarBudgetSwitcher() {
   const {
@@ -14,9 +15,9 @@ export default function TopbarBudgetSwitcher() {
   } = useBudget();
   const { topbar } = useDictionary();
   const value = loading ? (
-    <Spinner size="sm" variant="secondary" />
+    <Spinner size='sm' variant='secondary' />
   ) : error ? (
-    <i className="fas fa-fw fa-exclamation-triangle text-secondary" />
+    <i className='fas fa-fw fa-exclamation-triangle text-secondary' />
   ) : (
     selectedBudget && selectedBudget.name
   );
