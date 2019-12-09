@@ -1,7 +1,6 @@
-import classnames from 'classnames';
 import PropTypes from 'prop-types';
-import React, { ReactNode, forwardRef } from 'react';
-import { Button, ButtonGroup, Dropdown, InputGroup } from 'react-bootstrap';
+import React from 'react';
+import { InputGroup } from 'react-bootstrap';
 
 import ContextSwitcher from '../components/ContextSwitcher/ContextSwitcher';
 
@@ -38,7 +37,3 @@ TopbarContextSwitcher.propTypes = {
   onChange: PropTypes.any,
   value: PropTypes.any,
 };
-
-const Toggle = forwardRef(({ children, ...props }, ref) => {
-  return <ButtonGroup ref={ref}>{children(props)}</ButtonGroup>;
-});
