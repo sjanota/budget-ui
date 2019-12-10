@@ -157,7 +157,10 @@ export function useDeletePlan() {
       { query: GET_ENVELOPES, variables: { budgetID: selectedBudget.id } },
       {
         query: GET_MONTHLY_REPORT,
-        variables: { budgetID: selectedBudget.id },
+        variables: {
+          budgetID: selectedBudget.id,
+          month: selectedBudget.currentMonth.month,
+        },
       },
     ],
   });

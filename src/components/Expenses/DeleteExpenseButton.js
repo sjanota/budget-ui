@@ -6,14 +6,15 @@ import { useDeleteExpense } from '../gql/expenses';
 import { IconButton } from '../sbadmin2';
 import { Variant } from '../sbadmin2/bootstrap';
 
-export function DeleteExpenseButton({ expense }) {
+export function DeleteExpenseButton({ expense, disabled }) {
   const [deleteExpense] = useDeleteExpense();
   return (
     <IconButton
       icon={faTrash}
-      variant={Variant.danger}
+      variant={disabled ? Variant.secondary : Variant.danger}
       onClick={() => deleteExpense(expense.id)}
       borderless
+      disabled={disabled}
     />
   );
 }

@@ -157,7 +157,10 @@ export function useDeleteTranfer() {
       { query: GET_ACCOUNTS, variables: { budgetID: selectedBudget.id } },
       {
         query: GET_MONTHLY_REPORT,
-        variables: { budgetID: selectedBudget.id },
+        variables: {
+          budgetID: selectedBudget.id,
+          month: selectedBudget.currentMonth.month,
+        },
       },
     ],
   });

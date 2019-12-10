@@ -27,20 +27,6 @@ const EXPENSE_FRAGMENT = gql`
   }
 `;
 
-export const GET_CURRENT_EXPENSES = gql`
-  query getCurrentExpenses($budgetID: ID!) {
-    budget(budgetID: $budgetID) {
-      currentMonth {
-        expenses {
-          ...Expense
-        }
-      }
-    }
-  }
-
-  ${EXPENSE_FRAGMENT}
-`;
-
 export const GET_EXPENSES = gql`
   query getExpenses($budgetID: ID!, $month: Month!) {
     monthlyReport(budgetID: $budgetID, month: $month) {
@@ -77,20 +63,23 @@ export function useCreateExpense() {
   const { selectedBudget } = useBudget();
   const [mutation, ...rest] = useMutation(CREATE_EXPENSE, {
     update: (cache, { data: { createExpense } }) => {
-      const { budget } = cache.readQuery({
-        query: GET_CURRENT_EXPENSES,
-        variables: { budgetID: selectedBudget.id },
+      const { monthlyReport } = cache.readQuery({
+        query: GET_EXPENSES,
+        variables: {
+          budgetID: selectedBudget.id,
+          month: selectedBudget.currentMonth.month,
+        },
       });
       cache.writeQuery({
-        query: GET_CURRENT_EXPENSES,
-        variables: { budgetID: selectedBudget.id },
+        query: GET_EXPENSES,
+        variables: {
+          budgetID: selectedBudget.id,
+          month: selectedBudget.currentMonth.month,
+        },
         data: {
-          budget: {
-            ...budget,
-            currentMonth: {
-              ...budget.currentMonth,
-              expenses: budget.currentMonth.expenses.concat([createExpense]),
-            },
+          monthlyReport: {
+            ...monthlyReport,
+            expenses: monthlyReport.expenses.concat([createExpense]),
           },
         },
       });
@@ -134,13 +123,6 @@ export function useUpdateExpense() {
   return [wrapper, ...rest];
 }
 
-export function useGetCurrentExpenses() {
-  const { selectedBudget } = useBudget();
-  return useQuery(GET_CURRENT_EXPENSES, {
-    variables: { budgetID: selectedBudget.id },
-  });
-}
-
 export function useGetExpenses(month) {
   const { selectedBudget } = useBudget();
   return useQuery(GET_EXPENSES, {
@@ -160,23 +142,26 @@ export function useDeleteExpense() {
   const { selectedBudget } = useBudget();
   const [mutation, ...rest] = useMutation(DELETE_EXPENSE, {
     update: (cache, { data: { deleteExpense } }) => {
-      const { budget } = cache.readQuery({
-        query: GET_CURRENT_EXPENSES,
-        variables: { budgetID: selectedBudget.id },
+      const { monthlyReport } = cache.readQuery({
+        query: GET_EXPENSES,
+        variables: {
+          budgetID: selectedBudget.id,
+          month: selectedBudget.currentMonth.month,
+        },
       });
       cache.writeQuery({
-        query: GET_CURRENT_EXPENSES,
-        variables: { budgetID: selectedBudget.id },
+        query: GET_EXPENSES,
+        variables: {
+          budgetID: selectedBudget.id,
+          month: selectedBudget.currentMonth.month,
+        },
         data: {
-          budget: {
-            ...budget,
-            currentMonth: {
-              ...budget.currentMonth,
-              expenses: removeFromListByID(
-                budget.currentMonth.expenses,
-                deleteExpense.id
-              ),
-            },
+          monthlyReport: {
+            ...monthlyReport,
+            expenses: removeFromListByID(
+              monthlyReport.expenses,
+              deleteExpense.id
+            ),
           },
         },
       });
@@ -186,7 +171,10 @@ export function useDeleteExpense() {
       { query: GET_ENVELOPES, variables: { budgetID: selectedBudget.id } },
       {
         query: GET_MONTHLY_REPORT,
-        variables: { budgetID: selectedBudget.id },
+        variables: {
+          budgetID: selectedBudget.id,
+          month: selectedBudget.currentMonth.month,
+        },
       },
     ],
   });

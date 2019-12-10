@@ -7,6 +7,17 @@ import { QueryTablePanel } from '../gql/QueryTablePanel';
 import { DeleteExpenseButton } from './DeleteExpenseButton';
 import { UpdateExpenseButton } from './UpdateExpenseButton';
 
+function ListActions({ row }) {
+  const { currentMonth, selectedMonth } = useMonth();
+  const disabled = currentMonth !== selectedMonth;
+  return (
+    <span>
+      <UpdateExpenseButton expense={row} disabled={disabled} />
+      <DeleteExpenseButton expense={row} disabled={disabled} />
+    </span>
+  );
+}
+
 const columns = [
   { dataField: 'title' },
   { dataField: 'date', sort: true },
@@ -23,12 +34,7 @@ const columns = [
   {
     dataField: 'actions',
     isDummyColumn: true,
-    formatter: (cell, row) => (
-      <span>
-        <UpdateExpenseButton expense={row} />
-        <DeleteExpenseButton expense={row} />
-      </span>
-    ),
+    formatter: (cell, row) => <ListActions row={row} />,
     style: {
       whiteSpace: 'nowrap',
       width: '1%',

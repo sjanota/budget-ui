@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 import PropTypes from 'prop-types';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-import { GET_CURRENT_EXPENSES } from './expenses';
+import { GET_EXPENSES } from './expenses';
 import { GET_MONTHLY_REPORT } from './monthlyReport';
 import { GET_CURRENT_PLANS } from './plans';
 import { GET_CURRENT_TRANSFERS } from './transfers';
@@ -93,8 +93,11 @@ export function useCloseCurrentMonth() {
         variables: { budgetID: selectedBudget.id },
       },
       {
-        query: GET_CURRENT_EXPENSES,
-        variables: { budgetID: selectedBudget.id },
+        query: GET_EXPENSES,
+        variables: {
+          budgetID: selectedBudget.id,
+          month: selectedBudget.currentMonth.month,
+        },
       },
     ],
   });

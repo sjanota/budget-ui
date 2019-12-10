@@ -8,7 +8,7 @@ import { useDictionary } from '../sbadmin2';
 import { Variant } from '../sbadmin2/bootstrap';
 import { ExpenseModal } from './ExpenseModal';
 
-export function UpdateExpenseButton({ expense }) {
+export function UpdateExpenseButton({ expense, disabled }) {
   const [updateExpense] = useUpdateExpense();
   const { expenses } = useDictionary();
   return (
@@ -16,9 +16,10 @@ export function UpdateExpenseButton({ expense }) {
       button={props => (
         <IconButton
           icon={faEdit}
-          variant={Variant.primary}
+          variant={disabled ? Variant.secondary : Variant.primary}
           {...props}
           borderless
+          disabled={disabled}
         />
       )}
       modalContent={props => (
