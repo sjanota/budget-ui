@@ -1,10 +1,16 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import { useGetCurrentTransfers } from '../gql/transfers';
-import { QueryTablePanel } from '../gql/QueryTablePanel';
-import { UpdateTransferButton } from './UpdateTransferButton';
-import { DeleteTransferButton } from './DeleteTransferButton';
+import React from 'react';
+
 import Amount from '../../model/Amount';
+import ListActions from '../common/ListActions';
+import { useMonth } from '../context/Month';
+import { QueryTablePanel } from '../gql/QueryTablePanel';
+import {
+  useDeleteTranfer,
+  useGetTransfers,
+  useUpdateTransfer,
+} from '../gql/transfers';
+import { TransferModal } from './TransferModal';
 
 const columns = [
   { dataField: 'title' },
@@ -31,10 +37,14 @@ const columns = [
     dataField: 'actions',
     isDummyColumn: true,
     formatter: (cell, row) => (
-      <span>
-        <UpdateTransferButton transfer={row} />
-        <DeleteTransferButton transfer={row} />
-      </span>
+      <ListActions
+        row={row}
+        monthScopedResource
+        modalComponent={TransferModal}
+        dictionaryName='transfers'
+        updateHook={useUpdateTransfer}
+        deletehook={useDeleteTranfer}
+      />
     ),
     style: {
       whiteSpace: 'nowrap',
@@ -49,7 +59,8 @@ export function TransfersTablePanel({
   createButton,
   ...props
 }) {
-  const query = useGetCurrentTransfers();
+  const { selectedMonth } = useMonth();
+  const query = useGetTransfers(selectedMonth);
   let filters = [];
   if (toAccountFilter) {
     filters.push(row => row.toAccount.id === toAccountFilter);
@@ -63,10 +74,10 @@ export function TransfersTablePanel({
     <QueryTablePanel
       {...props}
       query={query}
-      getData={data => data.budget.currentMonth.transfers}
+      getData={data => data.monthlyReport.transfers}
       buttons={createButton}
       columns={columns}
-      keyField="id"
+      keyField='id'
       readColumnNames={d => d.transfers.table.columns}
       filters={filters}
     />

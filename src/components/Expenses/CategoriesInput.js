@@ -62,6 +62,7 @@ export function CategoriesInput({ formData }) {
                   size={Size.sm}
                   onClick={() => formData.removeAt(idx)}
                   type='button'
+                  borderless
                 />
               </Col>
             </Form.Group>

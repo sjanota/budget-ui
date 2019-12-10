@@ -1,22 +1,15 @@
 import React from 'react';
 
 import Amount from '../../model/Amount';
+import ListActions from '../common/ListActions';
 import { useMonth } from '../context/Month';
-import { useGetExpenses } from '../gql/expenses';
+import {
+  useDeleteExpense,
+  useGetExpenses,
+  useUpdateExpense,
+} from '../gql/expenses';
 import { QueryTablePanel } from '../gql/QueryTablePanel';
-import { DeleteExpenseButton } from './DeleteExpenseButton';
-import { UpdateExpenseButton } from './UpdateExpenseButton';
-
-function ListActions({ row }) {
-  const { currentMonth, selectedMonth } = useMonth();
-  const disabled = currentMonth !== selectedMonth;
-  return (
-    <span>
-      <UpdateExpenseButton expense={row} disabled={disabled} />
-      <DeleteExpenseButton expense={row} disabled={disabled} />
-    </span>
-  );
-}
+import { ExpenseModal } from './ExpenseModal';
 
 const columns = [
   { dataField: 'title' },
@@ -34,7 +27,16 @@ const columns = [
   {
     dataField: 'actions',
     isDummyColumn: true,
-    formatter: (cell, row) => <ListActions row={row} />,
+    formatter: (_, row) => (
+      <ListActions
+        row={row}
+        monthScopedResource
+        modalComponent={ExpenseModal}
+        dictionaryName='expenses'
+        updateHook={useUpdateExpense}
+        deletehook={useDeleteExpense}
+      />
+    ),
     style: {
       whiteSpace: 'nowrap',
       width: '1%',

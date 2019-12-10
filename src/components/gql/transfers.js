@@ -36,10 +36,28 @@ export const GET_CURRENT_TRANSFERS = gql`
   ${TRANSFER_FRAGMENT}
 `;
 
+export const GET_TRANSFERS = gql`
+  query getTransfers($budgetID: ID!, $month: Month!) {
+    monthlyReport(budgetID: $budgetID, month: $month) {
+      transfers {
+        ...Transfer
+      }
+    }
+  }
+  ${TRANSFER_FRAGMENT}
+`;
+
 export function useGetCurrentTransfers() {
   const { selectedBudget } = useBudget();
   return useQuery(GET_CURRENT_TRANSFERS, {
     variables: { budgetID: selectedBudget.id },
+  });
+}
+
+export function useGetTransfers(month) {
+  const { selectedBudget } = useBudget();
+  return useQuery(GET_TRANSFERS, {
+    variables: { budgetID: selectedBudget.id, month },
   });
 }
 
@@ -56,20 +74,23 @@ export function useCreateTransfer() {
   const { selectedBudget } = useBudget();
   const [mutation, ...rest] = useMutation(CREATE_TRANSFER, {
     update: (cache, { data: { createTransfer } }) => {
-      const { budget } = cache.readQuery({
-        query: GET_CURRENT_TRANSFERS,
-        variables: { budgetID: selectedBudget.id },
+      const { monthlyReport } = cache.readQuery({
+        query: GET_TRANSFERS,
+        variables: {
+          budgetID: selectedBudget.id,
+          month: selectedBudget.currentMonth.month,
+        },
       });
       cache.writeQuery({
-        query: GET_CURRENT_TRANSFERS,
-        variables: { budgetID: selectedBudget.id },
+        query: GET_TRANSFERS,
+        variables: {
+          budgetID: selectedBudget.id,
+          month: selectedBudget.currentMonth.month,
+        },
         data: {
-          budget: {
-            ...budget,
-            currentMonth: {
-              ...budget.currentMonth,
-              transfers: budget.currentMonth.transfers.concat([createTransfer]),
-            },
+          monthlyReport: {
+            ...monthlyReport,
+            transfers: monthlyReport.transfers.concat([createTransfer]),
           },
         },
       });
@@ -132,23 +153,26 @@ export function useDeleteTranfer() {
   const { selectedBudget } = useBudget();
   const [mutation, ...rest] = useMutation(DELETE_TRANSFER, {
     update: (cache, { data: { deleteTransfer } }) => {
-      const { budget } = cache.readQuery({
-        query: GET_CURRENT_TRANSFERS,
-        variables: { budgetID: selectedBudget.id },
+      const { monthlyReport } = cache.readQuery({
+        query: GET_TRANSFERS,
+        variables: {
+          budgetID: selectedBudget.id,
+          month: selectedBudget.currentMonth.month,
+        },
       });
       cache.writeQuery({
-        query: GET_CURRENT_TRANSFERS,
-        variables: { budgetID: selectedBudget.id },
+        query: GET_TRANSFERS,
+        variables: {
+          budgetID: selectedBudget.id,
+          month: selectedBudget.currentMonth.month,
+        },
         data: {
-          budget: {
-            ...budget,
-            currentMonth: {
-              ...budget.currentMonth,
-              transfers: removeFromListByID(
-                budget.currentMonth.transfers,
-                deleteTransfer.id
-              ),
-            },
+          monthlyReport: {
+            ...monthlyReport,
+            transfers: removeFromListByID(
+              monthlyReport.transfers,
+              deleteTransfer.id
+            ),
           },
         },
       });
