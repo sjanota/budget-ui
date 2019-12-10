@@ -30,7 +30,10 @@ export function PlanModal({ init, ...props }) {
       $init: init.fromEnvelope !== null ? init.fromEnvelope.id : '',
       $process: v => (v === '' ? null : v),
     },
-    toEnvelopeID: { $init: init.toEnvelope.id },
+    toEnvelopeID: {
+      $init: init.toEnvelope !== null ? init.toEnvelope.id : '',
+      $process: v => (v === '' ? null : v),
+    },
   });
   return (
     <FormInModal formData={formData} {...props}>
@@ -61,20 +64,24 @@ export function PlanModal({ init, ...props }) {
               <Combobox
                 _ref={formData.fromEnvelopeID}
                 defaultValue={formData.fromEnvelopeID.default()}
-                allowedValues={data.envelopes.map(({ id, name }) => ({
-                  id,
-                  label: name,
-                }))}
+                allowedValues={data.envelopes
+                  .map(({ id, name }) => ({
+                    id,
+                    label: name,
+                  }))
+                  .concat([{ id: null, label: '' }])}
               />
             </InlineFormControl>
             <InlineFormControl size={8} label={plans.modal.labels.toEnvelope}>
               <Combobox
                 _ref={formData.toEnvelopeID}
                 defaultValue={formData.toEnvelopeID.default()}
-                allowedValues={data.envelopes.map(({ id, name }) => ({
-                  id,
-                  label: name,
-                }))}
+                allowedValues={data.envelopes
+                  .map(({ id, name }) => ({
+                    id,
+                    label: name,
+                  }))
+                  .concat([{ id: null, label: '' }])}
               />
             </InlineFormControl>
           </>
