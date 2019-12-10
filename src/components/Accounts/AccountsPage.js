@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
+import MonthSwitcher from '../common/MonthSwitcher';
 import { CreateExpenseButton } from '../Expenses/CreateExpenseButton';
 import { ExpensesTablePanel } from '../Expenses/ExpensesTablePanel';
 import { Page } from '../sbadmin2';
@@ -22,7 +23,12 @@ export default function AccountsPage() {
         <Col>
           {!selectedAccount ? null : (
             <>
-              <h3>{selectedAccount.name}</h3>
+              <h3 className='d-flex justify-content-between'>
+                {selectedAccount.name}
+                <div>
+                  <MonthSwitcher />
+                </div>
+              </h3>
               <TransfersTablePanel
                 readTitle={d => d.accounts.inTransfersTableTitle}
                 createButton={
