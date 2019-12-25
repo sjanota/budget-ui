@@ -32,7 +32,6 @@ export function AccountDetails({ entity: account }) {
         accountFilter={account.id}
         hiddenColumns={['account']}
         wrapper={CollapsiblePanel}
-        wrapperProps={{ initialyShown: true }}
       />
     </>
   );
