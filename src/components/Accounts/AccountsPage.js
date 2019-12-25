@@ -11,26 +11,11 @@ import { CreateAccountButton } from './CreateAccountButton';
 import { UpdateAccountButton } from './UpdateAccountButton';
 
 const columns = [
-  { dataField: 'name', sort: true },
   {
     dataField: 'balance',
     align: 'right',
     headerAlign: 'right',
     formatter: Amount.format,
-  },
-  {
-    dataField: 'actions',
-    isDummyColumn: true,
-    formatter: (_, row) => (
-      <span>
-        <UpdateAccountButton account={row} />
-        <IconButton icon={faArchive} variant={Variant.secondary} borderless />
-      </span>
-    ),
-    style: {
-      whiteSpace: 'nowrap',
-      width: '1%',
-    },
   },
 ];
 
@@ -47,6 +32,12 @@ export default function AccountsPage() {
       getData={data => data.accounts}
       columns={columns}
       readColumnNames={d => d.accounts.table.columns}
+      renderActions={account => (
+        <>
+          <UpdateAccountButton account={account} />
+          <IconButton icon={faArchive} variant={Variant.secondary} borderless />
+        </>
+      )}
     />
   );
 }

@@ -39,18 +39,25 @@ const defaultSorted = [
   },
 ];
 
-export function CategoriesListPanel() {
+export function CategoriesTablePanel({ envelopeFilter, ...props }) {
   const query = useGetCategories();
+
+  let filters = [];
+  if (envelopeFilter) {
+    filters.push(row => row.envelope.id === envelopeFilter.id);
+  }
   return (
     <QueryTablePanel
+      {...props}
       keyField='id'
       columns={columns}
-      buttons={<CreateCategoryButton />}
+      buttons={<CreateCategoryButton envelope={envelopeFilter} />}
       query={query}
       getData={data => data.categories}
       readTitle={d => d.categories.table.title}
       readColumnNames={d => d.categories.table.columns}
       defaultSorted={defaultSorted}
+      filters={filters}
     />
   );
 }

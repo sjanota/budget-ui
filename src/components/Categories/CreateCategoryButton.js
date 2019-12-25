@@ -7,7 +7,7 @@ import { OpenModalButton } from '../sbadmin2';
 import { useDictionary } from '../sbadmin2/language';
 import { CategoryModal } from './CategoryModal';
 
-export function CreateCategoryButton({ onClickRef }) {
+export function CreateCategoryButton({ envelope, onClickRef }) {
   const [createCategory] = useCreateCategory();
   const { categories } = useDictionary();
   return (
@@ -19,6 +19,7 @@ export function CreateCategoryButton({ onClickRef }) {
           title={categories.modal.createTitle}
           init={{ name: '', envelope: { id: null }, description: '' }}
           onSave={createCategory}
+          envelope={envelope}
           {...props}
         />
       )}

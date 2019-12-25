@@ -1,32 +1,12 @@
 import React from 'react';
 
 import { withDictionary } from '../sbadmin2/language';
-import MonthSwitcher from './MonthSwitcher';
 
-function Details({
-  entity,
-  columns,
-  titleField,
-  actionsField = 'actions',
-  fieldNames,
-}) {
-  const actionsColumn = columns.find(c => c.dataField === actionsField);
-  const fieldColumns = columns.filter(
-    c => c.dataField !== titleField && c.dataField !== actionsField
-  );
+function Details({ entity, columns, fieldNames }) {
   return (
     <div className='mb-3'>
-      <h3 className='d-flex justify-content-between'>
-        <span>
-          <span className='pr-2'>{entity[titleField]}</span>
-          {actionsColumn.formatter(null, entity)}
-        </span>
-        <div>
-          <MonthSwitcher />
-        </div>
-      </h3>
       <div className='pl-2'>
-        {fieldColumns.map(f => {
+        {columns.map(f => {
           return (
             <DetailsField
               key={f.dataField}

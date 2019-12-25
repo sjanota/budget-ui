@@ -10,13 +10,14 @@ import { FormInModal } from '../sbadmin2/utilities/FormInModal';
 import { InlineFormControl } from '../sbadmin2/utilities/InlineFormControl';
 import { useFormData } from '../sbadmin2/utilities/useFormData';
 
-export function CategoryModal({ init, ...props }) {
+export function CategoryModal({ init, envelope, ...props }) {
   const query = useGetEnvelopes();
   const { categories } = useDictionary();
   const formData = useFormData({
     name: { $init: init.name },
     envelopeID: {
       $init: init.envelope.id,
+      $default: envelope && envelope.id,
     },
     description: { $init: init.description },
   });
@@ -42,6 +43,8 @@ export function CategoryModal({ init, ...props }) {
                 }))}
                 _ref={formData.envelopeID}
                 defaultValue={formData.envelopeID.default()}
+                disabled={!!envelope}
+                required
               />
             </InlineFormControl>
             <FormControl

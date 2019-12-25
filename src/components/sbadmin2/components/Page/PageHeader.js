@@ -15,11 +15,14 @@ function LinkBreadcrumb({ text, ...props }) {
 
 const BreadcrumbItem = withDictionary('text', LinkBreadcrumb);
 
-function PageHeader({ children, title, breadcrumbs }) {
+function PageHeader({ children, title, actions, breadcrumbs }) {
   return (
     <>
       <h1 className='h3 text-gray-800 d-flex justify-content-between'>
-        {title}
+        <span>
+          {title}
+          {actions}
+        </span>
         {children && <div>{children}</div>}
       </h1>
       <Breadcrumb listProps={{ className: 'bg-transparent pl-0 pt-0' }}>

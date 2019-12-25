@@ -3,6 +3,7 @@ import { Col, Row } from 'react-bootstrap';
 import { Route, Switch, useHistory } from 'react-router-dom';
 
 import Details from '../common/Details';
+import MonthSwitcher from '../common/MonthSwitcher';
 import { QueryTablePanel } from '../gql/QueryTablePanel';
 import { WithQuery } from '../gql/WithQuery';
 import { Page } from '../sbadmin2';
@@ -26,8 +27,30 @@ function ListWithDetails({ ...props }) {
 
 export default withDictionary('title', ListWithDetails);
 
-function List({ basePath, createButton, name, ...props }) {
+function List({
+  basePath,
+  createButton,
+  name,
+  columns,
+  renderActions,
+  ...props
+}) {
   const history = useHistory();
+
+  const enhancedColumns = [
+    { dataField: 'name', sort: true },
+    ...columns,
+    {
+      dataField: 'actions',
+      isDummyColumn: true,
+      formatter: (_, row) => <span>{renderActions(row)}</span>,
+      style: {
+        whiteSpace: 'nowrap',
+        width: '1%',
+        paddingBottom: 0,
+      },
+    },
+  ];
 
   function onSelect(entity) {
     history.push(`${basePath}/${entity.name}`);
@@ -36,6 +59,7 @@ function List({ basePath, createButton, name, ...props }) {
   return (
     <QueryTablePanel
       {...props}
+      columns={enhancedColumns}
       onSelect={onSelect}
       buttons={createButton}
       keyField='id'
@@ -57,20 +81,33 @@ function ListPage({ ...props }) {
 }
 
 function DetailsPage(props) {
-  const { basePath, title, name } = props;
+  const { query, basePath, title, name, renderActions, getData } = props;
 
   return (
-    <Page>
-      <Page.Header title={name} breadcrumbs={[{ text: title, to: basePath }]} />
-      <Row>
-        <Col sm={3}>
-          <List visibleColumns={['name']} {...props} />
-        </Col>
-        <Col>
-          <DetailsSection {...props} />
-        </Col>
-      </Row>
-    </Page>
+    <WithQuery query={query}>
+      {({ data }) => {
+        const entity = getData(data).find(e => e.name === name);
+        return (
+          <Page>
+            <Page.Header
+              title={name}
+              actions={renderActions(entity)}
+              breadcrumbs={[{ text: title, to: basePath }]}
+            >
+              <MonthSwitcher />
+            </Page.Header>
+            <Row>
+              <Col sm={3}>
+                <List visibleColumns={['name']} {...props} />
+              </Col>
+              <Col>
+                <DetailsSection entity={entity} {...props} />
+              </Col>
+            </Row>
+          </Page>
+        );
+      }}
+    </WithQuery>
   );
 }
 
@@ -82,29 +119,21 @@ const defaultSorted = [
 ];
 
 function DetailsSection({
-  query,
+  entity,
   columns,
   readColumnNames,
   detailsComponent: AdditionalDetails,
-  getData,
   name,
 }) {
   return (
-    <WithQuery query={query}>
-      {({ data }) => {
-        const entity = getData(data).find(e => e.name === name);
-        return (
-          <>
-            <Details
-              entity={entity}
-              columns={columns}
-              titleField='name'
-              readFieldNames={readColumnNames}
-            />
-            <AdditionalDetails name={name} entity={entity} />
-          </>
-        );
-      }}
-    </WithQuery>
+    <>
+      <Details
+        entity={entity}
+        columns={columns}
+        titleField='name'
+        readFieldNames={readColumnNames}
+      />
+      <AdditionalDetails name={name} entity={entity} />
+    </>
   );
 }
