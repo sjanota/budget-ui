@@ -28,7 +28,7 @@ export default class Amount {
 
   static format(amount, kSeparator = true) {
     if (amount === null) {
-      return null;
+      return '-';
     }
     const fixed = (amount / 100).toFixed(2);
     if (!kSeparator) {

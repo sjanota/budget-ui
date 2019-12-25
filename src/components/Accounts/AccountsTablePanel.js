@@ -1,12 +1,13 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
+
+import Amount from '../../model/Amount';
 import { useGetAccounts } from '../gql/accounts';
 import { QueryTablePanel } from '../gql/QueryTablePanel';
-import Amount from '../../model/Amount';
 import { CreateAccountButton } from './CreateAccountButton';
 import { UpdateAccountButton } from './UpdateAccountButton';
 
-const columns = [
+export const columns = [
   { dataField: 'name', sort: true },
   {
     dataField: 'balance',
@@ -17,11 +18,11 @@ const columns = [
   {
     dataField: 'actions',
     isDummyColumn: true,
-    formatter: (cell, row) => (
+    formatter: (_, row) => (
       <span>
         <UpdateAccountButton account={row} />
         <span style={{ cursor: 'pointer' }}>
-          <i className="fas fa-archive fa-fw" />
+          <i className='fas fa-archive fa-fw' />
         </span>
       </span>
     ),
@@ -39,7 +40,7 @@ const defaultSorted = [
   },
 ];
 
-export function AccountsTablePanel({ onSelectAcount }) {
+export function AccountsTablePanel({ onSelect, ...props }) {
   const query = useGetAccounts();
 
   const selectRow = {
@@ -47,16 +48,17 @@ export function AccountsTablePanel({ onSelectAcount }) {
     clickToSelect: true,
     hideSelectColumn: true,
     classes: 'text-white bg-primary selected',
-    onSelect: account => onSelectAcount(account),
+    onSelect,
   };
 
   return (
     <QueryTablePanel
+      {...props}
       query={query}
       getData={data => data.accounts}
       buttons={<CreateAccountButton />}
       columns={columns}
-      keyField="id"
+      keyField='id'
       readTitle={d => d.accounts.table.title}
       readColumnNames={d => d.accounts.table.columns}
       selectRow={selectRow}
@@ -66,6 +68,6 @@ export function AccountsTablePanel({ onSelectAcount }) {
 }
 
 AccountsTablePanel.propTypes = {
-  onSelectAcount: PropTypes.func.isRequired,
+  onSelect: PropTypes.func.isRequired,
   selectedAccountID: PropTypes.string,
 };

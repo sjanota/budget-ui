@@ -2,6 +2,7 @@ import { faArchive } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 
 import Amount from '../../model/Amount';
+import Envelope from '../../model/Envelope';
 import { useGetEnvelopes } from '../gql/envelopes';
 import { QueryTablePanel } from '../gql/QueryTablePanel';
 import { IconButton } from '../sbadmin2';
@@ -9,7 +10,7 @@ import { Variant } from '../sbadmin2/bootstrap';
 import { CreateEnvelopeButton } from './CreateEnvelopeButton';
 import { UpdateEnvelopeButton } from './UpdateEnvelopeButton';
 
-const columns = [
+export const columns = [
   { dataField: 'name', sort: true },
   {
     dataField: 'limit',
@@ -27,15 +28,12 @@ const columns = [
     dataField: 'overLimit',
     align: 'right',
     headerAlign: 'right',
-    formatter: (cell, row) =>
-      row.limit !== null && row.limit < row.balance
-        ? Amount.format(row.balance - row.limit)
-        : '',
+    formatter: (_, row) => Envelope.overLimit(row),
   },
   {
     dataField: 'actions',
     isDummyColumn: true,
-    formatter: (cell, row) => (
+    formatter: (_, row) => (
       <span>
         <UpdateEnvelopeButton envelope={row} />
         <IconButton icon={faArchive} variant={Variant.secondary} borderless />
@@ -55,10 +53,20 @@ const defaultSorted = [
   },
 ];
 
-export function EnvelopesListPanel() {
+export function EnvelopesTablePanel({ onSelect, ...props }) {
   const query = useGetEnvelopes();
+
+  const selectRow = {
+    mode: 'radio',
+    clickToSelect: true,
+    hideSelectColumn: true,
+    classes: 'text-white bg-primary selected',
+    onSelect: envelope => onSelect(envelope),
+  };
+
   return (
     <QueryTablePanel
+      {...props}
       query={query}
       buttons={<CreateEnvelopeButton />}
       getData={data => data.envelopes}
@@ -66,6 +74,7 @@ export function EnvelopesListPanel() {
       keyField='id'
       readTitle={d => d.envelopes.table.title}
       readColumnNames={d => d.envelopes.table.columns}
+      selectRow={selectRow}
       defaultSorted={defaultSorted}
     />
   );

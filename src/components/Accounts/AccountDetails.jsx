@@ -1,17 +1,23 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import HeaderWithMonthSwitcher from '../common/HeaderWithMonthSwitcher';
+import Details from '../common/Details';
 import { CreateExpenseButton } from '../Expenses/CreateExpenseButton';
 import { ExpensesTablePanel } from '../Expenses/ExpensesTablePanel';
 import { CollapsiblePanel } from '../sbadmin2/components/CollapsiblePanel/CollapsiblePanel';
 import { CreateTransferButton } from '../Transfers/CreateTransferButton';
 import { TransfersTablePanel } from '../Transfers/TransfersTablePanel';
+import { columns } from './AccountsTablePanel';
 
 export function AccountDetails({ account }) {
   return (
     <div>
-      <HeaderWithMonthSwitcher title={account.name} />
+      <Details
+        entity={account}
+        titleField='name'
+        columns={columns}
+        readFieldNames={d => d.accounts.table.columns}
+      />
       <TransfersTablePanel
         readTitle={d => d.accounts.inTransfersTableTitle}
         createButton={<CreateTransferButton toAccount={account} />}

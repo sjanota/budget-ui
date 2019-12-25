@@ -12,8 +12,11 @@ export default function AccountsPage() {
     <Page>
       <Page.Header readTitle={d => d.sidebar.pages.accounts} />
       <Row>
-        <Col sm={5}>
-          <AccountsTablePanel onSelectAcount={a => setSelectedAccount(a)} />
+        <Col sm={3}>
+          <AccountsTablePanel
+            hiddenColumns={['balance']}
+            onSelect={setSelectedAccount}
+          />
         </Col>
         <Col>
           {!selectedAccount ? null : (
