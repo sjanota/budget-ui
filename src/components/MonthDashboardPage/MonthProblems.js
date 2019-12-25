@@ -1,5 +1,9 @@
+import './MonthProblems.css';
+
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { useGetAccounts } from '../gql/accounts';
 import { useGetEnvelopes } from '../gql/envelopes';
@@ -18,26 +22,47 @@ const severityIcon = {
   INFO: 'info-circle',
 };
 
+const basePathPerProblem = {
+  NegativeBalanceOnEnvelope: '/envelopes',
+  EnvelopeOverLimit: '/envelopes',
+  NegativeBalanceOnAccount: '/accounts',
+};
+
 export function MonthProblems({ className, problems }) {
+  const envelopesQuery = useGetEnvelopes();
+  const accountsQuery = useGetAccounts();
   return (
-    <Panel className={className}>
-      <Panel.Header>
-        <div className='d-flex justify-content-between align-items-center'>
-          <Panel.Title readTitle={d => d.dashboard.problems.title} />
-        </div>
-      </Panel.Header>
-      <Panel.Body>
-        <ul className='list-group list-group-flush'>
-          {problems.length > 0 ? (
-            problems.map((problem, idx) => (
-              <Problem key={idx} problem={problem} />
-            ))
-          ) : (
-            <NoProblems />
+    <WithQuery query={envelopesQuery}>
+      {({ data: envelopesData }) => (
+        <WithQuery query={accountsQuery}>
+          {({ data: accountsData }) => (
+            <Panel className={className}>
+              <Panel.Header>
+                <div className='d-flex justify-content-between align-items-center'>
+                  <Panel.Title readTitle={d => d.dashboard.problems.title} />
+                </div>
+              </Panel.Header>
+              <Panel.Body>
+                <ul className='list-group list-group-flush'>
+                  {problems.length > 0 ? (
+                    problems.map((problem, idx) => (
+                      <Problem
+                        key={idx}
+                        problem={problem}
+                        envelopes={envelopesData.envelopes}
+                        accounts={accountsData.accounts}
+                      />
+                    ))
+                  ) : (
+                    <NoProblems />
+                  )}
+                </ul>
+              </Panel.Body>
+            </Panel>
           )}
-        </ul>
-      </Panel.Body>
-    </Panel>
+        </WithQuery>
+      )}
+    </WithQuery>
   );
 }
 
@@ -56,11 +81,27 @@ function NoProblems() {
   );
 }
 
-function Problem({ problem }) {
+function Problem(props) {
+  const { problem, accounts, envelopes } = props;
+  const history = useHistory();
+  const basePath = basePathPerProblem[problem.__typename];
+  const classes = classNames(
+    { 'month-dashboard__problem--clickable': !!basePath },
+    'list-group-item',
+    `text-${severityVariant[problem.severity]}`
+  );
+
+  function onClick() {
+    if (!basePath) return;
+    const list = basePath === '/envelopes' ? envelopes : accounts;
+    const entityName = list.find(e => e.id === problem.id).name;
+    history.push(`${basePath}/${entityName}`);
+  }
+
   return (
-    <li className={`list-group-item text-${severityVariant[problem.severity]}`}>
+    <li className={classes} onClick={onClick}>
       <i className={`fas fa-fw fa-${severityIcon[problem.severity]} mr-1`} />
-      <ProblemMessage problem={problem} />
+      <ProblemMessage {...props} />
     </li>
   );
 }
@@ -71,39 +112,32 @@ Problem.propTypes = {
   }),
 };
 
-function ProblemMessage({ problem }) {
-  const envelopesQuery = useGetEnvelopes();
-  const accountsQuery = useGetAccounts();
+function ProblemMessage({ problem, envelopes, accounts }) {
   const { dashboard } = useDictionary();
+  const { problems } = dashboard;
 
   return (
-    <WithQuery query={envelopesQuery}>
-      {({ data: envelopesData }) => (
-        <WithQuery query={accountsQuery}>
-          {({ data: accountsData }) =>
-            problem.__typename === 'Misplanned'
-              ? problem.overplanned
-                ? dashboard.problems.overplanned
-                : dashboard.problems.underplanned
-              : problem.__typename === 'NegativeBalanceOnEnvelope'
-              ? dashboard.problems.expensesExceedPlans(
-                  envelopesData.envelopes.find(e => e.id === problem.id).name
-                )
-              : problem.__typename === 'EnvelopeOverLimit'
-              ? dashboard.problems.envelopeOverLimit(
-                  envelopesData.envelopes.find(e => e.id === problem.id).name
-                )
-              : problem.__typename === 'NegativeBalanceOnAccount'
-              ? dashboard.problems.negativeAccountBalance(
-                  accountsData.accounts.find(a => a.id === problem.id).name
-                )
-              : problem.__typename === 'MonthStillInProgress'
-              ? dashboard.problems.monthNotEnded
-              : problem.__typename
-          }
-        </WithQuery>
-      )}
-    </WithQuery>
+    <span>
+      {problem.__typename === 'Misplanned'
+        ? problem.overplanned
+          ? problems.overplanned
+          : problems.underplanned
+        : problem.__typename === 'NegativeBalanceOnEnvelope'
+        ? problems.expensesExceedPlans(
+            envelopes.find(e => e.id === problem.id).name
+          )
+        : problem.__typename === 'EnvelopeOverLimit'
+        ? problems.envelopeOverLimit(
+            envelopes.find(e => e.id === problem.id).name
+          )
+        : problem.__typename === 'NegativeBalanceOnAccount'
+        ? problems.negativeAccountBalance(
+            accounts.find(a => a.id === problem.id).name
+          )
+        : problem.__typename === 'MonthStillInProgress'
+        ? problems.monthNotEnded
+        : problem.__typename}
+    </span>
   );
 }
 
