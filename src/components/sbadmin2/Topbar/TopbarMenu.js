@@ -57,5 +57,4 @@ TopbarMenu.propTypes = {
   faIcon: PropTypes.string,
   highlighted: PropTypes.bool,
   name: PropTypes.string,
-  render: PropTypes.func.isRequired,
 };
