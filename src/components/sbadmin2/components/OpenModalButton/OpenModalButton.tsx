@@ -24,7 +24,7 @@ export default function OpenModalButton({
   const onClick = () => setShow(true);
 
   return (
-    <span>
+    <span onClick={e => e.stopPropagation()}>
       <Button onClick={onClick} />
       <Modal show={show} onHide={onHide} {...props}>
         <ModalContent onHide={onHide} />
