@@ -15,7 +15,7 @@ function Details({
     c => c.dataField !== titleField && c.dataField !== actionsField
   );
   return (
-    <div className='mb-1'>
+    <div className='mb-3'>
       <h3 className='d-flex justify-content-between'>
         <span>
           <span className='pr-2'>{entity[titleField]}</span>
@@ -25,19 +25,21 @@ function Details({
           <MonthSwitcher />
         </div>
       </h3>
-      {fieldColumns.map(f => {
-        return (
-          <DetailsField
-            key={f.dataField}
-            name={fieldNames[f.dataField]}
-            value={
-              f.formatter
-                ? f.formatter(entity[f.dataField], entity)
-                : entity[f.dataField]
-            }
-          />
-        );
-      })}
+      <div className='pl-2'>
+        {fieldColumns.map(f => {
+          return (
+            <DetailsField
+              key={f.dataField}
+              name={fieldNames[f.dataField]}
+              value={
+                f.formatter
+                  ? f.formatter(entity[f.dataField], entity)
+                  : entity[f.dataField]
+              }
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }

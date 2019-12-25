@@ -53,7 +53,7 @@ const defaultSorted = [
   },
 ];
 
-export function EnvelopesTablePanel({ onSelect, ...props }) {
+export function EnvelopesTablePanel({ selected, onSelect, ...props }) {
   const query = useGetEnvelopes();
 
   const selectRow = {
@@ -61,7 +61,8 @@ export function EnvelopesTablePanel({ onSelect, ...props }) {
     clickToSelect: true,
     hideSelectColumn: true,
     classes: 'text-white bg-primary selected',
-    onSelect: envelope => onSelect(envelope),
+    onSelect,
+    selected: [selected],
   };
 
   return (
