@@ -12,7 +12,7 @@ import { InlineFormControl } from '../sbadmin2/utilities/InlineFormControl';
 import { OptionalFormControl } from '../sbadmin2/utilities/OptionalFormControl';
 import { useFormData } from '../sbadmin2/utilities/useFormData';
 
-export function PlanModal({ init, ...props }) {
+export function PlanModal({ init, fromEnvelope, toEnvelope, ...props }) {
   const query = useGetEnvelopes();
   const { plans } = useDictionary();
   const formData = useFormData({
@@ -29,10 +29,12 @@ export function PlanModal({ init, ...props }) {
     fromEnvelopeID: {
       $init: init.fromEnvelope !== null ? init.fromEnvelope.id : '',
       $process: v => (v === '' ? null : v),
+      $default: fromEnvelope && fromEnvelope.id,
     },
     toEnvelopeID: {
       $init: init.toEnvelope !== null ? init.toEnvelope.id : '',
       $process: v => (v === '' ? null : v),
+      $default: toEnvelope && toEnvelope.id,
     },
   });
   return (
@@ -70,6 +72,7 @@ export function PlanModal({ init, ...props }) {
                     label: name,
                   }))
                   .concat([{ id: null, label: '' }])}
+                disabled={!!fromEnvelope}
               />
             </InlineFormControl>
             <InlineFormControl size={8} label={plans.modal.labels.toEnvelope}>
@@ -82,6 +85,7 @@ export function PlanModal({ init, ...props }) {
                     label: name,
                   }))
                   .concat([{ id: null, label: '' }])}
+                disabled={!!toEnvelope}
               />
             </InlineFormControl>
           </>

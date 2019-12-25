@@ -6,6 +6,7 @@ import Envelope from '../../model/Envelope';
 import { CategoriesTablePanel } from '../Categories/CategoriesTablePanel';
 import { useGetEnvelopes } from '../gql/envelopes';
 import ListWithDetails from '../layout/ListWithDetails';
+import { PlansTablePanel } from '../Plans/PlansTablePanel';
 import { IconButton } from '../sbadmin2';
 import { Variant } from '../sbadmin2/bootstrap';
 import { CollapsiblePanel } from '../sbadmin2/components/CollapsiblePanel/CollapsiblePanel';
@@ -56,13 +57,25 @@ export default function EnvelopesPage() {
   );
 }
 
-export function EnvelopeDetails({ name, entity }) {
+export function EnvelopeDetails({ entity }) {
   return (
     <>
       <CategoriesTablePanel
         hiddenColumns={['envelope']}
         envelopeFilter={entity}
         wrapper={CollapsiblePanel}
+      />
+      <PlansTablePanel
+        hiddenColumns={['toEnvelope']}
+        toEnvelope={entity}
+        wrapper={CollapsiblePanel}
+        readTitle={d => d.envelopes.inPlansTableTitle}
+      />
+      <PlansTablePanel
+        hiddenColumns={['fromEnvelope']}
+        fromEnvelope={entity}
+        wrapper={CollapsiblePanel}
+        readTitle={d => d.envelopes.outPlansTableTitle}
       />
     </>
   );

@@ -75,6 +75,9 @@ export default {
         overLimit: 'Ponad limit',
       },
     },
+    expensesTableTitle: 'Wydatki',
+    inPlansTableTitle: 'Plany przychodzące',
+    outPlansTableTitle: 'Plany wychodzące',
     modal: {
       createTitle: 'Dodaj nową kopertę',
       editTitle: 'Edytuj kopertę',

@@ -5,7 +5,7 @@ import { useCreatePlan } from '../gql/plans';
 import { OpenModalButton, useDictionary } from '../sbadmin2';
 import { PlanModal } from './PlanModal';
 
-export function CreatePlanButton() {
+export function CreatePlanButton(otherProps) {
   const [createPlan] = useCreatePlan();
   const { plans } = useDictionary();
   return (
@@ -13,6 +13,7 @@ export function CreatePlanButton() {
       button={props => <CreateButton {...props} />}
       modalContent={props => (
         <PlanModal
+          {...otherProps}
           init={{
             title: null,
             fromEnvelope: { id: null },
