@@ -5,7 +5,7 @@ import pl from '../../lang/pl';
 import { useAuth0 } from '../../react-auth0-spa';
 import AccountsPage from '../Accounts/AccountsPage';
 import { MonthProvider } from '../context/Month';
-import Envelopes, { EnvelopeDetailsPage } from '../Envelopes/EnvelopesPage';
+import EnvelopesPage from '../Envelopes/EnvelopesPage';
 import ExpensesPage from '../Expenses/ExpensesPage';
 import { BudgetContext, BudgetProvider } from '../gql/budget';
 import { MonthDashboardPage } from '../MonthDashboardPage/MonthDashboardPage';
@@ -18,10 +18,6 @@ import { sidebarConfig } from './sidebarConfig';
 const dictionaries = {
   pl,
 };
-
-const RoutedEnvelopeDetailsPage = ({ match }) => (
-  <EnvelopeDetailsPage envelopeName={match.params.envelopeName} />
-);
 
 export default function App() {
   const { user, logout } = useAuth0();
@@ -44,12 +40,8 @@ export default function App() {
             selectedBudget && (
               <MonthProvider currentMonth={selectedBudget.currentMonth.month}>
                 <Switch>
-                  <Route
-                    path='/envelopes/:envelopeName'
-                    component={RoutedEnvelopeDetailsPage}
-                  />
                   <Route path='/accounts' component={AccountsPage} />
-                  <Route path='/envelopes' component={Envelopes} />
+                  <Route path='/envelopes' component={EnvelopesPage} />
                   <Route path='/expenses' component={ExpensesPage} />
                   <Route path='/transfers' component={TransfersPage} />
                   <Route path='/plans' component={PlansPage} />

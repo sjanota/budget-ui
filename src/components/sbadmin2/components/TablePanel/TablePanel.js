@@ -13,8 +13,11 @@ function TablePanel({
   wrapper: Wrapper,
   wrapperProps,
   hiddenColumns,
+  visibleColumns,
   data,
   filters,
+  onSelect,
+  selected,
   ...props
 }) {
   const paddedFirstColumn = {
@@ -26,9 +29,29 @@ function TablePanel({
     paddedFirstColumn,
     ...columns.slice(1, columns.length),
   ];
+
+  const selectRow = !onSelect
+    ? null
+    : {
+        mode: 'radio',
+        clickToSelect: true,
+        hideSelectColumn: true,
+        classes: 'text-white bg-primary selected',
+        onSelect,
+        selected: selected ? [selected] : [],
+      };
+
+  function isColumnHidden(c) {
+    const isHidden =
+      hiddenColumns && hiddenColumns.some(hc => c.dataField === hc);
+    const isVisible =
+      visibleColumns && visibleColumns.some(vc => c.dataField === vc);
+    return isHidden || (visibleColumns && !isVisible);
+  }
+
   const wihtouHidden = modifiedColumns.map(c => ({
     ...c,
-    hidden: hiddenColumns && hiddenColumns.some(hc => c.dataField === hc),
+    hidden: isColumnHidden(c),
   }));
 
   function filtersMatch(row) {
@@ -54,6 +77,7 @@ function TablePanel({
           bordered={false}
           columns={wihtouHidden}
           data={filteredData}
+          selectRow={selectRow}
           {...props}
         />
       </Wrapper.Body>
