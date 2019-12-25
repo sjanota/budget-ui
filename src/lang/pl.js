@@ -34,12 +34,12 @@ export default {
       title: 'Problemy',
       overplanned: 'Plany na bieżący miesiąc przekraczają wpływy',
       underplanned: 'Część środków jest nierozplanowana',
-      expensesExceedPlans: [
-        'Wydatki przekroczyły zaplanowany budżet na kopercie',
-        '',
-      ],
-      envelopeOverLimit: ['Limit dla koperty "', '" został przekroczony'],
-      negativeAccountBalance: ['Bilans na koncie "', '" jest ujemny'],
+      expensesExceedPlans: envelope =>
+        `Wydatki przekroczyły zaplanowany budżet na kopercie "${envelope}"`,
+      envelopeOverLimit: envelope =>
+        `Limit dla koperty "${envelope}" został przekroczony`,
+      negativeAccountBalance: account =>
+        `Bilans na koncie "${account}" jest ujemny`,
       monthNotEnded: 'Miesiąc się jeszcze nie skończył',
     },
     buttons: {

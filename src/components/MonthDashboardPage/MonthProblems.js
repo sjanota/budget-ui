@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import { useGetAccounts } from '../gql/accounts';
 import { useGetEnvelopes } from '../gql/envelopes';
@@ -87,25 +86,16 @@ function ProblemMessage({ problem }) {
                 ? dashboard.problems.overplanned
                 : dashboard.problems.underplanned
               : problem.__typename === 'NegativeBalanceOnEnvelope'
-              ? withLink(
-                  '/envelopes',
-                  dashboard.problems.expensesExceedPlans,
-                  envelopesData.envelopes,
-                  problem
+              ? dashboard.problems.expensesExceedPlans(
+                  envelopesData.envelopes.find(e => e.id === problem.id).name
                 )
               : problem.__typename === 'EnvelopeOverLimit'
-              ? withLink(
-                  '/envelopes',
-                  dashboard.problems.envelopeOverLimit,
-                  envelopesData.envelopes,
-                  problem
+              ? dashboard.problems.envelopeOverLimit(
+                  envelopesData.envelopes.find(e => e.id === problem.id).name
                 )
               : problem.__typename === 'NegativeBalanceOnAccount'
-              ? withLink(
-                  '/accounts',
-                  dashboard.problems.negativeAccountBalance,
-                  accountsData.accounts,
-                  problem
+              ? dashboard.problems.negativeAccountBalance(
+                  accountsData.accounts.find(a => a.id === problem.id).name
                 )
               : problem.__typename === 'MonthStillInProgress'
               ? dashboard.problems.monthNotEnded
@@ -114,30 +104,6 @@ function ProblemMessage({ problem }) {
         </WithQuery>
       )}
     </WithQuery>
-  );
-}
-
-function withLink(basePath, textParts, data, problem) {
-  const name = data.find(e => e.id === problem.id).name;
-  const link = (
-    <Link
-      className={`text-${severityVariant[problem.severity]}`}
-      to={`${basePath}/${name}`}
-      key='link'
-    >
-      {name}
-    </Link>
-  );
-  return textParts.reduce(
-    (acc, v, idx) =>
-      idx < textParts.length - 1
-        ? [
-            ...acc,
-            <span key={idx}>{v}</span>,
-            <span key={`${idx}-link`}>{link}</span>,
-          ]
-        : [...acc, <span key={idx}>{v}</span>],
-    []
   );
 }
 
