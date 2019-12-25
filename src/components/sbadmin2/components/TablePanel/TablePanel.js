@@ -31,7 +31,7 @@ function TablePanel({
   ];
 
   const selectRow = !onSelect
-    ? null
+    ? undefined
     : {
         mode: 'radio',
         clickToSelect: true,

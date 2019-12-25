@@ -101,7 +101,7 @@ function DetailsSection({
               titleField='name'
               readFieldNames={readColumnNames}
             />
-            <AdditionalDetails name={name} />
+            <AdditionalDetails name={name} entity={entity} />
           </>
         );
       }}
