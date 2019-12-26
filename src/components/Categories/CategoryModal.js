@@ -63,7 +63,7 @@ export function CategoryModal({ init, envelope, ...props }) {
 CategoryModal.propTypes = {
   envelope: PropTypes.shape({
     id: PropTypes.string,
-  }).isRequired,
+  }),
   id: PropTypes.string,
   init: PropTypes.shape({
     name: PropTypes.string,

@@ -1,5 +1,6 @@
 import { faArchive } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { useGetCategories } from '../gql/categories';
 import { QueryTablePanel } from '../gql/QueryTablePanel';
@@ -8,28 +9,13 @@ import { Variant } from '../sbadmin2/bootstrap';
 import { CreateCategoryButton } from './CreateCategoryButton';
 import { UpdateCategoryButton } from './UpdateCategoryButton';
 
-const columns = [
-  { dataField: 'name', sort: true },
+export const columns = [
   {
     dataField: 'envelope',
-    formatter: a => a.name,
+    formatter: a => <Link to={`/envelopes/${a.name}`}>{a.name}</Link>,
     sort: true,
   },
   { dataField: 'description' },
-  {
-    dataField: 'actions',
-    isDummyColumn: true,
-    formatter: (cell, row) => (
-      <span>
-        <UpdateCategoryButton category={row} />
-        <IconButton icon={faArchive} variant={Variant.secondary} borderless />
-      </span>
-    ),
-    style: {
-      whiteSpace: 'nowrap',
-      width: '1%',
-    },
-  },
 ];
 
 const defaultSorted = [
@@ -46,11 +32,33 @@ export function CategoriesTablePanel({ envelopeFilter, ...props }) {
   if (envelopeFilter) {
     filters.push(row => row.envelope.id === envelopeFilter.id);
   }
+
   return (
     <QueryTablePanel
       {...props}
       keyField='id'
-      columns={columns}
+      columns={[
+        { dataField: 'name', sort: true },
+        ...columns,
+        {
+          dataField: 'actions',
+          isDummyColumn: true,
+          formatter: (cell, row) => (
+            <span>
+              <UpdateCategoryButton category={row} />
+              <IconButton
+                icon={faArchive}
+                variant={Variant.secondary}
+                borderless
+              />
+            </span>
+          ),
+          style: {
+            whiteSpace: 'nowrap',
+            width: '1%',
+          },
+        },
+      ]}
       buttons={<CreateCategoryButton envelope={envelopeFilter} />}
       query={query}
       getData={data => data.categories}

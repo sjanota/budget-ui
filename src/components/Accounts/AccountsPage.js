@@ -3,9 +3,9 @@ import React from 'react';
 
 import Amount from '../../model/Amount';
 import { useGetAccounts } from '../gql/accounts';
-import ListWithDetails from '../layout/ListWithDetails';
 import { IconButton } from '../sbadmin2';
 import { Variant } from '../sbadmin2/bootstrap';
+import ListWithDetailsWorkflow from '../workflow/ListWithDetailsWorkflow';
 import { AccountDetails } from './AccountDetails';
 import { CreateAccountButton } from './CreateAccountButton';
 import { UpdateAccountButton } from './UpdateAccountButton';
@@ -23,7 +23,7 @@ export default function AccountsPage() {
   const query = useGetAccounts();
 
   return (
-    <ListWithDetails
+    <ListWithDetailsWorkflow
       basePath='/accounts'
       readTitle={d => d.sidebar.pages.accounts}
       detailsComponent={AccountDetails}

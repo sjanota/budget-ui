@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import pl from '../../lang/pl';
 import { useAuth0 } from '../../react-auth0-spa';
 import AccountsPage from '../Accounts/AccountsPage';
+import CategoryPage from '../Categories/CategoryPage';
 import { MonthProvider } from '../context/Month';
 import EnvelopesPage from '../Envelopes/EnvelopesPage';
 import ExpensesPage from '../Expenses/ExpensesPage';
@@ -45,6 +46,7 @@ export default function App() {
                   <Route path='/expenses' component={ExpensesPage} />
                   <Route path='/transfers' component={TransfersPage} />
                   <Route path='/plans' component={PlansPage} />
+                  <Route path='/categories' component={CategoryPage} />
                   <Route path='/' component={MonthDashboardPage} />
                 </Switch>
               </MonthProvider>

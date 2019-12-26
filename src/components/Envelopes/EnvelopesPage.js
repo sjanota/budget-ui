@@ -1,15 +1,16 @@
 import { faArchive } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 import Amount from '../../model/Amount';
 import Envelope from '../../model/Envelope';
 import { CategoriesTablePanel } from '../Categories/CategoriesTablePanel';
 import { useGetEnvelopes } from '../gql/envelopes';
-import ListWithDetails from '../layout/ListWithDetails';
 import { PlansTablePanel } from '../Plans/PlansTablePanel';
 import { IconButton } from '../sbadmin2';
 import { Variant } from '../sbadmin2/bootstrap';
 import { CollapsiblePanel } from '../sbadmin2/components/CollapsiblePanel/CollapsiblePanel';
+import ListWithDetailsWorkflow from '../workflow/ListWithDetailsWorkflow';
 import { CreateEnvelopeButton } from './CreateEnvelopeButton';
 import { UpdateEnvelopeButton } from './UpdateEnvelopeButton';
 
@@ -38,7 +39,7 @@ export default function EnvelopesPage() {
   const query = useGetEnvelopes();
 
   return (
-    <ListWithDetails
+    <ListWithDetailsWorkflow
       basePath='/envelopes'
       readTitle={d => d.sidebar.pages.envelopes}
       detailsComponent={EnvelopeDetails}
@@ -58,12 +59,19 @@ export default function EnvelopesPage() {
 }
 
 export function EnvelopeDetails({ entity }) {
+  const history = useHistory();
+
+  function handleCategoryOnSelect(category) {
+    history.push(`/categories/${category.name}`);
+  }
+
   return (
     <>
       <CategoriesTablePanel
         hiddenColumns={['envelope']}
         envelopeFilter={entity}
         wrapper={CollapsiblePanel}
+        onSelect={handleCategoryOnSelect}
       />
       <PlansTablePanel
         hiddenColumns={['toEnvelope']}
