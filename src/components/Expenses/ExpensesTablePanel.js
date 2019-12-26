@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import Amount from '../../model/Amount';
 import ListActions from '../common/ListActions';
@@ -16,7 +17,7 @@ const columns = [
   { dataField: 'date', sort: true },
   {
     dataField: 'account',
-    formatter: a => a.name,
+    formatter: a => <Link to={`/accounts/${a.name}`}>{a.name}</Link>,
   },
   {
     dataField: 'totalAmount',

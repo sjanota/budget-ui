@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import Amount from '../../model/Amount';
 import { useGetCurrentPlans } from '../gql/plans';
@@ -44,13 +45,13 @@ const columns = [
     dataField: 'fromEnvelope',
     sort: true,
     sortValue: cell => (cell ? cell.name : ''),
-    formatter: a => a && a.name,
+    formatter: a => a && <Link to={`/envelopes/${a.name}`}>{a.name}</Link>,
   },
   {
     dataField: 'toEnvelope',
     sort: true,
     sortValue: cell => (cell ? cell.name : ''),
-    formatter: a => a && a.name,
+    formatter: a => a && <Link to={`/envelopes/${a.name}`}>{a.name}</Link>,
   },
   {
     dataField: 'currentAmount',

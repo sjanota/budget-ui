@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import Amount from '../../model/Amount';
 import ListActions from '../common/ListActions';
@@ -16,11 +17,11 @@ const columns = [
   { dataField: 'title' },
   {
     dataField: 'fromAccount',
-    formatter: a => a && a.name,
+    formatter: a => a && <Link to={`/accounts/${a.name}`}>{a.name}</Link>,
   },
   {
     dataField: 'toAccount',
-    formatter: a => a.name,
+    formatter: a => a && <Link to={`/accounts/${a.name}`}>{a.name}</Link>,
   },
   {
     dataField: 'amount',
