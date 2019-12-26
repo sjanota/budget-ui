@@ -27,7 +27,7 @@ export function EntityList({
     },
   ];
   function onSelect(entity) {
-    history.push(`${basePath}/${entity.name}`);
+    history.push(`${basePath}/${encodeURIComponent(entity.name)}`);
   }
   return (
     <QueryTablePanel

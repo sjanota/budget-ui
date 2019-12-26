@@ -62,7 +62,7 @@ export function EnvelopeDetails({ entity }) {
   const history = useHistory();
 
   function handleCategoryOnSelect(category) {
-    history.push(`/categories/${category.name}`);
+    history.push(`/categories/${encodeURIComponent(category.name)}`);
   }
 
   return (

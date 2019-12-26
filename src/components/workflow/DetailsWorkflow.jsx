@@ -6,13 +6,15 @@ import { withDictionary } from '../sbadmin2/language';
 
 function DetailsWorkflow({ ...props }) {
   const { basePath } = props;
-
   return (
     <Switch>
       <Route
         path={`${basePath}/:name`}
         render={({ match }) => (
-          <DetailsPage name={match.params.name} {...props} />
+          <DetailsPage
+            name={decodeURIComponent(match.params.name)}
+            {...props}
+          />
         )}
       />
     </Switch>
