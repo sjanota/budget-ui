@@ -12,7 +12,11 @@ import {
 import { QueryTablePanel } from '../gql/QueryTablePanel';
 import { ExpenseModal } from './ExpenseModal';
 
-const columns = [
+const footer = {
+  totalAmount: amounts => Amount.format(amounts.reduce((acc, a) => acc + a, 0)),
+};
+
+const baseColumns = [
   { dataField: 'title' },
   { dataField: 'date', sort: true },
   {
@@ -25,6 +29,7 @@ const columns = [
     align: 'right',
     headerAlign: 'right',
     sort: true,
+    footerAlign: 'right',
   },
   {
     dataField: 'actions',
@@ -78,6 +83,7 @@ export function ExpensesTablePanel({
   createButton,
   accountFilter,
   categoryFilter,
+  addFooter = false,
   ...props
 }) {
   const { selectedMonth } = useMonth();
@@ -92,6 +98,13 @@ export function ExpensesTablePanel({
       row.categories.some(c => c.category.id === categoryFilter)
     );
   }
+
+  const columns = !addFooter
+    ? baseColumns
+    : baseColumns.map(c => ({
+        ...c,
+        footer: footer[c.dataField] ? footer[c.dataField] : '',
+      }));
 
   return (
     <QueryTablePanel

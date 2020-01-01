@@ -57,6 +57,7 @@ function CategoryExpenses({ entity }) {
       createButton={<CreateExpenseButton />}
       wrapper={CollapsiblePanel}
       categoryFilter={entity.id}
+      addFooter={true}
     />
   );
 }
