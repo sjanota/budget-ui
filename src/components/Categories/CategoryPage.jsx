@@ -1,9 +1,12 @@
 import { faArchive } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 
+import { CreateExpenseButton } from '../Expenses/CreateExpenseButton';
+import { ExpensesTablePanel } from '../Expenses/ExpensesTablePanel';
 import { useGetCategories } from '../gql/categories';
 import { IconButton } from '../sbadmin2';
 import { Variant } from '../sbadmin2/bootstrap';
+import { CollapsiblePanel } from '../sbadmin2/components/CollapsiblePanel/CollapsiblePanel';
 import DetailsWorkflow from '../workflow/DetailsWorkflow';
 import { columns } from './CategoriesTablePanel';
 import { CreateCategoryButton } from './CreateCategoryButton';
@@ -39,6 +42,21 @@ export default function CategoryPage() {
   );
 }
 
-function CategoryDetails() {
-  return <>Nic ciekawego</>;
+function CategoryDetails(props) {
+  return (
+    <>
+      <CategoryExpenses {...props} />
+    </>
+  );
+}
+
+function CategoryExpenses({ entity }) {
+  return (
+    <ExpensesTablePanel
+      readTitle={d => d.expenses.table.title}
+      createButton={<CreateExpenseButton />}
+      wrapper={CollapsiblePanel}
+      categoryFilter={entity.id}
+    />
+  );
 }

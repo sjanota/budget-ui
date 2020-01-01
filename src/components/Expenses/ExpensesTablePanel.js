@@ -77,6 +77,7 @@ export function ExpensesTablePanel({
   readTitle,
   createButton,
   accountFilter,
+  categoryFilter,
   ...props
 }) {
   const { selectedMonth } = useMonth();
@@ -85,6 +86,11 @@ export function ExpensesTablePanel({
   let filters = [];
   if (accountFilter) {
     filters.push(row => row.account.id === accountFilter);
+  }
+  if (categoryFilter) {
+    filters.push(row =>
+      row.categories.some(c => c.category.id === categoryFilter)
+    );
   }
 
   return (
