@@ -24,6 +24,7 @@ const columns = [
     formatter: Amount.format,
     align: 'right',
     headerAlign: 'right',
+    sort: true,
   },
   {
     dataField: 'actions',
