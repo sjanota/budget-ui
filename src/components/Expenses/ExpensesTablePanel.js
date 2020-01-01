@@ -90,6 +90,7 @@ export function ExpensesTablePanel({
   const query = useGetExpenses(selectedMonth);
 
   let filters = [];
+  let mappers = [];
   if (accountFilter) {
     filters.push(row => row.account.id === accountFilter);
   }
@@ -97,6 +98,14 @@ export function ExpensesTablePanel({
     filters.push(row =>
       row.categories.some(c => c.category.id === categoryFilter)
     );
+    mappers.push(row => ({
+      ...row,
+      categories: row.categories.filter(c => c.category.id === categoryFilter),
+    }));
+    mappers.push(row => ({
+      ...row,
+      totalAmount: row.categories.reduce((acc, c) => acc + c.amount, 0),
+    }));
   }
 
   const columns = !addFooter
@@ -121,6 +130,7 @@ export function ExpensesTablePanel({
       readColumnNames={d => d.expenses.table.columns}
       defaultSorted={defaultSorted}
       filters={filters}
+      mappers={mappers}
     />
   );
 }

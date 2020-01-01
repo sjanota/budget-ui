@@ -3,6 +3,7 @@ import React from 'react';
 
 import Amount from '../../model/Amount';
 import Month from '../../model/Month';
+import { AmountInput } from '../Expenses/AmountInput';
 import { useGetAccounts } from '../gql/accounts';
 import { useBudget } from '../gql/budget';
 import { WithQuery } from '../gql/WithQuery';
@@ -59,15 +60,9 @@ export function TransferModal({ toAccount, fromAccount, init, ...props }) {
               min={first.format()}
               max={last.format()}
             />
-            <FormControl
-              inline={10}
-              label={transfers.modal.labels.amount}
-              feedback='Provide amount'
-              type='number'
-              required
-              formData={formData.amount}
-              step='0.01'
-            />
+            <FormControl inline={10} label={transfers.modal.labels.amount}>
+              <AmountInput formData={formData.amount} />
+            </FormControl>{' '}
             <InlineFormControl
               size={10}
               label={transfers.modal.labels.fromAccount}

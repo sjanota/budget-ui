@@ -18,6 +18,7 @@ function TablePanel({
   filters,
   onSelect,
   selected,
+  mappers = [],
   ...props
 }) {
   const paddedFirstColumn = {
@@ -59,6 +60,10 @@ function TablePanel({
   }
 
   const filteredData = data.filter(row => filtersMatch(row));
+  const mappedData = mappers.reduce(
+    (acc, mapper) => acc.map(mapper),
+    filteredData
+  );
 
   return (
     <Wrapper className={panelClassName} {...wrapperProps}>
@@ -76,7 +81,7 @@ function TablePanel({
           hover
           bordered={false}
           columns={wihtouHidden}
-          data={filteredData}
+          data={mappedData}
           selectRow={selectRow}
           {...props}
         />
