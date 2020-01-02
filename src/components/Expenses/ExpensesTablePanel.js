@@ -13,7 +13,8 @@ import { QueryTablePanel } from '../gql/QueryTablePanel';
 import { ExpenseModal } from './ExpenseModal';
 
 const footer = {
-  totalAmount: amounts => Amount.format(amounts.reduce((acc, a) => acc + a, 0)),
+  totalAmount: amounts =>
+    Amount.prettyFormat(amounts.reduce((acc, a) => acc + a, 0)),
 };
 
 const baseColumns = [
@@ -25,7 +26,7 @@ const baseColumns = [
   },
   {
     dataField: 'totalAmount',
-    formatter: Amount.format,
+    formatter: Amount.prettyFormat,
     align: 'right',
     headerAlign: 'right',
     sort: true,
@@ -63,7 +64,7 @@ const expandRow = {
         {row.categories.map((category, idx) => (
           <tr key={idx}>
             <td className='pl-3'>{category.category.name}</td>
-            <td>{Amount.format(category.amount)}</td>
+            <td>{Amount.prettyFormat(category.amount)}</td>
           </tr>
         ))}
       </tbody>

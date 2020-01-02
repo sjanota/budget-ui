@@ -17,13 +17,13 @@ import { UpdateEnvelopeButton } from './UpdateEnvelopeButton';
 const columns = [
   {
     dataField: 'balance',
-    formatter: Amount.format,
+    formatter: Amount.prettyFormat,
     align: 'right',
     headerAlign: 'right',
   },
   {
     dataField: 'limit',
-    formatter: Amount.format,
+    formatter: Amount.prettyFormat,
     align: 'right',
     headerAlign: 'right',
   },

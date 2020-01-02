@@ -56,12 +56,9 @@ export function PlanModal({ init, fromEnvelope, toEnvelope, ...props }) {
               initEnabled={init.recurringAmount !== null}
               inline={8}
               label={plans.modal.labels.recurring}
-              feedback='Provide amount for recurring plans'
-              type='number'
-              required
-              formData={formData.recurringAmount}
-              step='0.01'
-            />
+            >
+              <AmountInput formData={formData.recurringAmount} required />
+            </OptionalFormControl>
             <InlineFormControl size={8} label={plans.modal.labels.fromEnvelope}>
               <Combobox
                 _ref={formData.fromEnvelopeID}

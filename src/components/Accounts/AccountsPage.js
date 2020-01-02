@@ -15,7 +15,7 @@ const columns = [
     dataField: 'balance',
     align: 'right',
     headerAlign: 'right',
-    formatter: Amount.format,
+    formatter: Amount.prettyFormat,
   },
 ];
 

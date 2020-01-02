@@ -27,7 +27,7 @@ const columns = [
     dataField: 'amount',
     align: 'right',
     headerAlign: 'right',
-    formatter: Amount.format,
+    formatter: Amount.prettyFormat,
   },
   {
     dataField: 'date',

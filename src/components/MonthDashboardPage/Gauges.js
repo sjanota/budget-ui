@@ -15,21 +15,21 @@ export function Gauges({ className, month }) {
           className='col-6 col-lg-12 mb-4'
           variant='primary'
           title={dashboard.planned}
-          value={Amount.format(month.totalPlannedAmount)}
+          value={Amount.prettyFormat(month.totalPlannedAmount)}
           faIcon='clipboard-list'
         />
         <Gauge
           className='col-6 col-lg-12 mb-4'
           variant='primary'
           title={dashboard.incomes}
-          value={Amount.format(month.totalIncomeAmount)}
+          value={Amount.prettyFormat(month.totalIncomeAmount)}
           faIcon='briefcase'
         />
         <Gauge
           className='col-6 col-lg-12 mb-4'
           variant='primary'
           title={dashboard.leftToPlan}
-          value={Amount.format(
+          value={Amount.prettyFormat(
             month.totalIncomeAmount - month.totalPlannedAmount
           )}
           faIcon='balance-scale'
@@ -38,7 +38,7 @@ export function Gauges({ className, month }) {
           className='col-6 col-lg-12 mb-4'
           variant='primary'
           title={dashboard.expenses}
-          value={Amount.format(month.totalExpenseAmount)}
+          value={Amount.prettyFormat(month.totalExpenseAmount)}
           faIcon='receipt'
         />
       </Row>

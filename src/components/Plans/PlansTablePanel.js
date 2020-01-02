@@ -55,7 +55,7 @@ const columns = [
   },
   {
     dataField: 'currentAmount',
-    formatter: Amount.format,
+    formatter: Amount.prettyFormat,
     align: 'right',
     headerAlign: 'right',
   },
