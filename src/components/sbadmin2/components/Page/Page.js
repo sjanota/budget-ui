@@ -4,7 +4,7 @@ import React from 'react';
 import PageHeader from './PageHeader';
 
 export default function Page({ children }) {
-  return <div className='container-fluid d-flex flex-column'>{children}</div>;
+  return <div className='container-fluid'>{children}</div>;
 }
 
 Page.propTypes = {

@@ -1,24 +1,13 @@
-import './Panel.css';
-
-import classnames from 'classnames';
-import PropTypes from 'prop-types';
 import React from 'react';
-
-import PanelBody from './PanelBody';
-import PanelHeader from './PanelHeader';
+import PropTypes from 'prop-types';
+import classnames from 'classnames';
 import PanelTitle from './PanelTitle';
+import PanelHeader from './PanelHeader';
+import PanelBody from './PanelBody';
 
 export default function Panel({ children, className }) {
   return (
-    <div
-      className={classnames(
-        'card',
-        'shadow',
-        'mb-4',
-        className,
-        'overflow-hidden'
-      )}
-    >
+    <div className={classnames('card', 'shadow', 'mb-4', className)}>
       {children}
     </div>
   );
