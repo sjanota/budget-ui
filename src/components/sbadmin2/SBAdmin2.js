@@ -1,10 +1,13 @@
-import React from 'react';
-import { SBAdmin2Provider } from './context';
+import './SBAdmin2.css';
+
 import PropTypes from 'prop-types';
-import { Switch, Route } from 'react-router-dom';
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+
+import { SBAdmin2Provider } from './context';
+import { DictionaryProvider } from './language';
 import { NotFoundPage } from './NotFoundPage';
 import Sidebar from './Sidebar/Sidebar';
-import { DictionaryProvider } from './language';
 
 export function SBAdmin2({
   sidebarProps,
@@ -19,11 +22,11 @@ export function SBAdmin2({
   return (
     <SBAdmin2Provider user={user} logout={logout}>
       <DictionaryProvider dictionaries={dictionaries}>
-        <div id="wrapper">
+        <div id='wrapper'>
           <Sidebar {...sidebarProps} />
-          <div id="content-wrapper" className="d-flex flex-column">
-            <div id="content">
-              <Topbar />
+          <div id='content-wrapper' className='d-flex flex-column'>
+            <Topbar />
+            <div id='content'>
               <Switch>
                 {children}
                 <Route component={NotFoundPage} />
@@ -31,9 +34,9 @@ export function SBAdmin2({
             </div>
           </div>
         </div>
-        <footer className="sticky-footer bg-white">
-          <div className="container my-auto">
-            <div className="copyright text-center my-auto">
+        <footer className='sticky-footer bg-white'>
+          <div className='container my-auto'>
+            <div className='copyright text-center my-auto'>
               <span>Copyright &copy; {copyright}</span>
             </div>
           </div>
